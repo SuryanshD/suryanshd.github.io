@@ -24,7 +24,8 @@
     setRect: function () {},
     setAlpha: function () {},
     refreshColors: function () {},
-    pointer: function () {}
+    pointer: function () {},
+    stop: function () {}
   };
   window.SDViz = API;
 
@@ -467,20 +468,26 @@
     last = now;
     if (dt > 0.05) dt = 0.05;            // tab stalls shouldn't teleport particles
 
-    /* frame-time watchdog: shed work once, then bail out entirely */
-    if (dt > 0.032) slowFrames++; else slowFrames = Math.max(0, slowFrames - 1);
+    /* Frame-time watchdog: shed work once, then bail out entirely.
+       The threshold has to sit clear of a legitimate steady 30fps (33.3ms) or a
+       device rendering perfectly smoothly at 30Hz trips it every frame and the
+       field gets killed for no reason. */
+    if (dt > 0.042) slowFrames++; else slowFrames = Math.max(0, slowFrames - 1);
     if (slowFrames > 90 && !degraded) {
       degraded = true;
       DPR_CAP = 1;
       resize();
       slowFrames = 0;
     } else if (slowFrames > 200 && degraded) {
-      dead = true;
-      canvas.removeAttribute('data-ready');
+      API.stop();
       return;
     }
 
     t += dt;
+    /* u_time is uploaded as float32. Left running for hours the mantissa runs
+       out and the motion visibly quantises, so wrap it. 1024 is a whole number
+       of loops for every path, so nothing jumps at the seam. */
+    if (t > 1024) t -= 1024;
     alpha += (alphaTarget - alpha) * Math.min(1, dt * 3.2);
 
     /* --- simulate --- */
@@ -550,27 +557,32 @@
   API.setMode = function (name, dur) {
     var next = MODES.indexOf(name);
     if (next < 0) return;
-    var cur = mixV < 0.5 ? modeA : modeB;
-    if (next === cur && mixV === (mixV < 0.5 ? 0 : 1)) return;
+    if (next === modeB && mixV > 0) return;          // already heading there
+    if (next === modeA && mixV === 0) return;        // already there
 
-    /* collapse whatever is in flight onto the current visible mode, then cross */
-    modeA = cur;
-    modeB = next;
-    mixV = 0;
-
-    if (tween && tween.kill) tween.kill();
     var d = typeof dur === 'number' ? dur : 1.1;
+
+    /* Retarget rather than restart. Collapsing a half-finished crossfade back
+       onto its source made the field lurch when you scrolled quickly across
+       several stages; keeping the current mix and swapping only the
+       destination keeps the motion continuous. */
+    var inFlight = !!(tween && tween.isActive && tween.isActive());
+    if (tween && tween.kill) tween.kill();
+
+    if (!inFlight) { modeA = modeB; mixV = 0; }
+    modeB = next;
+
     if (window.gsap) {
-      var box = { v: 0 };
+      var box = { v: mixV };
       tween = window.gsap.to(box, {
-        v: 1, duration: d, ease: 'power2.inOut',
+        v: 1,
+        duration: Math.max(0.25, d * (1 - mixV)),
+        ease: 'power2.inOut',
         onUpdate: function () { mixV = box.v; },
-        onComplete: function () { modeA = next; mixV = 0; }
+        onComplete: function () { modeA = next; modeB = next; mixV = 0; }
       });
     } else {
-      mixV = 1;
-      modeA = next;
-      mixV = 0;
+      modeA = next; modeB = next; mixV = 0;
     }
   };
 
@@ -580,6 +592,22 @@
   };
 
   API.setAlpha = function (a) { alphaTarget = Math.max(0, Math.min(1, a)); };
+
+  /* Stop for good and hand the GPU memory back. Used when the visitor turns
+     reduce-motion on mid-session, and by the watchdog. */
+  API.stop = function () {
+    if (dead) return;
+    dead = true;
+    canvas.removeAttribute('data-ready');
+    if (tween && tween.kill) tween.kill();
+    try {
+      gl.deleteTexture(A.tex); gl.deleteTexture(B.tex);
+      gl.deleteFramebuffer(A.fbo); gl.deleteFramebuffer(B.fbo);
+      gl.deleteBuffer(quadBuf); gl.deleteBuffer(idxBuf);
+      gl.deleteVertexArray(quadVAO); gl.deleteVertexArray(pointVAO);
+      gl.deleteProgram(simProg); gl.deleteProgram(drawProg);
+    } catch (e) { /* context may already be gone */ }
+  };
   API.refreshColors = refreshColors;
   API.pointer = function (x, y) {
     if (x == null) { ptrOn = 0; return; }
@@ -601,13 +629,22 @@
     e.preventDefault();
     dead = true;
     canvas.removeAttribute('data-ready');
+    if (tween && tween.kill) tween.kill();
   }, false);
 
   if (!window.matchMedia('(pointer: coarse)').matches) {
     window.addEventListener('pointermove', function (e) {
       API.pointer(e.clientX, e.clientY);
     }, { passive: true });
-    window.addEventListener('pointerleave', function () { API.pointer(null); }, { passive: true });
+    /* documentElement, not window: leave events don't bubble, so a window
+       listener misses them and the field keeps avoiding a phantom point where
+       the cursor was last seen. */
+    document.documentElement.addEventListener('pointerleave', function () {
+      API.pointer(null);
+    }, { passive: true });
+    document.addEventListener('pointerout', function (e) {
+      if (!e.relatedTarget) API.pointer(null);
+    }, { passive: true });
   }
 
   running = true;

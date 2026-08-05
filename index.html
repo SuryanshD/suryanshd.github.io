@@ -80,7 +80,7 @@
       <a href="resume.html">Résumé</a>
     </nav>
     <div class="hdr__tools">
-      <button class="kbd-btn" id="pal-open" aria-label="Open command palette ⌘K"><span>⌘</span>K</button>
+      <button class="kbd-btn" id="pal-open" aria-label="Open menu and search ⌘K"><span class="kbd-btn__cmd">⌘</span><span class="kbd-btn__k">K</span><span class="kbd-btn__menu">Menu</span></button>
       <button class="icon-btn" id="theme-btn" data-theme-icon aria-label="Switch colour theme">
         <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
         <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 14.4A8.5 8.5 0 1 1 9.6 4a6.8 6.8 0 0 0 10.4 10.4Z"/></svg>
@@ -100,14 +100,15 @@
       <h1 id="h-name" data-split>Suryansh Deoli</h1>
 
       <p class="hero__role">
-        Software engineer at InMobi. One of three building a new
-        <em>AI monetization platform</em>, there since the backend's first commit.
+        Software engineer at InMobi. Founding engineer on two products:
+        an <em>AI monetization platform</em>, and the answer surface I started building on top of it.
       </p>
 
       <p class="hero__lede">
-        I own the platform's monetization surface: the feed integrations and the ad templates
-        that decide what serves. Before that I built a compliance proxy that checks ad campaigns
-        before their traffic reaches Google, with an LLM in the approval loop.
+        On the platform I'm one of three, there since the backend's first commit, and I own the
+        monetization surface: the feed integrations and the ad templates that decide what serves.
+        Before that I built a compliance proxy that checks ad campaigns before their traffic reaches
+        Google, with an LLM in the approval loop.
       </p>
 
       <div class="proof" data-reveal>
@@ -217,7 +218,7 @@
                   A shared asset library for everything the platform generates, with
                   <b>semantic search over embeddings</b> so an editor can find an image by
                   describing it. I built the universal-access module, ran the database migration
-                  and backfill, and fixed the search path when it was returning 500s.
+                  and backfill, and got the search path working reliably.
                 </p>
               </div>
 
@@ -351,17 +352,18 @@
               <h3 class="stage__name">Serve</h3>
               <span class="stage__of">Stage 4 of 4</span>
             </div>
-            <h3>So I prototyped owning the serve layer too</h3>
+            <h3>So I started building the serve layer</h3>
             <div class="stage__body">
               <p>
                 If the answer surface is where attention is going, then the ad units belong inside the
-                answer. I built a proof of concept for that, from scratch, to find out what it would take.
+                answer. I built the proof of concept for that from scratch, and it became a second
+                product. <strong>I started the build and I'm a founding engineer on it.</strong>
               </p>
 
               <div class="sys">
                 <div class="sys__top">
                   <h4>Embeddable AI answer surface</h4>
-                  <span class="tag tag--era">Prototype · 2026</span>
+                  <span class="tag tag--era">Second product · in development</span>
                 </div>
                 <p>
                   A publisher drops in one <code>&lt;script&gt;</code> tag and gets an answer
@@ -380,7 +382,7 @@
                   <a class="arrow-link" href="work/answer-surface.html">Read the deep dive
                     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
                   </a>
-                  <span class="mono" style="color:var(--ink-3)">Vanilla JS · Shadow DOM · FastAPI · embeddings</span>
+                  <span class="mono" style="color:var(--ink-3)">Vanilla JS · closed Shadow DOM · FastAPI · embeddings</span>
                 </div>
               </div>
             </div>
@@ -590,12 +592,18 @@
         </div>
 
         <div class="gate__side">
-          <div class="verdict" id="verdict" data-verdict="pass" aria-live="polite">
+          <!-- Static default matches the pre-filled sample, so with JavaScript
+               blocked the page never appears to approve a policy violation. -->
+          <div class="verdict" id="verdict" data-verdict="block" aria-live="polite">
             <div class="verdict__row">
-              <span class="verdict__badge"><i aria-hidden="true"></i><span id="verdict-label">approved</span></span>
-              <span class="verdict__meta" id="verdict-meta">0 rules fired</span>
+              <span class="verdict__badge"><i aria-hidden="true"></i><span id="verdict-label">blocked</span></span>
+              <span class="verdict__meta" id="verdict-meta">3 rules fired · campaign never reaches the network</span>
             </div>
-            <div class="verdict__rules" id="verdict-rules"></div>
+            <div class="verdict__rules" id="verdict-rules">
+              <div class="verdict__rule" data-hit="block"><b>R-07</b><span>unsupported health claim · claims to cure or reverse a named condition</span></div>
+              <div class="verdict__rule" data-hit="block"><b>R-11</b><span>guaranteed outcome · promises a result the advertiser cannot guarantee</span></div>
+              <div class="verdict__rule" data-hit="hold"><b>R-03</b><span>curiosity-gap clickbait · withholds the subject of the claim from the headline</span></div>
+            </div>
             <div class="trace" id="verdict-trace"></div>
           </div>
           <p class="mono" style="color:var(--ink-3);line-height:1.6">
@@ -622,7 +630,7 @@
       <div class="found__lead">
         <p class="lede">
           Every request in that pipeline crosses the same four things: identity, latency, storage, and
-          whether any of it survives a penetration test.
+          how much of it holds up under a security review.
         </p>
         <p>
           I'm one of three founding engineers on this platform, and I've owned identity since the
@@ -680,16 +688,16 @@
 
         <article class="found__card" data-reveal>
           <span class="found__num">04 / hardening</span>
-          <h3>Pen-test remediation</h3>
+          <h3>Security hardening for launch</h3>
           <p>
-            The findings that came back were mostly about session lifetime and authorisation
-            boundaries, which is where they usually are.
+            I owned the security work ahead of the launch review: how long a session stays usable, who
+            can reach an administrative route, and what a sign-out actually clears.
           </p>
           <ul>
             <li>layered session invalidation</li>
-            <li>idle timeout + hard 24h cap</li>
-            <li>super-admin authz gates</li>
-            <li>logout: cleared cookies, Clear-Site-Data</li>
+            <li>idle timeout and a hard cap</li>
+            <li>authorisation gates on admin routes</li>
+            <li>sign-out that clears client state</li>
           </ul>
         </article>
       </div>
@@ -762,7 +770,7 @@
           </div>
           <p>
             A health-insurance claims processor that reads handwritten medical documents and
-            produces a submittable claim packet. Indian claim paperwork is handwritten and bilingual, and the required format is
+            produces a claim packet in the required format. Indian claim paperwork is handwritten and bilingual, and the required format is
             unforgiving.
           </p>
           <p>
@@ -860,7 +868,7 @@
               college. The product was an investment aggregator: crypto, stocks and NFTs managed
               from one account, with portfolio tracking and personalised insights. I co-founded it
               in 2021 with two co-founders and owned the market research that told us whether
-              anyone wanted it. It was my first exit.
+              anyone wanted it.
             </p>
           </div>
 
@@ -951,7 +959,7 @@
       <div class="xp">
         <div class="xp__row">
           <span class="xp__when">Jun 2025 – now</span>
-          <span class="xp__what"><b>Software Development Engineer</b><span>One of three founding engineers on a new AI monetization platform. Earlier: the ad-compliance proxy and the content-automation platform.</span></span>
+          <span class="xp__what"><b>Software Development Engineer</b><span>Founding engineer on two products: one of three on a new AI monetization platform, and the embeddable answer surface I started building. Earlier: the ad-compliance proxy and the content-automation platform.</span></span>
           <span class="xp__where">InMobi · Bengaluru</span>
         </div>
         <div class="xp__row">

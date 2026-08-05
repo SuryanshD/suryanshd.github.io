@@ -21,13 +21,21 @@
   function applyTheme(next) {
     root.setAttribute('data-theme', next);
     try { localStorage.setItem('sd-theme', next); } catch (e) {}
-    var meta = document.querySelector('meta[name="theme-color"]:not([media])');
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.setAttribute('name', 'theme-color');
-      document.head.appendChild(meta);
+    /* Rewrite the two media-qualified metas rather than appending a third:
+       browsers disagree about which duplicate wins. */
+    var color = next === 'light' ? '#fbfaf8' : '#08090b';
+    var metas = document.querySelectorAll('meta[name="theme-color"]');
+    if (metas.length) {
+      Array.prototype.forEach.call(metas, function (m) {
+        m.removeAttribute('media');
+        m.setAttribute('content', color);
+      });
+    } else {
+      var m = document.createElement('meta');
+      m.setAttribute('name', 'theme-color');
+      m.setAttribute('content', color);
+      document.head.appendChild(m);
     }
-    meta.setAttribute('content', next === 'light' ? '#fbfaf8' : '#08090b');
     if (viz && viz.refreshColors) requestAnimationFrame(viz.refreshColors);
   }
   if (themeBtn) {
@@ -39,6 +47,14 @@
   window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function () {
     if (!root.getAttribute('data-theme') && viz && viz.refreshColors) viz.refreshColors();
   });
+
+  /* A visitor who turns reduce-motion on mid-session, often for vestibular
+     reasons, should not keep getting a full-screen particle field until reload. */
+  if (reduced.addEventListener) {
+    reduced.addEventListener('change', function (e) {
+      if (e.matches && viz && viz.stop) viz.stop();
+    });
+  }
 
   /* --------------------------------------------------------------- header */
   var hdr = document.getElementById('hdr');
@@ -285,6 +301,36 @@
     if (schemCap && STAGE_META[i]) schemCap.textContent = STAGE_META[i].cap;
   }
 
+  /* The sticky schematic panel is desktop-only, so on a phone the four topology
+     figures would never be seen at all. Mirror each one under its own stage
+     heading. Cloned rather than duplicated in the markup so there is one
+     source of truth for each diagram. */
+  (function mirrorStageFigures() {
+    var figs = document.querySelectorAll('.schem__fig');
+    if (!figs.length) return;
+    var caps = [
+      'The generation surface: one concept in, an article, headline set, imagery and ad spec out.',
+      'One spreadsheet becomes up to 5,000 ads. Every one of them created paused.',
+      'Policy rules, then an LLM. Approved traffic passes, blocked traffic never leaves.',
+      'A closed Shadow DOM on someone else\'s page, with the ad units inside the answer.'
+    ];
+    Array.prototype.forEach.call(figs, function (fig, i) {
+      var svg = fig.querySelector('svg');
+      var stage = document.querySelector('[data-stage="' + i + '"]');
+      if (!svg || !stage) return;
+      var head = stage.querySelector('.stage__head');
+      if (!head) return;
+      var wrap = document.createElement('figure');
+      wrap.className = 'stage__fig';
+      wrap.setAttribute('aria-hidden', 'true');
+      wrap.appendChild(svg.cloneNode(true));
+      var cap = document.createElement('figcaption');
+      cap.textContent = caps[i] || '';
+      wrap.appendChild(cap);
+      head.insertAdjacentElement('afterend', wrap);
+    });
+  })();
+
   /* Inside the schematic panel the field competes with 8px labels; full-bleed
      it sits directly behind body copy. Both want a different intensity. */
   var ALPHA = {
@@ -300,7 +346,7 @@
     var a = ALPHA[curMode] != null ? ALPHA[curMode] : 0.7;
     /* No panel means the stage field is full-bleed behind paragraphs, which
        happens on narrow viewports. Pull it well back so text stays first. */
-    if (STAGE_MODES.indexOf(curMode) > -1 && !panelActive) a *= 0.4;
+    if (STAGE_MODES.indexOf(curMode) > -1 && !panelActive) a *= 0.14;
     viz.setAlpha(a);
   }
 
@@ -353,7 +399,7 @@
     });
 
     /* Deliberately no extra GSAP reveal on .found__card. Those carry
-       [data-reveal], which the IntersectionObserver above already handles.
+       [data-reveal], which the position-based reveal above already handles.
        Animating opacity from both places leaves GSAP's inline opacity:0 on
        screen whenever its ScrollTrigger doesn't fire, which hides the cards. */
 

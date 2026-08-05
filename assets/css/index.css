@@ -747,3 +747,52 @@
   font-family: var(--font-mono);
   letter-spacing: 0.01em;
 }
+
+/* ---------- stage topology, mirrored inline on narrow viewports ----------
+   The sticky schematic panel is desktop-only, which would otherwise hide the
+   four topology figures from phone visitors entirely. site.js clones each one
+   under its stage heading below 1000px; this styles the clone.            */
+.stage__fig {
+  position: relative;
+  margin: var(--s-3) 0 var(--s-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--bg-sunken) 92%, transparent);
+  overflow-x: auto;
+}
+.stage__fig svg {
+  width: 100%;
+  /* No min-width: these SVGs carry a viewBox so they scale cleanly, and a floor
+     wider than a 320px viewport pushed the page into horizontal overflow. */
+  height: auto;
+  padding: var(--s-2);
+  overflow: visible;
+}
+@media (min-width: 380px) { .stage__fig svg { padding: var(--s-3); } }
+.stage__fig text {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  fill: var(--ink-3);
+  text-transform: uppercase;
+  paint-order: stroke fill;
+  stroke: var(--bg-sunken);
+  stroke-width: 2.6px;
+  stroke-linejoin: round;
+}
+.stage__fig .s-line { stroke: var(--line-strong); fill: none; stroke-width: 1; }
+.stage__fig .s-line--pass { stroke: var(--pass); }
+.stage__fig .s-line--block { stroke: var(--block); stroke-dasharray: 3 3; }
+.stage__fig .s-box { stroke: var(--line-strong); fill: none; stroke-width: 1; }
+.stage__fig .s-box--live { stroke: var(--accent); }
+.stage__fig .s-fill { fill: var(--bg-inset); stroke: var(--line-strong); stroke-width: 1; }
+.stage__fig .s-dot { fill: var(--accent); }
+.stage__fig .s-dot--block { fill: var(--block); }
+.stage__fig figcaption {
+  padding: 0 var(--s-3) var(--s-3);
+  font-family: var(--font-mono);
+  font-size: var(--t--2);
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+@media (min-width: 1000px) { .stage__fig { display: none; } }
