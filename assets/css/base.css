@@ -615,3 +615,34 @@ section { position: relative; }
 @media print {
   .hdr, .pal, .skip, canvas, .no-print { display: none !important; }
 }
+
+/* ---------- forced / increased contrast ------------------------------------
+   Some readers run the OS at increased contrast, and some browsers force their
+   own palette. Hairline borders and tertiary greys are the first thing to
+   disappear in both cases, so strengthen the structure rather than let the
+   layout dissolve.                                                          */
+@media (prefers-contrast: more) {
+  :root {
+    --ink-2: var(--ink);
+    --ink-3: var(--ink);
+    --line: var(--line-strong);
+  }
+  .tag, .sys, .found__card, .card, .facts__cell, .decision, .retro,
+  .verdict, .trace, .rail__seg, .proof__cell { border-color: var(--ink-3); }
+  .link, .prose a, .quiet__v a { border-bottom-width: 2px; }
+  :focus-visible { outline-width: 3px; }
+}
+
+@media (forced-colors: active) {
+  /* Let the forced palette through, but keep the structure legible: borders
+     have to be drawn in a system colour or they vanish entirely. */
+  .tag, .sys, .found__card, .card, .facts__cell, .decision, .retro,
+  .verdict, .trace, .rail__seg, .proof__cell, .schem, .fig, .tiers,
+  .case__nav a, .btn, .icon-btn, .kbd-btn {
+    border: 1px solid CanvasText;
+  }
+  #viz { display: none; }
+  .found, .ftr { background: Canvas; }
+  :focus-visible { outline: 3px solid Highlight; }
+  .verdict__badge, .verdict__rule { forced-color-adjust: none; }
+}
