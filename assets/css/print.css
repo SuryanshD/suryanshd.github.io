@@ -54,7 +54,8 @@
   letter-spacing: 0.02em;
   color: var(--ink-2);
 }
-.cv__contact a { border-bottom: 1px solid var(--line-strong); display: inline-flex; align-items: center; min-height: 24px; }
+.cv__contact a { color: var(--accent); border-bottom: 1px solid currentColor; display: inline-flex; align-items: center; min-height: 24px; }
+.cv__sep { color: var(--ink-3); }
 .cv__contact a:hover { color: var(--accent); border-color: var(--accent); }
 
 /* sections */
@@ -184,9 +185,21 @@
 
   .cv__head { border-bottom: 1pt solid #000 !important; padding-bottom: 3pt; gap: 1pt; }
   .cv__head h1 { font-size: 16pt !important; color: #000 !important; }
-  .cv__role, .cv__contact, .cv__contact a { color: #000 !important; font-size: 7.6pt !important; }
-  .cv__contact { gap: 2pt 9pt !important; }
-  .cv__contact a { border: 0 !important; }
+  .cv__role { color: #000 !important; font-size: 7.6pt !important; }
+  .cv__contact { color: #000 !important; font-size: 6.9pt !important; }
+  .cv__contact {
+    gap: 1pt 0 !important;
+    align-items: baseline;
+    /* one deliberate row rather than an accidental wrap */
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+  /* A résumé PDF gets clicked, in an email and in LinkedIn Easy Apply, so the
+     links should look like links. Colour only; no underline, because the whole
+     row is links and underlining all of it turns into noise. Text colour has no
+     effect on ATS extraction. */
+  .cv__contact a { color: #0b4f9e !important; border: 0 !important; font-size: 6.9pt !important; }
+  .cv__sep { color: #9a9a9a !important; font-size: 6.9pt !important; }
 
   .cv h2 {
     font-size: 7.6pt !important;
@@ -215,7 +228,8 @@
   .cv__row .k { font-size: 7.4pt !important; color: #333 !important; }
   .cv__compact { gap: 2pt !important; }
 
-  a { color: #000 !important; text-decoration: none !important; border: 0 !important; }
+  a:not(.cv__contact a) { color: #000 !important; }
+  a { text-decoration: none !important; border: 0 !important; }
 
   h1, h2, h3 { break-after: avoid; }
   .job, .cv__row { break-inside: avoid; }
