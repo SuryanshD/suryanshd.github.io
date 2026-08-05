@@ -414,15 +414,18 @@
 
   function refreshColors() {
     var cs = getComputedStyle(document.documentElement);
-    var ink = parseColor(cs.getPropertyValue('--ink-3'));
+    var bg = parseColor(cs.getPropertyValue('--bg')) || [0, 0, 0];
+    isDark = (bg[0] + bg[1] + bg[2]) / 3 < 0.5;
+
+    /* Dark composites additively, so a mid-grey glows. Light composites with
+       normal alpha over paper, where the same grey reads as dust; a darker ink
+       at lower opacity resolves into points instead of smudging. */
     var pass = parseColor(cs.getPropertyValue('--pass'));
     var block = parseColor(cs.getPropertyValue('--block'));
+    var ink = parseColor(cs.getPropertyValue(isDark ? '--ink-3' : '--ink-2'));
     if (ink) colors.ink = ink;
     if (pass) colors.pass = pass;
     if (block) colors.block = block;
-
-    var bg = parseColor(cs.getPropertyValue('--bg')) || [0, 0, 0];
-    isDark = (bg[0] + bg[1] + bg[2]) / 3 < 0.5;
   }
   refreshColors();
 
@@ -529,16 +532,16 @@
     gl.uniform1i(drawU.state, 0);
     gl.uniform2f(drawU.res, W, H);
     gl.uniform1i(drawU.side, SIDE);
-    gl.uniform1f(drawU.size, (isDark ? 2.5 : 2.2) * dpr);
+    gl.uniform1f(drawU.size, (isDark ? 2.5 : 1.9) * dpr);
     gl.uniform1f(drawU.modeA, modeA);
     gl.uniform1f(drawU.modeB, modeB);
     gl.uniform1f(drawU.mix, mixV);
     gl.uniform3fv(drawU.ink, colors.ink);
     gl.uniform3fv(drawU.pass, colors.pass);
     gl.uniform3fv(drawU.block, colors.block);
-    /* light theme composites with normal alpha over paper, so the same value
-       reads far heavier there than additive-on-black does */
-    gl.uniform1f(drawU.alpha, alpha * (isDark ? 0.68 : 0.3));
+    /* Light composites with normal alpha over paper, so the same value reads far
+       heavier there than additive-on-black does. */
+    gl.uniform1f(drawU.alpha, alpha * (isDark ? 0.68 : 0.2));
     gl.drawArrays(gl.POINTS, 0, COUNT);
     gl.bindVertexArray(null);
 
