@@ -106,19 +106,27 @@
   margin-bottom: 0.45em;
 }
 .job ul { display: grid; gap: 0.34em; }
+/* No position:relative here, and no absolutely-positioned marker. Positioned
+   elements paint after normal flow, and Chrome writes PDF text in paint order,
+   which pushed every bullet to the end of the file and detached it from its
+   job. A two-column grid gives the same hanging indent with no positioning, so
+   an ATS reads the résumé in the order a human does. */
 .job li {
-  position: relative;
-  padding-left: 1.1em;
+  /* Hanging indent via text-indent, with a static inline marker. Not a grid:
+     grid turns every inline child of the <li>, including each <b>, into its own
+     grid item, which explodes one bullet into many rows. And not an absolutely
+     positioned marker either: positioned elements paint after normal flow, and
+     Chrome writes PDF text in paint order, which detaches every bullet from its
+     job when an ATS reads the file. */
+  padding-left: 0.95em;
+  text-indent: -0.95em;
   font-size: var(--t--1);
   line-height: 1.55;
   color: var(--ink-2);
 }
 .job li::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0.62em;
-  width: 6px; height: 1px;
-  background: var(--line-strong);
+  content: '\2013\00a0';
+  color: var(--ink-3);
 }
 .job li b, .job li strong { color: var(--ink); font-weight: 500; }
 
@@ -131,7 +139,7 @@
   color: var(--ink-2);
 }
 @media (min-width: 620px) {
-  .cv__row { grid-template-columns: 12.5rem 1fr; align-items: baseline; }
+  .cv__row { grid-template-columns: 11rem 1fr; align-items: baseline; }
 }
 .cv__row b { color: var(--ink); font-weight: 500; }
 .cv__row .k {
@@ -199,10 +207,11 @@
   .job__sub { margin-bottom: 2pt !important; }
   .job ul { gap: 1pt !important; }
   .job li, .cv__row, .cv__compact p { font-size: 8.1pt !important; color: #000 !important; }
-  .job li { padding-left: 8pt !important; }
-  .job li::before, .cv__row::before { background: #000 !important; }
+  .job li { padding-left: 7pt !important; text-indent: -7pt !important; }
+  .job li::before { color: #000 !important; }
   .cv__rows { gap: 1.6pt !important; }
-  .cv__row { grid-template-columns: 66pt 1fr !important; gap: 0 7pt !important; }
+  .cv__row { grid-template-columns: 74pt 1fr !important; gap: 0 7pt !important; }
+  .cv__row .k { white-space: nowrap; }
   .cv__row .k { font-size: 7.4pt !important; color: #333 !important; }
   .cv__compact { gap: 2pt !important; }
 
