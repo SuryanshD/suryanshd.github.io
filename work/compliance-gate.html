@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The compliance gate — Suryansh Deoli</title>
+<meta name="description" content="An ad-compliance proxy that validates campaigns before their traffic reaches Google, with HMAC-signed requests, Redis approval state, and an LLM auto-approval layer.">
+<link rel="canonical" href="https://suryanshd.github.io/work/compliance-gate.html">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://suryanshd.github.io/work/compliance-gate.html">
+<meta property="og:title" content="The compliance gate — Suryansh Deoli">
+<meta property="og:description" content="Validating ad campaigns before their traffic reaches Google. HMAC signing, Redis approval state, a creative-change watchdog, and an LLM in the approval loop.">
+<meta property="og:image" content="https://suryanshd.github.io/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbfaf8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08090b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/space-grotesk-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/case.css">
+<script>
+(function () {
+  try { var t = localStorage.getItem('sd-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  document.documentElement.classList.add('js');
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr" id="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__mark" href="../index.html"><b>SD</b> Suryansh Deoli</a>
+    <nav class="hdr__nav" aria-label="Sections">
+      <a href="../index.html#pipeline">Work</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#before">Before InMobi</a>
+      <a href="../resume.html">Résumé</a>
+    </nav>
+    <div class="hdr__tools">
+      <button class="kbd-btn" id="pal-open" aria-label="Open command palette ⌘K"><span>⌘</span>K</button>
+      <button class="icon-btn" id="theme-btn" data-theme-icon aria-label="Switch colour theme">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 14.4A8.5 8.5 0 1 1 9.6 4a6.8 6.8 0 0 0 10.4 10.4Z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="case" id="main">
+  <div class="wrap">
+    <p class="crumb"><a href="../index.html#stage-gate">Stage 03 · Gate</a> <span aria-hidden="true">/</span> Deep dive</p>
+
+    <div class="case__head">
+      <h1>The compliance gate</h1>
+      <p class="case__sum">
+        A proxy that decides whether an ad campaign is allowed to send traffic, before it sends any.
+      </p>
+    </div>
+
+    <div class="facts">
+      <div class="facts__cell"><span class="facts__k">Where</span><span class="facts__v">Publabs, InWeb team at InMobi</span></div>
+      <div class="facts__cell"><span class="facts__k">When</span><span class="facts__v">Aug 2025 – Feb 2026</span></div>
+      <div class="facts__cell"><span class="facts__k">Stack</span><span class="facts__v">Python, FastAPI, Redis, gunicorn, HMAC, LLM</span></div>
+      <div class="facts__cell"><span class="facts__k">My role</span><span class="facts__v">Designed and built it; a senior engineer collaborated on the production refactor</span></div>
+    </div>
+
+    <div class="prose">
+      <h2>The problem</h2>
+      <p>
+        The business bought traffic on one network and monetised it with search ad units on another.
+        The monetising network has policies about what the landing page and the creative may say, and
+        the first you hear about breaking them is a restriction on the account.
+      </p>
+      <p>
+        The failure is asynchronous, which is what makes it expensive. By the time a policy problem
+        surfaces the campaign has been live for hours or days and the traffic is already spent.
+        Reporting tells you what went wrong long after you could have stopped it.
+      </p>
+      <p>
+        So the check has to move from after the report to before the click. That means something in
+        the request path that knows the approval state of every campaign. It also has to be fast enough
+        that nobody notices it is there.
+      </p>
+
+      <h2>Constraints I had to build inside</h2>
+      <ul>
+        <li><strong>It's in the click path.</strong> Every millisecond is a real user waiting, so approval state had to be a memory lookup rather than a database query.</li>
+        <li><strong>Approval isn't permanent.</strong> An advertiser can swap a creative after approval, which quietly invalidates the decision that let it through.</li>
+        <li><strong>Six networks, six shapes.</strong> Each ad platform exposes campaigns, ad accounts and creatives differently, and some of them lie about what's fetchable.</li>
+        <li><strong>Multiple accounts, one Redis.</strong> Campaign state for different ad accounts could not be allowed to leak across the boundary.</li>
+        <li><strong>Humans had to stay in it.</strong> A fully automatic gate that wrongly blocks a good campaign costs real money, so there had to be a review path.</li>
+      </ul>
+
+      <h2>How it works</h2>
+      <p>
+        The proxy owns the URL that the ad's creative points at. A click arrives with the landing
+        page and its UTM parameters encoded into the proxy path, so the proxy resolves the campaign
+        it belongs to before it decides anything.
+      </p>
+
+      <figure class="fig">
+        <div class="fig__hd">Request path</div>
+        <div class="fig__body">
+          <svg viewBox="0 0 700 260" role="img" aria-label="A click enters the proxy, which resolves the campaign, checks Redis approval state, and either forwards to the landing page or refuses. A poller watches creatives and pauses campaigns whose creative changed.">
+            <text x="0" y="14" class="dim">click</text>
+            <rect class="bx" x="0" y="22" width="92" height="34" rx="3"/>
+            <text x="10" y="43">ad creative</text>
+            <path class="ln" d="M92 39h44"/>
+
+            <rect class="bx bx--live" x="136" y="10" width="150" height="120" rx="3"/>
+            <text x="146" y="30">compliance proxy</text>
+            <text x="146" y="52" class="dim">resolve campaign key</text>
+            <text x="146" y="70" class="dim">verify hmac signature</text>
+            <text x="146" y="88" class="dim">read approval state</text>
+            <text x="146" y="106" class="dim">normalise creative</text>
+            <text x="146" y="124" class="dim">fastapi · gunicorn</text>
+
+            <path class="ln" d="M211 130v34"/>
+            <rect class="bx" x="136" y="164" width="150" height="34" rx="3"/>
+            <text x="146" y="185">redis: approval state</text>
+            <text x="146" y="214" class="dim">account-scoped keys</text>
+
+            <path class="ln ln--pass" d="M286 46h84"/>
+            <rect class="bx" x="370" y="28" width="150" height="34" rx="3"/>
+            <text x="380" y="49" style="fill:var(--pass)">forward to page</text>
+            <path class="ln ln--pass" d="M520 45h44"/>
+            <text x="568" y="42" class="dim">search ad</text>
+            <text x="568" y="56" class="dim">units serve</text>
+
+            <path class="ln ln--block" d="M286 96h84"/>
+            <rect class="bx" x="370" y="78" width="150" height="34" rx="3"/>
+            <text x="380" y="99" style="fill:var(--block)">refuse</text>
+
+            <rect class="bx bx--ghost" x="370" y="140" width="150" height="76" rx="3"/>
+            <text x="380" y="160">review api</text>
+            <text x="380" y="178" class="dim">approve / reject</text>
+            <text x="380" y="196" class="dim">+ comment</text>
+            <text x="380" y="212" class="dim">llm auto-approval</text>
+            <path class="ln ln--dash" d="M370 178h-84"/>
+
+            <rect class="bx" x="560" y="140" width="140" height="52" rx="3"/>
+            <text x="570" y="160">creative poller</text>
+            <text x="570" y="178" class="dim">cron, one-shot</text>
+            <path class="ln ln--block" d="M560 166H520v-54"/>
+            <text x="530" y="230" style="fill:var(--block)">auto-pause</text>
+          </svg>
+        </div>
+        <figcaption>
+          Approval state is the hot path and lives in Redis. The review API and the poller act on
+          that same state out of band.
+        </figcaption>
+      </figure>
+
+      <h3>Signed requests</h3>
+      <p>
+        Anything that can write approval state can decide what serves, so requests into the
+        validation surface are HMAC-signed. The proxy recomputes the signature per campaign source and
+        rejects anything that doesn't match. Secrets
+        moved to environment variables early, and I stripped the hardcoded fallback defaults that
+        had let the service start up in an unsafe state.
+      </p>
+
+      <h3>The LLM auto-approval layer</h3>
+      <p>
+        The expensive cases are the ones in the middle: copy that is not clearly fine and not
+        clearly a breach, which a person has to read.
+      </p>
+      <p>
+        So I put a model in front of the queue. It reads the creative and the policy context and
+        either clears the campaign or leaves it for a human, so the review queue only holds the cases
+        where a judgment call is needed. The model's job is to clear, never to reject on its own.
+      </p>
+      <p>
+        You can <a href="../index.html#gate">poke at a simplified version of that decision path</a>
+        on the home page. It runs in the browser with an illustrative rule set, not the production
+        one.
+      </p>
+
+      <h3>The watchdog</h3>
+      <p>
+        Approval describes a creative at a moment. Change the image and the approval is describing
+        something that no longer exists. A polling service walks the networks, compares creatives
+        against what was approved, and pauses anything that has drifted.
+      </p>
+      <p>
+        This was the part that generated the most production pain. Naive comparison flagged
+        campaigns constantly, because the networks re-encode thumbnails and hand back different
+        URLs for the same asset. Getting the false-positive rate down meant normalising creatives
+        before comparing them and adding a thumbnail fallback for the cases where the network
+        wouldn't serve the original.
+      </p>
+
+      <h2>Decisions, and what each one cost</h2>
+
+      <div class="decision">
+        <h3>Redis as the source of truth on the hot path</h3>
+        <p>
+          Approval state is small, hot and read on every click, so it lives in memory rather than
+          behind a database query.
+        </p>
+        <div class="decision__cost"><b>cost</b>
+          <span>Redis becomes a hard dependency of serving. I later hit exactly that problem on a different service, which is why the platform now has a circuit breaker around it.</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <h3>Replacing KEYS with SMEMBERS, and prefixing every key</h3>
+        <p>
+          The first version enumerated campaigns with <code>KEYS</code>, which walks the entire
+          keyspace and gets slower as the business grows. Campaign sets moved behind explicit set
+          membership, and every key got a prefix scoped to its ad account.
+        </p>
+        <div class="decision__cost"><b>cost</b>
+          <span>Set membership has to be maintained on write, so deletes and moves became more code. Worth it: the account prefix is also what makes tenant isolation enforceable rather than assumed.</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <h3>A poller on cron instead of a long-running loop</h3>
+        <p>
+          The poller was converted to one-shot execution so cron owns the schedule. A crashed run is
+          then just a missed tick that the next one recovers from.
+        </p>
+        <div class="decision__cost"><b>cost</b>
+          <span>Detection latency is bounded by the cron interval rather than being continuous. For creative drift, minutes are acceptable.</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <h3>A per-network adapter rather than one generalised client</h3>
+        <p>
+          Meta, Google, TikTok, Bing, Outbrain and Taboola disagree about almost everything. I built
+          per-network configuration and diagnostics instead of forcing a single abstraction.
+        </p>
+        <div class="decision__cost"><b>cost</b>
+          <span>Six things to maintain. It paid for itself the first time Meta stopped listing an ad account under <code>/me/adaccounts</code> and that network needed a direct-access fallback nothing else wanted.</span>
+        </div>
+      </div>
+
+      <h2>What it does now</h2>
+      <ul>
+        <li>Meta was integrated and production-tested first, then Google Ads, TikTok Ads, Bing, Outbrain and Taboola.</li>
+        <li>Campaigns are validated before their traffic reaches the search units, so a policy breach is a blocked click rather than an account problem.</li>
+        <li>The review workflow gives the business team an approve or reject with a comment, and the model clears the volume that doesn't need them.</li>
+        <li>It left behind a reusable compliance framework that other traffic sources can plug into.</li>
+      </ul>
+
+      <div class="retro">
+        <span class="retro__tag">What I'd do differently</span>
+        <p>
+          This one ran long. Requirements kept moving while I was still ramping up on the domain,
+          and a senior engineer worked with me on the refactor that made it production-ready. Two
+          things changed in how I work because of it: I get a design review and written agreement on
+          requirements before I write code, and I roll out incrementally instead of integrating six
+          networks and then testing.
+        </p>
+        <p>
+          The technical lesson was narrower. I under-validated the third-party APIs before building
+          against them. Outbrain in particular had creative-format constraints that I found during
+          integration rather than before it, and that ordering is what cost the time.
+        </p>
+      </div>
+    </div>
+
+    <nav class="case__nav" aria-label="Other deep dives">
+      <a href="bulk-uploader.html"><span>Previous</span><b>The Meta Ads bulk uploader</b></a>
+      <a href="answer-surface.html"><span>Next</span><b>The embeddable answer surface</b></a>
+    </nav>
+  </div>
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__base">
+      <span><a href="../index.html">Suryansh Deoli</a> · Bengaluru, India</span>
+      <span><a href="mailto:suryanshdeoliofficial@gmail.com">suryanshdeoliofficial@gmail.com</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="pal" id="pal" data-open="false" role="dialog" aria-modal="true" aria-labelledby="pal-title">
+  <h2 class="vh" id="pal-title">Jump to a section or page</h2>
+  <div class="pal__box">
+    <input class="pal__input" id="pal-input" type="text" role="combobox" aria-expanded="true"
+      aria-controls="pal-list" aria-autocomplete="list" placeholder="Jump to…" autocomplete="off" spellcheck="false">
+    <div class="pal__list" id="pal-list" role="listbox" aria-label="Results"></div>
+  </div>
+</div>
+
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>

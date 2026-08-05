@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Identity, rebuilt from scratch — Suryansh Deoli</title>
+<meta name="description" content="IAM v3: a clean-slate identity system with a three-tier organisation hierarchy, dynamic roles, SSO and JWT, built across backend and frontend.">
+<link rel="canonical" href="https://suryanshd.github.io/work/identity.html">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://suryanshd.github.io/work/identity.html">
+<meta property="og:title" content="Identity, rebuilt from scratch — Suryansh Deoli">
+<meta property="og:description" content="Why we replaced the identity model instead of patching it, and what a three-tier org hierarchy actually costs to build.">
+<meta property="og:image" content="https://suryanshd.github.io/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbfaf8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08090b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/space-grotesk-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/case.css">
+<script>
+(function () {
+  try { var t = localStorage.getItem('sd-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  document.documentElement.classList.add('js');
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr" id="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__mark" href="../index.html"><b>SD</b> Suryansh Deoli</a>
+    <nav class="hdr__nav" aria-label="Sections">
+      <a href="../index.html#pipeline">Work</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#before">Before InMobi</a>
+      <a href="../resume.html">Résumé</a>
+    </nav>
+    <div class="hdr__tools">
+      <button class="kbd-btn" id="pal-open" aria-label="Open command palette ⌘K"><span>⌘</span>K</button>
+      <button class="icon-btn" id="theme-btn" data-theme-icon aria-label="Switch colour theme">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 14.4A8.5 8.5 0 1 1 9.6 4a6.8 6.8 0 0 0 10.4 10.4Z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="case" id="main">
+  <div class="wrap">
+    <p class="crumb"><a href="../index.html#foundation">Foundation · Identity</a> <span aria-hidden="true">/</span> Deep dive</p>
+
+    <div class="case__head">
+      <h1>Identity, rebuilt from scratch</h1>
+      <p class="case__sum">
+        The old model couldn't express the customer shape we were selling into, so we replaced it
+        rather than kept bending it.
+      </p>
+    </div>
+
+    <div class="facts">
+      <div class="facts__cell"><span class="facts__k">Where</span><span class="facts__v">A new AI monetization platform at InMobi</span></div>
+      <div class="facts__cell"><span class="facts__k">When</span><span class="facts__v">Mar – Jul 2026</span></div>
+      <div class="facts__cell"><span class="facts__k">Stack</span><span class="facts__v">Python, FastAPI, AlloyDB, Redis, Next.js, SSO, JWT</span></div>
+      <div class="facts__cell"><span class="facts__k">My role</span><span class="facts__v">Owned it end to end, backend and frontend. One of three engineers on the platform.</span></div>
+    </div>
+
+    <div class="prose">
+      <h2>Why replace rather than patch</h2>
+      <p>
+        The product needed an access model with more structure than the one it started with, and
+        the gap was being covered by convention rather than by the model itself.
+      </p>
+      <p>
+        That kind of gap shows up as a slow accumulation of places where "is this person allowed to
+        see this" gets answered slightly differently. So IAM v3 was a clean slate.
+      </p>
+
+      <h2>The three tiers</h2>
+      <p>
+        The whole design is one decision: identity has three levels, and every authorisation
+        question resolves against them in order.
+      </p>
+
+      <figure class="fig">
+        <div class="fig__hd">Hierarchy and resolution</div>
+        <div class="fig__body">
+          <svg viewBox="0 0 700 250" role="img" aria-label="Organisation contains businesses, businesses contain users. A request resolves org grant, then active business, then the user's dynamic roles, into a permission decision.">
+            <rect class="bx bx--live" x="0" y="18" width="180" height="46" rx="3"/>
+            <text x="12" y="38">tier 1 · organisation</text>
+            <text x="12" y="55" class="dim">granted modules</text>
+
+            <path class="ln" d="M90 64v22h-40v20M90 86h40v20"/>
+
+            <rect class="bx" x="0" y="106" width="100" height="44" rx="3"/>
+            <text x="10" y="124">tier 2</text>
+            <text x="10" y="140" class="dim">business a</text>
+            <rect class="bx" x="112" y="106" width="100" height="44" rx="3"/>
+            <text x="122" y="124">tier 2</text>
+            <text x="122" y="140" class="dim">business b</text>
+
+            <path class="ln" d="M50 150v22M162 150v22"/>
+            <rect class="bx" x="0" y="172" width="100" height="44" rx="3"/>
+            <text x="10" y="190">tier 3 · user</text>
+            <text x="10" y="206" class="dim">dynamic roles</text>
+            <rect class="bx" x="112" y="172" width="100" height="44" rx="3"/>
+            <text x="122" y="190">tier 3 · user</text>
+            <text x="122" y="206" class="dim">dynamic roles</text>
+
+            <path class="ln ln--dash" d="M212 128h60"/>
+
+            <rect class="bx bx--ghost" x="272" y="18" width="200" height="198" rx="3"/>
+            <text x="284" y="40">per-request resolution</text>
+            <text x="284" y="66" class="dim">01  verify jwt from sso</text>
+            <text x="284" y="86" class="dim">02  org granted this module?</text>
+            <text x="284" y="106" class="dim">03  require_active_business</text>
+            <text x="284" y="126" class="dim">04  roles → permissions</text>
+            <text x="284" y="146" class="dim">05  session still valid?</text>
+            <text x="284" y="172" class="dim">cached; invalidated on</text>
+            <text x="284" y="190" class="dim">role or grant change</text>
+
+            <path class="ln ln--pass" d="M472 90h60"/>
+            <rect class="bx" x="532" y="72" width="150" height="36" rx="3"/>
+            <text x="544" y="94" style="fill:var(--pass)">allow</text>
+            <path class="ln ln--block" d="M472 140h60"/>
+            <rect class="bx" x="532" y="122" width="150" height="36" rx="3"/>
+            <text x="544" y="144" style="fill:var(--block)">403 / typed 409</text>
+          </svg>
+        </div>
+        <figcaption>
+          Tier 1 grants modules. Tier 2 is the data boundary. Tier 3 holds roles. A request has to
+          satisfy all three.
+        </figcaption>
+      </figure>
+
+      <h3>Dynamic roles</h3>
+      <p>
+        Roles are rows with permission mappings, so a customer can be given a shape nobody
+        anticipated at build time without a code change. That was the point.
+      </p>
+
+      <h3>The active-business gate</h3>
+      <p>
+        Product routes sit behind a <code>require_active_business</code> dependency. It reads simple
+        and it removes a whole class of bug, because a route can no longer accidentally serve data
+        without having established which business boundary it's operating inside.
+      </p>
+
+      <h3>Invites, SSO, and the parts that actually go wrong</h3>
+      <p>
+        Sign-in is hosted by the identity provider and self-signup is removed, so the application
+        never sees a password. Most of the real work was in the seams:
+      </p>
+      <ul>
+        <li><strong>Environment-correct redirects.</strong> Staging was sending users to the production auth domain. The fix was to build the sign-in URL server-side from runtime environment rather than baking it in.</li>
+        <li><strong>Relative callbacks.</strong> Absolute redirect URLs resolved to <code>localhost</code> once the app was behind a public host, so callbacks became relative.</li>
+        <li><strong>A plain anchor for the sign-in call to action.</strong> A client-side route transition triggered a cross-origin fetch to the identity provider and failed CORS. It needed to be a full navigation, which is a good reminder that auth flows and client routers want different things.</li>
+        <li><strong>Reconciling users by email on login.</strong> A user's identifier at the provider can change across tenants, and treating that as a new person orphaned their access. Login now reconciles on email.</li>
+        <li><strong>Invite auto-heal.</strong> Invites could land in a state where the row existed but the user couldn't complete it, so the flow repairs itself rather than needing an operator.</li>
+      </ul>
+
+      <h2>Decisions, and what each one cost</h2>
+
+      <div class="decision">
+        <h3>Three tiers, not two, and not arbitrary nesting</h3>
+        <p>
+          One level of grouping could not express an organisation holding separate businesses.
+          Arbitrary depth would have made every permission check a recursive walk and every UI a tree.
+        </p>
+        <div class="decision__cost"><b>cost</b>
+          <span>Anyone who genuinely needs a fourth level has to model it awkwardly. I would rather widen it if that arrives than carry the recursion now.</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <h3>Typed 409s instead of generic failures</h3>
+        <p>
+          Conflicts during invite and provisioning return a typed conflict, so the frontend can tell
+          the user which specific thing collided.
+        </p>
+        <div class="decision__cost"><b>cost</b>
+          <span>More error surface to define and keep in sync between backend and UI. Cheaper than support conversations about an opaque failure.</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <h3>Caching resolved permissions, with explicit invalidation</h3>
+        <p>
+          Resolving roles into permissions on every request is the obvious way and it is work repeated
+          constantly, so the result is cached with <code>Cache-Control</code> and cleared when a grant
+          or role changes.
+        </p>
+        <div class="decision__cost"><b>cost</b>
+          <span>Every write path that touches roles now has to remember to invalidate. This is the part of the system I'd most want a second pair of eyes on.</span>
+        </div>
+      </div>
+
+      <h2>Session lifetime, after the pen test</h2>
+      <p>
+        The findings from the penetration test were mostly about how long a session stays usable and
+        who can reach an administrative route. Session invalidation ended up layered, because no
+        single mechanism covers all of it:
+      </p>
+      <ol>
+        <li>A provisioning gate, so a user who isn't fully set up can't hold a working session.</li>
+        <li>An epoch, so bumping a value invalidates every existing session for a user at once.</li>
+        <li>An idle timeout for the abandoned-laptop case.</li>
+        <li>A hard 24-hour cap, so no session outlives a day regardless of activity.</li>
+      </ol>
+      <p>
+        Sign-out became provider-initiated, clearing cookies and sending
+        <code>Clear-Site-Data</code>, with <code>no-store</code> on authenticated routes so the back
+        button can't paint a logged-in page after logout. Administrative authorisation moved
+        server-side, and the rediscovery route got a super-admin gate. I also cleared the dependency
+        audit findings and stopped the container from shipping dev dependencies.
+      </p>
+
+      <div class="retro">
+        <span class="retro__tag">What I'd change</span>
+        <p>
+          The hierarchy took the longest to settle and I changed my mind about it twice while code
+          was already depending on it. If I did it again I'd write the permission-resolution rules
+          down as a table and get them agreed before building the data model, because the model
+          follows from the rules and I did it in the other order.
+        </p>
+      </div>
+    </div>
+
+    <nav class="case__nav" aria-label="Other deep dives">
+      <a href="answer-surface.html"><span>Previous</span><b>The embeddable answer surface</b></a>
+      <a href="generation-surface.html"><span>Next</span><b>The generation surface</b></a>
+    </nav>
+  </div>
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__base">
+      <span><a href="../index.html">Suryansh Deoli</a> · Bengaluru, India</span>
+      <span><a href="mailto:suryanshdeoliofficial@gmail.com">suryanshdeoliofficial@gmail.com</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="pal" id="pal" data-open="false" role="dialog" aria-modal="true" aria-labelledby="pal-title">
+  <h2 class="vh" id="pal-title">Jump to a section or page</h2>
+  <div class="pal__box">
+    <input class="pal__input" id="pal-input" type="text" role="combobox" aria-expanded="true"
+      aria-controls="pal-list" aria-autocomplete="list" placeholder="Jump to…" autocomplete="off" spellcheck="false">
+    <div class="pal__list" id="pal-list" role="listbox" aria-label="Results"></div>
+  </div>
+</div>
+
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>

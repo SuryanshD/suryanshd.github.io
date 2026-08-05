@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The generation surface — Suryansh Deoli</title>
+<meta name="description" content="An LLM content and keyword generation product on Gemini and Claude, with a prompt engine, per-feed config, Imagen 4 imagery and semantic image search over embeddings.">
+<link rel="canonical" href="https://suryanshd.github.io/work/generation-surface.html">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://suryanshd.github.io/work/generation-surface.html">
+<meta property="og:title" content="The generation surface — Suryansh Deoli">
+<meta property="og:description" content="Two model providers, a prompt engine, per-feed config, and the streaming service that had to be stabilised under real load.">
+<meta property="og:image" content="https://suryanshd.github.io/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbfaf8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08090b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/space-grotesk-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/case.css">
+<script>
+(function () {
+  try { var t = localStorage.getItem('sd-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  document.documentElement.classList.add('js');
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr" id="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__mark" href="../index.html"><b>SD</b> Suryansh Deoli</a>
+    <nav class="hdr__nav" aria-label="Sections">
+      <a href="../index.html#pipeline">Work</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#before">Before InMobi</a>
+      <a href="../resume.html">Résumé</a>
+    </nav>
+    <div class="hdr__tools">
+      <button class="kbd-btn" id="pal-open" aria-label="Open command palette ⌘K"><span>⌘</span>K</button>
+      <button class="icon-btn" id="theme-btn" data-theme-icon aria-label="Switch colour theme">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 14.4A8.5 8.5 0 1 1 9.6 4a6.8 6.8 0 0 0 10.4 10.4Z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="case" id="main">
+  <div class="wrap">
+    <p class="crumb"><a href="../index.html#stage-generate">Stage 01 · Generate</a> <span aria-hidden="true">/</span> Deep dive</p>
+
+    <div class="case__head">
+      <h1>The generation surface</h1>
+      <p class="case__sum">
+        Concept Intelligence: a trending concept goes in, and a publishable page with its headline
+        set, imagery and ad configuration comes out.
+      </p>
+    </div>
+
+    <div class="facts">
+      <div class="facts__cell"><span class="facts__k">Where</span><span class="facts__v">A new AI monetization platform at InMobi</span></div>
+      <div class="facts__cell"><span class="facts__k">When</span><span class="facts__v">Mar 2026 – now</span></div>
+      <div class="facts__cell"><span class="facts__k">Stack</span><span class="facts__v">Next.js 16, React 19, TypeScript, FastAPI, AlloyDB, Gemini, Claude, Imagen 4</span></div>
+      <div class="facts__cell"><span class="facts__k">My role</span><span class="facts__v">Built the frontend and most of the backend; wired every model call</span></div>
+    </div>
+
+    <div class="prose">
+      <h2>What it has to produce</h2>
+      <p>
+        A page that earns has to satisfy two audiences that want different things. A reader wants
+        something worth reading. The ad network wants a page whose content genuinely matches the
+        keywords the ad units are querying against, and it will demote or refuse pages where that
+        relationship is thin.
+      </p>
+      <p>
+        So the output isn't an article. It's an article, a headline set, images at the right aspect
+        ratio, and the ad-unit specification for that page, all of which have to agree with each
+        other about what the page is about.
+      </p>
+
+      <figure class="fig">
+        <div class="fig__hd">Generation flow</div>
+        <div class="fig__body">
+          <svg viewBox="0 0 700 250" role="img" aria-label="Discovery produces concepts, the prompt engine composes per-feed and per-article prompts, Gemini and Claude generate text while Imagen 4 generates images, and the output is an article with headlines, imagery and an ad specification.">
+            <rect class="bx" x="0" y="16" width="120" height="48" rx="3"/>
+            <text x="10" y="36">discovery</text>
+            <text x="10" y="54" class="dim">trending signals</text>
+            <path class="ln" d="M120 40h40"/>
+
+            <rect class="bx bx--live" x="160" y="10" width="150" height="118" rx="3"/>
+            <text x="170" y="30">prompt engine</text>
+            <text x="170" y="52" class="dim">feed-specific prompt</text>
+            <text x="170" y="70" class="dim">per-article config</text>
+            <text x="170" y="88" class="dim">afs / rsoc ad spec</text>
+            <text x="170" y="106" class="dim">production template</text>
+            <text x="170" y="124" class="dim">keyword count</text>
+
+            <path class="ln" d="M310 44h34M344 44v-16h40M344 44h40M344 44v22h40"/>
+            <rect class="bx" x="384" y="14" width="110" height="24" rx="2"/><text x="392" y="30" class="dim">gemini</text>
+            <rect class="bx" x="384" y="44" width="110" height="24" rx="2"/><text x="392" y="60" class="dim">claude</text>
+            <rect class="bx" x="384" y="74" width="110" height="24" rx="2"/><text x="392" y="90" class="dim">imagen 4</text>
+
+            <path class="ln" d="M494 26h30v104h-90v16"/>
+            <path class="ln" d="M494 56h20"/>
+            <path class="ln" d="M494 86h10v44"/>
+
+            <rect class="bx bx--live" x="344" y="146" width="200" height="88" rx="3"/>
+            <text x="356" y="166">page output</text>
+            <text x="356" y="186" class="dim">article + headline set</text>
+            <text x="356" y="204" class="dim">16:9 webp imagery</text>
+            <text x="356" y="222" class="dim">ad unit specification</text>
+
+            <rect class="bx" x="0" y="146" width="150" height="88" rx="3"/>
+            <text x="10" y="166">image hub</text>
+            <text x="10" y="186" class="dim">semantic search</text>
+            <text x="10" y="204" class="dim">over embeddings</text>
+            <text x="10" y="222" class="dim">vertical + type tags</text>
+            <path class="ln ln--dash" d="M150 190h194"/>
+
+            <path class="ln ln--pass" d="M544 190h56"/>
+            <text x="606" y="186" class="dim">publish</text>
+            <text x="606" y="202" class="dim">flow</text>
+          </svg>
+        </div>
+        <figcaption>
+          Two text providers and an image model behind one prompt engine. The image hub supplies
+          existing assets so not everything has to be generated fresh.
+        </figcaption>
+      </figure>
+
+      <h3>Two providers, deliberately</h3>
+      <p>
+        Gemini and Claude are both wired in, behind the same prompt engine. In practice they are not
+        interchangeable: each one wants the templates' structured output shaped a little differently.
+        Having two also means a provider incident degrades the product instead of stopping it.
+      </p>
+
+      <h3>The prompt engine</h3>
+      <p>
+        Each content feed needs the generation to behave differently, so prompts are configuration
+        rather than strings next to the call site: composed per feed, overridable per article. Changing
+        how one feed generates does not mean touching the others.
+      </p>
+
+      <h3>Semantic image search</h3>
+      <p>
+        Generating a fresh image every time is slow and expensive, and the platform accumulates a
+        large asset library anyway. The Image Hub indexes assets as embeddings, so an editor finds an
+        image by describing it rather than by remembering a filename. I built the universal-access
+        module for it, ran the database migration and the backfill, added vertical and content-type
+        metadata to AI-generated images, and fixed the search endpoint when it was returning 500s.
+      </p>
+
+      <h2>Decisions, and what each one cost</h2>
+
+      <div class="decision">
+        <h3>Prompts as configuration rather than code</h3>
+        <p>Per-feed and per-article prompt config, changeable without a deploy.</p>
+        <div class="decision__cost"><b>cost</b>
+          <span>Prompt behaviour is now spread across configuration rows, so reproducing a bad output means knowing exactly which config produced it. That's an argument for versioning prompt config, which I'd add next.</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <h3>Migrating imagery to Imagen 4</h3>
+        <p>
+          Imagery moved to Imagen 4, and a 16:9 WebP pipeline standardised the output for the
+          templates that hold the ad units.
+        </p>
+        <div class="decision__cost"><b>cost</b>
+          <span>A migration mid-product, with the older assets still in circulation, so the library holds two generations of imagery and the newer tags don't exist on the old ones.</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <h3>Streaming discovery instead of a request that finishes</h3>
+        <p>
+          Concept rediscovery takes long enough that a plain request-response would time out, so it
+          streams progress.
+        </p>
+        <div class="decision__cost"><b>cost</b>
+          <span>This is the part that broke in production. Streaming makes the client feel fast and moves the failure modes into infrastructure, which is where I then had to go fix them.</span>
+        </div>
+      </div>
+
+      <h2>Stabilising it under real load</h2>
+      <p>
+        Discovery worked, then didn't, once it was running against real volumes. Fixing it was
+        unglamorous and worth recording precisely:
+      </p>
+      <ul>
+        <li>The run timeout went from 300 to 900 seconds, with the distributed lock TTL raised past it so a long run couldn't have its own lock expire underneath it.</li>
+        <li>The container was being killed on memory, so the limits went up and the data directory was made writable rather than the process failing on a read-only path.</li>
+        <li>Exception tracebacks became structured JSON, because an unparseable stack trace in a log aggregator is nearly useless.</li>
+        <li>On the frontend, a proxy was doubling the query string, which broke one feed specifically. That one took longer to find than it should have.</li>
+      </ul>
+      <p>
+        Almost none of it was model work.
+      </p>
+
+      <div class="retro">
+        <span class="retro__tag">What I'd change</span>
+        <p>
+          I'd build the output checks before the generation. The specific thing I'd add is an
+          automated check that the article and the ad-unit keywords agree, because that relationship is
+          what the ad network grades and it is the one property nothing measured directly.
+        </p>
+      </div>
+    </div>
+
+    <nav class="case__nav" aria-label="Other deep dives">
+      <a href="identity.html"><span>Previous</span><b>Identity, rebuilt from scratch</b></a>
+      <a href="bulk-uploader.html"><span>Next</span><b>The Meta Ads bulk uploader</b></a>
+    </nav>
+  </div>
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__base">
+      <span><a href="../index.html">Suryansh Deoli</a> · Bengaluru, India</span>
+      <span><a href="mailto:suryanshdeoliofficial@gmail.com">suryanshdeoliofficial@gmail.com</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="pal" id="pal" data-open="false" role="dialog" aria-modal="true" aria-labelledby="pal-title">
+  <h2 class="vh" id="pal-title">Jump to a section or page</h2>
+  <div class="pal__box">
+    <input class="pal__input" id="pal-input" type="text" role="combobox" aria-expanded="true"
+      aria-controls="pal-list" aria-autocomplete="list" placeholder="Jump to…" autocomplete="off" spellcheck="false">
+    <div class="pal__list" id="pal-list" role="listbox" aria-label="Results"></div>
+  </div>
+</div>
+
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>

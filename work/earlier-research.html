@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Earlier research and ML — Suryansh Deoli</title>
+<meta name="description" content="Two DRDO summers on tactical MANET protocols and circuit design, AI fault detection at IIT Delhi, plant-disease detection at IBM, and a Ministry of Defence journal article.">
+<link rel="canonical" href="https://suryanshd.github.io/work/earlier-research.html">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://suryanshd.github.io/work/earlier-research.html">
+<meta property="og:title" content="Earlier research and ML — Suryansh Deoli">
+<meta property="og:description" content="Defence research, a fuel-cell diagnostics summer at IIT Delhi, applied ML at IBM, and the student projects underneath all of it.">
+<meta property="og:image" content="https://suryanshd.github.io/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbfaf8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08090b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/space-grotesk-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/case.css">
+<script>
+(function () {
+  try { var t = localStorage.getItem('sd-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  document.documentElement.classList.add('js');
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr" id="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__mark" href="../index.html"><b>SD</b> Suryansh Deoli</a>
+    <nav class="hdr__nav" aria-label="Sections">
+      <a href="../index.html#pipeline">Work</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#before">Before InMobi</a>
+      <a href="../resume.html">Résumé</a>
+    </nav>
+    <div class="hdr__tools">
+      <button class="kbd-btn" id="pal-open" aria-label="Open command palette ⌘K"><span>⌘</span>K</button>
+      <button class="icon-btn" id="theme-btn" data-theme-icon aria-label="Switch colour theme">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 14.4A8.5 8.5 0 1 1 9.6 4a6.8 6.8 0 0 0 10.4 10.4Z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="case" id="main">
+  <div class="wrap">
+    <p class="crumb"><a href="../index.html#before">Before InMobi</a> <span aria-hidden="true">/</span> Deep dive</p>
+
+    <div class="case__head">
+      <h1>Earlier research and ML</h1>
+      <p class="case__sum">
+        Three college summers inside other people's organisations, each one ending in something
+        they kept.
+      </p>
+    </div>
+
+    <div class="facts">
+      <div class="facts__cell"><span class="facts__k">Span</span><span class="facts__v">2021 – 2024</span></div>
+      <div class="facts__cell"><span class="facts__k">Hosts</span><span class="facts__v">IRDE and DEAL (DRDO), IIT Delhi, IBM India, Glance</span></div>
+      <div class="facts__cell"><span class="facts__k">Published</span><span class="facts__v">DGQA journal, Ministry of Defence, circulation 5,000+</span></div>
+      <div class="facts__cell"><span class="facts__k">Degree</span><span class="facts__v">B.Tech Computer Science, UPES Dehradun, 2021–2025</span></div>
+    </div>
+
+    <div class="prose">
+      <h2>DRDO, twice</h2>
+
+      <h3>DEAL, Dehradun: MAC protocols in tactical MANETs (Jun–Jul 2023)</h3>
+      <p>
+        I was a summer trainee in the IP Based Protocols Group at DEAL, a DRDO lab. The subject was
+        medium-access control in tactical mobile ad-hoc networks.
+      </p>
+      <p>
+        A tactical MANET has no fixed infrastructure. Every node is mobile and every node routes, and
+        the topology changes while traffic is flowing. There's no base station to arbitrate who
+        transmits, so the medium-access protocol is doing that job, and its behaviour under contention
+        is what determines whether the network stays usable when nodes move or drop out.
+      </p>
+      <p>
+        I built simulated network environments in NS2 and compared MAC protocols under varying
+        conditions, then delivered a technical report with 10 recommendations to the group. Worth being precise:
+        it was a simulation study and nothing was deployed. It was also my first exposure to systems whose
+        failure mode is degradation under load rather than a crash. Most of what I work on now fails the
+        same way.
+      </p>
+
+      <h3>IRDE: electronic circuit design (Jun–Aug 2022)</h3>
+      <p>
+        The summer before, at IRDE, another DRDO lab, I worked on electronic circuit design and logic
+        gates. It's the least fashionable line on my CV and I'd keep it. Working out what a circuit does at
+        the gate level is the same kind of reasoning I now do on systems.
+      </p>
+
+      <h2>IIT Delhi: fault detection in fuel cells (2023)</h2>
+      <p>
+        A research summer in Dr. Anil Verma's lab, on "Fault Detection and Diagnosis in PEMFC using
+        AI", part of the lab's wider sustainable-energy research.
+      </p>
+      <p>
+        A proton-exchange-membrane fuel cell degrades in ways that show up in its electrical behaviour
+        before they show up as failure. Flooding, membrane drying and gas-supply faults each leave a
+        signature, and separating those signatures from ordinary variation is the diagnosis problem. It
+        meant applying AI methods to a physical system while it was operating, which is a different
+        exercise from a clean dataset: the labels come from the physics, and being wrong has a
+        mechanical consequence rather than a metric one.
+      </p>
+      <p>
+        I was two years into a B.Tech at UPES when I got the seat.
+      </p>
+
+      <h2>IBM India: plant-disease detection (Jun–Jul 2024)</h2>
+      <p>
+        I led a plant-disease detection and prediction project to <strong>92% accuracy</strong>, working
+        with agricultural experts to refine the model, alongside NLP research.
+      </p>
+      <p>
+        The accuracy figure is the least useful thing about it. The work that mattered was done with
+        the agricultural experts, refining what the model was being asked to tell apart.
+      </p>
+
+      <h2>Glance: product analytics (Jun–Aug 2024)</h2>
+      <p>
+        A year before I joined InMobi as an engineer, I spent a summer at Glance as a product analyst. I
+        built and maintained 4 Superset dashboards carrying 50+ charts across the USA and Singapore
+        clusters, including a product-alert dashboard that surfaced daily engagement deviations by OEM
+        and region, and ran regional deep dives across 30+ engagement metrics into a bi-weekly report
+        for product managers. I also did market research on state demographics and smartphone usage for
+        Xiaomi, Realme and Samsung.
+      </p>
+      <p>
+        The transferable part was learning what a metric is for. I built a few dashboards nobody made
+        a decision from before I built useful ones.
+      </p>
+
+      <h2>The published article</h2>
+      <p>
+        As a student I published "Use of AI and Its Benefits on Quality Assurance (QA)" in the official
+        journal of the DGQA, the Directorate General of Quality Assurance under India's Ministry of
+        Defence. It's DGQA's own departmental publication, with a circulation of 5,000+.
+      </p>
+      <p>
+        The subject was AI in the quality-assurance loop. Years later I shipped something with that
+        shape: a campaign-compliance path where a model clears what it can and a human sees the rest.
+      </p>
+
+      <h2>Student projects</h2>
+      <p>
+        Every CS graduate has some of these. Mine, honestly labelled:
+      </p>
+      <ul>
+        <li><strong>Brain-tumor detection CNN</strong>: MRI image analysis at 91% accuracy, with preprocessing and optimisation work. The most useful thing I learned was how easily medical imaging datasets let you fool yourself with a split that leaks.</li>
+        <li><strong>SkinNectar</strong>: a skincare recommender using TF-IDF over 1,000+ product descriptions, integrated into a UI. A pre-embeddings approach to a problem I would now solve with embeddings, which is a useful thing to have felt the limits of directly.</li>
+        <li><strong>Face-detection attendance</strong>: real-time attendance using a custom Haar cascade with OpenCV.</li>
+        <li><strong>Plant-disease detection</strong>: the IBM project above, at 92%.</li>
+      </ul>
+
+      <h2>Certifications</h2>
+      <p>
+        Microsoft AI-102 for Azure AI, AWS Academy Graduate, and QSim quantum computing at IIT Roorkee.
+        I did a couple of marketplace courses too, which are on the <a href="../resume.html">résumé</a>
+        and don't need a paragraph.
+      </p>
+    </div>
+
+    <nav class="case__nav" aria-label="Other deep dives">
+      <a href="munshi.html"><span>Previous</span><b>Munshi</b></a>
+      <a href="../index.html#pipeline"><span>Next</span><b>The path a request takes</b></a>
+    </nav>
+  </div>
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__base">
+      <span><a href="../index.html">Suryansh Deoli</a> · Bengaluru, India</span>
+      <span><a href="mailto:suryanshdeoliofficial@gmail.com">suryanshdeoliofficial@gmail.com</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="pal" id="pal" data-open="false" role="dialog" aria-modal="true" aria-labelledby="pal-title">
+  <h2 class="vh" id="pal-title">Jump to a section or page</h2>
+  <div class="pal__box">
+    <input class="pal__input" id="pal-input" type="text" role="combobox" aria-expanded="true"
+      aria-controls="pal-list" aria-autocomplete="list" placeholder="Jump to…" autocomplete="off" spellcheck="false">
+    <div class="pal__list" id="pal-list" role="listbox" aria-label="Results"></div>
+  </div>
+</div>
+
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>

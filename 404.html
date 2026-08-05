@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Not found — Suryansh Deoli</title>
+<meta name="description" content="That page doesn't exist.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#fbfaf8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08090b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/case.css">
+<script>
+(function () {
+  try { var t = localStorage.getItem('sd-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  document.documentElement.classList.add('js');
+})();
+</script>
+<style>
+  .nf { min-height: 100svh; display: grid; place-content: center; }
+  .nf__in { display: grid; gap: var(--s-4); max-width: 46ch; }
+  .nf h1 { font-size: var(--t-4); letter-spacing: -0.04em; }
+  .nf__code {
+    font-family: var(--font-mono);
+    font-size: var(--t--1);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--block);
+  }
+  .nf p { color: var(--ink-2); }
+  .nf__links { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+</style>
+</head>
+<body>
+<main class="nf">
+  <div class="wrap nf__in">
+    <p class="nf__code">404 · blocked</p>
+    <h1>Nothing at this address.</h1>
+    <p>
+      Either the URL is wrong or I moved something. The pipeline, the deep dives and the résumé are
+      all reachable from the front page.
+    </p>
+    <div class="nf__links">
+      <a class="btn btn--primary" href="/">Go to the front page</a>
+      <a class="btn" href="/resume.html">Résumé</a>
+      <a class="btn" href="mailto:suryanshdeoliofficial@gmail.com">Email me</a>
+    </div>
+  </div>
+</main>
+</body>
+</html>

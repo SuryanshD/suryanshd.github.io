@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Suryansh Deoli">
+  <rect width="64" height="64" rx="12" fill="#08090b"/>
+  <rect x="4.5" y="4.5" width="55" height="55" rx="9.5" fill="none" stroke="#1d2127" stroke-width="1.5"/>
+  <!-- the gate: a stream in, a slot, one pass and one blocked exit -->
+  <path d="M9 32h13" stroke="#79838f" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="25" y="19" width="7" height="26" rx="2" fill="#2fdca8"/>
+  <path d="M36 24h19" stroke="#2fdca8" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M36 41h12" stroke="#ff6b5b" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="4 3.5"/>
+</svg>

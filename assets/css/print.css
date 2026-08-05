@@ -1,0 +1,213 @@
+@charset "utf-8";
+/* ==========================================================================
+   Résumé — screen layout, then a print stylesheet that produces a clean
+   single-page A4 PDF straight from the browser. No separate PDF to keep in sync.
+   ========================================================================== */
+
+.cv { padding-block: 6rem var(--s-6); }
+.cv__wrap { max-width: 860px; margin-inline: auto; padding-inline: var(--gutter); }
+
+.cv__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  align-items: center;
+  margin-bottom: var(--s-5);
+}
+.cv__note {
+  font-family: var(--font-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+}
+
+.cv__sheet {
+  padding: var(--s-6) var(--s-5);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+}
+
+/* header */
+.cv__head {
+  display: grid;
+  gap: var(--s-2);
+  padding-bottom: var(--s-3);
+  border-bottom: 2px solid var(--ink);
+}
+.cv__head h1 {
+  font-size: var(--t-3);
+  letter-spacing: -0.035em;
+}
+.cv__role {
+  font-family: var(--font-mono);
+  font-size: var(--t--1);
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+}
+.cv__contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em 1.1em;
+  font-family: var(--font-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.02em;
+  color: var(--ink-2);
+}
+.cv__contact a { border-bottom: 1px solid var(--line-strong); display: inline-flex; align-items: center; min-height: 24px; }
+.cv__contact a:hover { color: var(--accent); border-color: var(--accent); }
+
+/* sections */
+.cv h2 {
+  font-family: var(--font-mono);
+  font-size: var(--t--2);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-top: var(--s-5);
+  margin-bottom: var(--s-3);
+  padding-bottom: 0.4em;
+  border-bottom: 1px solid var(--line-strong);
+}
+.cv__lede {
+  margin-top: var(--s-3);
+  font-size: var(--t-0);
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 70ch;
+}
+.cv__lede strong { color: var(--ink); font-weight: 500; }
+
+.job { margin-bottom: var(--s-4); break-inside: avoid; }
+.job:last-child { margin-bottom: 0; }
+.job__top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3em 0.8em;
+  align-items: baseline;
+  margin-bottom: 0.3em;
+}
+.job__what { font-size: var(--t-0); font-weight: 500; letter-spacing: -0.015em; }
+.job__org { font-size: var(--t-0); color: var(--ink-2); }
+.job__when {
+  margin-inline-start: auto;
+  font-family: var(--font-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.05em;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.job__sub {
+  font-family: var(--font-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+  margin-bottom: 0.45em;
+}
+.job ul { display: grid; gap: 0.34em; }
+.job li {
+  position: relative;
+  padding-left: 1.1em;
+  font-size: var(--t--1);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.job li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.62em;
+  width: 6px; height: 1px;
+  background: var(--line-strong);
+}
+.job li b, .job li strong { color: var(--ink); font-weight: 500; }
+
+.cv__rows { display: grid; gap: 0.55em; }
+.cv__row {
+  display: grid;
+  gap: 0.15em 0.9em;
+  font-size: var(--t--1);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+@media (min-width: 620px) {
+  .cv__row { grid-template-columns: 12.5rem 1fr; align-items: baseline; }
+}
+.cv__row b { color: var(--ink); font-weight: 500; }
+.cv__row .k {
+  font-family: var(--font-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.05em;
+  color: var(--ink-3);
+}
+
+.cv__compact { display: grid; gap: 0.4em; }
+.cv__compact p {
+  font-size: var(--t--1);
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.cv__compact b { color: var(--ink); font-weight: 500; }
+
+/* ------------------------------------------------------------------ print */
+@media print {
+  @page { size: A4; margin: 6.5mm 9mm; }
+
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 8.3pt;
+    line-height: 1.24;
+  }
+  .hdr, .pal, .skip, .cv__actions, .ftr, canvas, #viz { display: none !important; }
+
+  .cv { padding: 0 !important; }
+  .cv__wrap { max-width: none; padding: 0 !important; }
+  .cv__sheet {
+    padding: 0 !important;
+    border: 0 !important;
+    background: #fff !important;
+    border-radius: 0 !important;
+    /* Scales the whole sheet down a hair so it lands on exactly one page.
+       Cheaper than deleting another two lines of real content, and it keeps
+       every proportion in the document intact. */
+    zoom: 0.955;
+  }
+
+  .cv__head { border-bottom: 1pt solid #000 !important; padding-bottom: 3pt; gap: 1pt; }
+  .cv__head h1 { font-size: 16pt !important; color: #000 !important; }
+  .cv__role, .cv__contact, .cv__contact a { color: #000 !important; font-size: 7.6pt !important; }
+  .cv__contact { gap: 2pt 9pt !important; }
+  .cv__contact a { border: 0 !important; }
+
+  .cv h2 {
+    font-size: 7.6pt !important;
+    color: #000 !important;
+    margin-top: 4pt !important;
+    margin-bottom: 2pt !important;
+    padding-bottom: 1.5pt;
+    border-bottom: 0.6pt solid #000 !important;
+    break-after: avoid;
+  }
+  .cv__lede { font-size: 8.4pt !important; color: #000 !important; margin-top: 3pt; max-width: none; }
+  .cv__lede strong, .job li b, .job li strong, .cv__row b, .cv__compact b { color: #000 !important; }
+
+  .job { margin-bottom: 3pt !important; }
+  .job__top { gap: 1pt 6pt !important; margin-bottom: 1pt !important; }
+  .job__what, .job__org { font-size: 8.8pt !important; color: #000 !important; }
+  .job__when, .job__sub { font-size: 7.4pt !important; color: #333 !important; }
+  .job__sub { margin-bottom: 2pt !important; }
+  .job ul { gap: 1pt !important; }
+  .job li, .cv__row, .cv__compact p { font-size: 8.1pt !important; color: #000 !important; }
+  .job li { padding-left: 8pt !important; }
+  .job li::before, .cv__row::before { background: #000 !important; }
+  .cv__rows { gap: 1.6pt !important; }
+  .cv__row { grid-template-columns: 66pt 1fr !important; gap: 0 7pt !important; }
+  .cv__row .k { font-size: 7.4pt !important; color: #333 !important; }
+  .cv__compact { gap: 2pt !important; }
+
+  a { color: #000 !important; text-decoration: none !important; border: 0 !important; }
+
+  h1, h2, h3 { break-after: avoid; }
+  .job, .cv__row { break-inside: avoid; }
+}

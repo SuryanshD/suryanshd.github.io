@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Meta Ads bulk uploader — Suryansh Deoli</title>
+<meta name="description" content="A spreadsheet becomes up to 5,000 Meta ads, every one created paused. One Python package driving a CLI and a web UI over a shared SQLite database.">
+<link rel="canonical" href="https://suryanshd.github.io/work/bulk-uploader.html">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://suryanshd.github.io/work/bulk-uploader.html">
+<meta property="og:title" content="The Meta Ads bulk uploader — Suryansh Deoli">
+<meta property="og:description" content="Built and deployed solo. Excel in, up to 5,000 ads out, nothing spending until an operator says so.">
+<meta property="og:image" content="https://suryanshd.github.io/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbfaf8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08090b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/space-grotesk-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/case.css">
+<script>
+(function () {
+  try { var t = localStorage.getItem('sd-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  document.documentElement.classList.add('js');
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr" id="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__mark" href="../index.html"><b>SD</b> Suryansh Deoli</a>
+    <nav class="hdr__nav" aria-label="Sections">
+      <a href="../index.html#pipeline">Work</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#before">Before InMobi</a>
+      <a href="../resume.html">Résumé</a>
+    </nav>
+    <div class="hdr__tools">
+      <button class="kbd-btn" id="pal-open" aria-label="Open command palette ⌘K"><span>⌘</span>K</button>
+      <button class="icon-btn" id="theme-btn" data-theme-icon aria-label="Switch colour theme">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 14.4A8.5 8.5 0 1 1 9.6 4a6.8 6.8 0 0 0 10.4 10.4Z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="case" id="main">
+  <div class="wrap">
+    <p class="crumb"><a href="../index.html#stage-launch">Stage 02 · Launch</a> <span aria-hidden="true">/</span> Deep dive</p>
+
+    <div class="case__head">
+      <h1>The Meta Ads bulk uploader</h1>
+      <p class="case__sum">
+        A partner sends a spreadsheet. It becomes up to 5,000 ads in Meta Ads Manager, and not one of
+        them can spend money until somebody deliberately turns it on.
+      </p>
+    </div>
+
+    <div class="facts">
+      <div class="facts__cell"><span class="facts__k">Where</span><span class="facts__v">Internal tool at InMobi. Private repo.</span></div>
+      <div class="facts__cell"><span class="facts__k">When</span><span class="facts__v">2026</span></div>
+      <div class="facts__cell"><span class="facts__k">Stack</span><span class="facts__v">Python 3.11, FastAPI, Jinja2, htmx, SSE, SQLite (WAL), systemd, nginx</span></div>
+      <div class="facts__cell"><span class="facts__k">My role</span><span class="facts__v">Built, tested and deployed it solo, end to end</span></div>
+    </div>
+
+    <div class="prose">
+      <h2>The problem</h2>
+      <p>
+        Campaign structures were being built by hand in Ads Manager. That works for ten ads. At a few
+        thousand it is not something a person does, and hand-entry is where the expensive mistakes come
+        from, because a wrong budget on a live ad spends money immediately.
+      </p>
+      <p>
+        The partner already had the information in a spreadsheet. Everything needed was in there. What
+        was missing was something that could turn it into a campaign structure without a human
+        transcribing it row by row.
+      </p>
+
+      <h2>The one decision that made it trustworthy</h2>
+      <p>
+        <strong>Every entity is created paused.</strong> Campaigns, ad sets and ads, all of it.
+      </p>
+      <p>
+        With everything paused, the worst a bug can do is leave objects to delete. The go-live decision moves to a
+        person who is looking at what was actually created.
+      </p>
+
+      <figure class="fig">
+        <div class="fig__hd">One package, two front ends</div>
+        <div class="fig__body">
+          <svg viewBox="0 0 700 240" role="img" aria-label="A spreadsheet is parsed into a shared SQLite database. A CLI and a web UI both drive the same package. A single-worker FIFO queue pushes to the Meta Ads API, reporting progress over Server-Sent Events. Everything is created paused until an operator activates it.">
+            <rect class="bx" x="0" y="20" width="96" height="34" rx="3"/>
+            <text x="10" y="41">partner .xlsx</text>
+            <path class="ln" d="M96 37h40"/>
+
+            <rect class="bx bx--live" x="136" y="14" width="130" height="46" rx="3"/>
+            <text x="146" y="34">parse + validate</text>
+            <text x="146" y="52" class="dim">row → entity plan</text>
+
+            <path class="ln" d="M201 60v28"/>
+            <rect class="bx bx--live" x="136" y="88" width="130" height="42" rx="3"/>
+            <text x="146" y="108">sqlite · wal</text>
+            <text x="146" y="124" class="dim">one shared run state</text>
+
+            <rect class="bx" x="0" y="88" width="96" height="20" rx="2"/>
+            <text x="8" y="102" class="dim">cli</text>
+            <rect class="bx" x="0" y="112" width="96" height="20" rx="2"/>
+            <text x="8" y="126" class="dim">web ui · htmx</text>
+            <path class="ln" d="M96 98h40M96 122h40"/>
+            <text x="0" y="152" class="dim">a run can move</text>
+            <text x="0" y="168" class="dim">between them</text>
+
+            <path class="ln" d="M266 109h44"/>
+            <rect class="bx bx--live" x="310" y="86" width="150" height="46" rx="3"/>
+            <text x="320" y="106">fifo queue</text>
+            <text x="320" y="124" class="dim">single worker</text>
+
+            <path class="ln" d="M385 132v26"/>
+            <rect class="bx" x="310" y="158" width="150" height="34" rx="3"/>
+            <text x="320" y="179" class="dim">rate limiter</text>
+
+            <path class="ln ln--pass" d="M460 109h56"/>
+            <rect class="bx" x="516" y="86" width="170" height="46" rx="3"/>
+            <text x="526" y="106">meta ads api</text>
+            <text x="526" y="124" class="dim">up to 5,000 ads</text>
+
+            <path class="ln" d="M601 132v30"/>
+            <rect class="bx" x="516" y="162" width="170" height="34" rx="3"/>
+            <text x="526" y="183" style="fill:var(--hold)">created paused</text>
+            <path class="ln ln--dash" d="M601 196v22H385"/>
+            <text x="396" y="232" style="fill:var(--hold)">operator activates</text>
+
+            <path class="ln ln--dash" d="M310 100h-44"/>
+            <text x="276" y="76" class="dim">sse progress</text>
+          </svg>
+        </div>
+        <figcaption>
+          The CLI and the web UI drive one package over one database, so a run started on the command
+          line can be finished in a browser.
+        </figcaption>
+      </figure>
+
+      <h2>Decisions, and what each one cost</h2>
+
+      <div class="decision">
+        <h3>One package driving both front ends over a shared database</h3>
+        <p>
+          Engineers want a command line: <code>parse</code>, then <code>videos</code>, then
+          <code>push</code>. The business team wants a page with a button. Both drive the same code
+          against the same SQLite file, so a run has one state rather than two.
+        </p>
+        <div class="decision__cost"><b>cost</b>
+          <span>The shared state has to be safe for two writers, which is why SQLite runs in WAL mode. Simpler than the alternative, which is two tools that disagree about what happened.</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <h3>htmx and server-rendered HTML instead of a frontend framework</h3>
+        <p>
+          The UI is forms, a table and a progress view. Jinja templates with htmx cover all of it and
+          the whole tool stays one deployable Python process.
+        </p>
+        <div class="decision__cost"><b>cost</b>
+          <span>Rich client-side interaction would be awkward. It doesn't need any. This is the sort of tool that gets abandoned if it has a build pipeline to maintain.</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <h3>Server-Sent Events for progress</h3>
+        <p>
+          Pushing thousands of entities takes a long time. SSE streams progress so the page reports
+          what's happening instead of appearing hung.
+        </p>
+        <div class="decision__cost"><b>cost</b>
+          <span>A long-lived connection through nginx needs its buffering and timeouts configured correctly, which is a deployment detail that will bite whoever forgets it.</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <h3>A single-worker FIFO queue rather than parallel pushing</h3>
+        <p>
+          Concurrency would be faster right up until the API rate limit, at which point failures
+          arrive interleaved and partial state gets very hard to reason about. One worker, in order,
+          behind a rate limiter.
+        </p>
+        <div class="decision__cost"><b>cost</b>
+          <span>A 5,000-ad run takes as long as it takes. In exchange a failure is legible, because the runs happened in a known order.</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <h3>Dialect-neutral schema</h3>
+        <p>
+          SQLite is right for a single-operator internal tool, but the schema avoids SQLite-specific
+          constructs so it can move to Postgres or AlloyDB if the tool outgrows one machine.
+        </p>
+        <div class="decision__cost"><b>cost</b>
+          <span>Passing up some SQLite conveniences for a migration that may never happen. Cheap insurance.</span>
+        </div>
+      </div>
+
+      <h2>The parts that make it a tool rather than a script</h2>
+      <ul>
+        <li>A pytest suite covering parsing, the database layer, templates, reporting, the rate limiter, the push orchestrator, ad sets, videos, and an end-to-end path.</li>
+        <li>A deploy kit: a systemd unit, a Caddyfile, and deploy, backup and cleanup scripts.</li>
+        <li>Signed-cookie session auth, so the web UI isn't open to whoever finds the host.</li>
+        <li>Optional email over AWS SES for run outcomes.</li>
+      </ul>
+      <p>
+        The tests are the reason I trust it. Most of the failure surface is in parsing partner
+        spreadsheets, and no two of those arrive shaped the same way.
+      </p>
+
+      <div class="retro">
+        <span class="retro__tag">What I'd change</span>
+        <p>
+          I delivered it as a single drop rather than in reviewable pieces. Nobody could read it
+          incrementally, and the history does not explain why any particular decision was made. The tool
+          is fine; the way I handed it over made it harder for anyone else to pick up.
+        </p>
+        <p>
+          The thing I'd actually add is a dry-run diff: show the operator exactly what would be
+          created, as a reviewable summary, before anything touches the API.
+        </p>
+      </div>
+    </div>
+
+    <nav class="case__nav" aria-label="Other deep dives">
+      <a href="generation-surface.html"><span>Previous</span><b>The generation surface</b></a>
+      <a href="compliance-gate.html"><span>Next</span><b>The compliance gate</b></a>
+    </nav>
+  </div>
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__base">
+      <span><a href="../index.html">Suryansh Deoli</a> · Bengaluru, India</span>
+      <span><a href="mailto:suryanshdeoliofficial@gmail.com">suryanshdeoliofficial@gmail.com</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="pal" id="pal" data-open="false" role="dialog" aria-modal="true" aria-labelledby="pal-title">
+  <h2 class="vh" id="pal-title">Jump to a section or page</h2>
+  <div class="pal__box">
+    <input class="pal__input" id="pal-input" type="text" role="combobox" aria-expanded="true"
+      aria-controls="pal-list" aria-autocomplete="list" placeholder="Jump to…" autocomplete="off" spellcheck="false">
+    <div class="pal__list" id="pal-list" role="listbox" aria-label="Results"></div>
+  </div>
+</div>
+
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>

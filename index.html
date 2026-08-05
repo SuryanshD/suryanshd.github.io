@@ -1,0 +1,1093 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suryansh Deoli — Software Engineer, AI Systems</title>
+<meta name="description" content="Software engineer at InMobi. One of three building a new AI monetization platform from its first commit. Earlier: a co-founded fintech prototype sold for $50,000.">
+<meta name="author" content="Suryansh Deoli">
+<link rel="canonical" href="https://suryanshd.github.io/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://suryanshd.github.io/">
+<meta property="og:site_name" content="Suryansh Deoli">
+<meta property="og:title" content="Suryansh Deoli — builds AI monetization systems">
+<meta property="og:description" content="From the first commit on a new AI monetization platform at InMobi to a compliance proxy with an LLM in the approval loop. Plus a co-founded $50,000 exit in college.">
+<meta property="og:image" content="https://suryanshd.github.io/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Suryansh Deoli — software engineer building AI monetization systems.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Suryansh Deoli — builds AI monetization systems">
+<meta name="twitter:description" content="From the first commit on a new AI monetization platform at InMobi to a compliance proxy with an LLM in the approval loop. Plus a co-founded $50,000 exit in college.">
+<meta name="twitter:image" content="https://suryanshd.github.io/assets/img/og.png">
+
+<meta name="theme-color" content="#fbfaf8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08090b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+<link rel="preload" href="assets/fonts/space-grotesk-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/index.css">
+
+<script>
+/* theme, set before first paint so there's no flash */
+(function () {
+  try {
+    var t = localStorage.getItem('sd-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+  document.documentElement.classList.add('js');
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Suryansh Deoli",
+  "url": "https://suryanshd.github.io/",
+  "email": "mailto:suryanshdeoliofficial@gmail.com",
+  "jobTitle": "Software Development Engineer",
+  "worksFor": { "@type": "Organization", "name": "InMobi" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Bengaluru", "addressCountry": "IN" },
+  "alumniOf": [
+    { "@type": "CollegeOrUniversity", "name": "University of Petroleum and Energy Studies (UPES), Dehradun" }
+  ],
+  "knowsAbout": ["Applied AI", "Large language models", "Retrieval-augmented generation", "Python", "FastAPI", "Next.js", "Identity and access management", "Ad technology"],
+  "sameAs": [
+    "https://github.com/SuryanshD",
+    "https://www.linkedin.com/in/suryansh-deoli-22746b212"
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<canvas id="viz" aria-hidden="true"></canvas>
+
+<header class="hdr" id="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__mark" href="#top"><b>SD</b> Suryansh Deoli</a>
+    <nav class="hdr__nav" aria-label="Sections">
+      <a href="#pipeline">Work</a>
+      <a href="#foundation">Foundation</a>
+      <a href="#projects">Projects</a>
+      <a href="#before">Before InMobi</a>
+      <a href="resume.html">Résumé</a>
+    </nav>
+    <div class="hdr__tools">
+      <button class="kbd-btn" id="pal-open" aria-label="Open command palette ⌘K"><span>⌘</span>K</button>
+      <button class="icon-btn" id="theme-btn" data-theme-icon aria-label="Switch colour theme">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 14.4A8.5 8.5 0 1 1 9.6 4a6.8 6.8 0 0 0 10.4 10.4Z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="page" id="top">
+<main id="main">
+
+  <!-- ============================ HERO ============================ -->
+  <section class="hero" data-viz-mode="hero" aria-labelledby="h-name">
+    <div class="wrap hero__in">
+      <p class="hero__eyebrow"><i aria-hidden="true"></i> Bengaluru, India &nbsp;·&nbsp; Software engineer</p>
+
+      <h1 id="h-name" data-split>Suryansh Deoli</h1>
+
+      <p class="hero__role">
+        Software engineer at InMobi. One of three building a new
+        <em>AI monetization platform</em>, there since the backend's first commit.
+      </p>
+
+      <p class="hero__lede">
+        I own the platform's monetization surface: the feed integrations and the ad templates
+        that decide what serves. Before that I built a compliance proxy that checks ad campaigns
+        before their traffic reaches Google, with an LLM in the approval loop.
+      </p>
+
+      <div class="proof" data-reveal>
+        <div class="proof__cell">
+          <span class="proof__val">LLM in the approval loop</span>
+          <span class="proof__key">Ad-compliance proxy in production. HMAC-signed requests, Redis-backed approval state.</span>
+        </div>
+        <div class="proof__cell">
+          <span class="proof__val">~8&times; faster auth <small>2s → 0.25s</small></span>
+          <span class="proof__key">Redis circuit breaker, cluster client, L1 cache, N+1 elimination.</span>
+        </div>
+        <div class="proof__cell">
+          <span class="proof__val">Identity rebuilt from scratch</span>
+          <span class="proof__key">Three-tier org hierarchy, dynamic roles, SSO and JWT, invite flows.</span>
+        </div>
+      </div>
+
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="#pipeline">See the work</a>
+        <a class="btn" href="mailto:suryanshdeoliofficial@gmail.com">Email me</a>
+        <a class="btn" href="https://github.com/SuryanshD" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/suryansh-deoli-22746b212" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="resume.html">Résumé</a>
+      </div>
+
+      <p class="hero__scroll" aria-hidden="true"><span></span> Scroll</p>
+    </div>
+  </section>
+
+  <!-- ========================== PIPELINE ========================== -->
+  <section class="pipe" id="pipeline" aria-labelledby="h-pipeline">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-head__row">
+          <span class="sec-head__idx">01</span>
+          <h2 id="h-pipeline">The path a request takes</h2>
+          <span class="sec-head__note">InMobi &nbsp;·&nbsp; 2025 → now</span>
+        </div>
+      </div>
+
+      <div class="pipe__intro stack measure">
+        <p>
+          Everything I've shipped sits somewhere on one path. A demand signal becomes generated
+          content, the content gets packaged into campaigns, the campaigns get ruled on, and
+          something serves. Below is that path, stage by stage.
+        </p>
+        <p>
+          It spans <strong>two platforms and a prototype</strong>, so every piece below is tagged with
+          where it actually ran and what it was built in.
+        </p>
+      </div>
+
+      <nav class="rail" id="rail" aria-label="Pipeline stages">
+        <a class="rail__seg" href="#stage-generate" data-rail="0"><b><i>01</i> Generate</b></a>
+        <a class="rail__seg" href="#stage-launch"   data-rail="1"><b><i>02</i> Launch</b></a>
+        <a class="rail__seg" href="#stage-gate"     data-rail="2"><b><i>03</i> Gate</b></a>
+        <a class="rail__seg" href="#stage-serve"    data-rail="3"><b><i>04</i> Serve</b></a>
+      </nav>
+
+      <div class="pipe__grid">
+        <div class="pipe__col">
+
+          <!-- ---------------- 01 GENERATE ---------------- -->
+          <article class="stage" id="stage-generate" data-stage="0" data-viz-mode="generate">
+            <div class="stage__head">
+              <span class="stage__num">01</span>
+              <h3 class="stage__name">Generate</h3>
+              <span class="stage__of">Stage 1 of 4</span>
+            </div>
+            <h3>Turning a keyword into a page worth serving ads against</h3>
+            <div class="stage__body">
+              <p>
+                The generation surface takes a trending concept and produces the article, the
+                headline set, the imagery and the ad-unit configuration for it. I built the dashboard
+                and much of the service behind it, and it's where most of my LLM work happens.
+              </p>
+
+              <div class="sys">
+                <div class="sys__top">
+                  <h4>Concept Intelligence</h4>
+                  <span class="tag tag--era">Current platform · 2026</span>
+                </div>
+                <p>
+                  A keyword-intelligence and generation product. I built the dashboard through two
+                  redesigns and wired the real model calls behind it.
+                </p>
+                <ul>
+                  <li><b>Gemini and Claude in production</b>, behind a prompt engine with per-feed and per-article prompt config.</li>
+                  <li><b>Imagen 4</b> for imagery, after migrating off the previous image model, with a 16:9 WebP pipeline.</li>
+                  <li>A concept discovery and rediscovery service with streaming, which I later had to stabilise under real load.</li>
+                  <li>Google AFS and RSOC ad specs, production templates, and the publish flow.</li>
+                </ul>
+                <div class="sys__foot">
+                  <a class="arrow-link" href="work/generation-surface.html">Read the deep dive
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+                  </a>
+                  <span class="mono" style="color:var(--ink-3)">Next.js 16 · React 19 · FastAPI · AlloyDB</span>
+                </div>
+              </div>
+
+              <div class="sys">
+                <div class="sys__top">
+                  <h4>Image Hub</h4>
+                  <span class="tag tag--era">Current platform · 2026</span>
+                </div>
+                <p>
+                  A shared asset library for everything the platform generates, with
+                  <b>semantic search over embeddings</b> so an editor can find an image by
+                  describing it. I built the universal-access module, ran the database migration
+                  and backfill, and fixed the search path when it was returning 500s.
+                </p>
+              </div>
+
+              <div class="sys">
+                <div class="sys__top">
+                  <h4>The data underneath</h4>
+                  <span class="tag tag--era">Publabs · 2025</span>
+                </div>
+                <p>
+                  Before any of the above, I built the MGID revenue and spend reporting service and the
+                  dbt spend and revenue models on top of it. Unglamorous, and it is where the numbers the
+                  rest of the business ran on came from.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- ---------------- 02 LAUNCH ---------------- -->
+          <article class="stage" id="stage-launch" data-stage="1" data-viz-mode="launch">
+            <div class="stage__head">
+              <span class="stage__num">02</span>
+              <h3 class="stage__name">Launch</h3>
+              <span class="stage__of">Stage 2 of 4</span>
+            </div>
+            <h3>Five thousand ads at once, and none of them spending</h3>
+            <div class="stage__body">
+              <p>
+                Generated pages earn nothing until campaigns point at them, and campaigns were being
+                built in Ads Manager by hand.
+              </p>
+
+              <div class="sys">
+                <div class="sys__top">
+                  <h4>Meta Ads bulk uploader</h4>
+                  <span class="tag tag--era">Built and deployed solo · 2026</span>
+                </div>
+                <p>
+                  A partner hands over a spreadsheet. The tool turns it into Meta Ads Manager
+                  campaigns, <b>up to 5,000 ads per file</b>.
+                </p>
+                <ul>
+                  <li><b>Every entity is created paused.</b> Nothing spends until an operator deliberately turns it on, which is what makes a 5,000-row run safe to attempt.</li>
+                  <li>One Python package drives two front ends over one SQLite database, so a run started on the command line can be finished in the browser. A CLI for engineers, a web UI for the business team.</li>
+                  <li>Server-rendered HTML with htmx, and Server-Sent Events so a long push reports progress instead of hanging.</li>
+                  <li>A real pytest suite across parsing, the push orchestrator, ad sets, the rate limiter and end-to-end, plus a deploy kit behind systemd and nginx.</li>
+                </ul>
+                <div class="sys__foot">
+                  <a class="arrow-link" href="work/bulk-uploader.html">Read the deep dive
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+                  </a>
+                  <span class="mono" style="color:var(--ink-3)">Python 3.11 · FastAPI · htmx · SSE · SQLite</span>
+                </div>
+              </div>
+
+              <div class="sys">
+                <div class="sys__top">
+                  <h4>Feed and network integrations</h4>
+                  <span class="tag tag--era">Both platforms · 2025–2026</span>
+                </div>
+                <p>
+                  I've built or extended integrations across <b>eight ad networks and content
+                  feeds</b>, each with its own per-partner configuration: MGID, Bing Ads, Google
+                  Ads with AFS and RSOC, Meta, Outbrain, Taboola, Yahoo and AdSense.
+                </p>
+                <ul>
+                  <li>The Yahoo US pipeline end to end, then Google feed variants with configurable keyword counts and an experiment feed.</li>
+                  <li>Staggered publish dates, so a large batch does not all go live in the same minute.</li>
+                  <li>Fixed article-save timeouts by moving heavy on-save hooks off the request path.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- ---------------- 03 GATE ---------------- -->
+          <article class="stage" id="stage-gate" data-stage="2" data-viz-mode="gate">
+            <div class="stage__head">
+              <span class="stage__num">03</span>
+              <h3 class="stage__name">Gate</h3>
+              <span class="stage__of">Stage 3 of 4</span>
+            </div>
+            <h3>Checking a campaign before Google ever sees its traffic</h3>
+            <div class="stage__body">
+              <p>
+                A policy strike from an ad network arrives as an account problem, after the traffic has
+                already run. So the check has to happen before the click.
+              </p>
+
+              <div class="sys">
+                <div class="sys__top">
+                  <h4>RAF compliance proxy</h4>
+                  <span class="tag tag--era">Publabs · 2025–2026</span>
+                </div>
+                <p>
+                  A transparent proxy that sits in the click path and validates a campaign against
+                  network policy before its traffic reaches Google's search units. It was the largest thing I owned
+                  in that era.
+                </p>
+                <ul>
+                  <li><b>An LLM auto-approval layer</b> that rules on campaign compliance, so the review queue only sees what the model won't clear on its own.</li>
+                  <li><b>HMAC-signed requests</b>, so the proxy can prove a validation call came from a source it trusts.</li>
+                  <li>A Redis-backed approval state enforced in real time, and a review API where a human approves or rejects with a comment.</li>
+                  <li>A polling service that detects creative changes after approval and pauses the campaign, because an approved ad that quietly swaps its image is no longer an approved ad.</li>
+                  <li>Redis re-architected for scale: key prefixing, <code>SMEMBERS</code> instead of <code>KEYS</code>, and account-level separation so tenants can't read each other's state.</li>
+                  <li>Integrated per network, starting with Meta in production, then Google Ads, TikTok Ads, Bing, Outbrain and Taboola.</li>
+                </ul>
+                <div class="sys__foot">
+                  <a class="arrow-link" href="work/compliance-gate.html">Read the deep dive
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+                  </a>
+                  <a class="arrow-link" href="#gate">Try the decision below
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2v11M4 9l4 4 4-4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+              <div class="boundary">
+                <span class="boundary__tag">End of what I owned</span>
+                <p>
+                  Past this point, compliant traffic reaches Google's serving infrastructure. That
+                  is the one stage of this pipeline I didn't own, and it's the reason the next
+                  stage exists.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- ---------------- 04 SERVE ---------------- -->
+          <article class="stage" id="stage-serve" data-stage="3" data-viz-mode="serve">
+            <div class="stage__head">
+              <span class="stage__num">04</span>
+              <h3 class="stage__name">Serve</h3>
+              <span class="stage__of">Stage 4 of 4</span>
+            </div>
+            <h3>So I prototyped owning the serve layer too</h3>
+            <div class="stage__body">
+              <p>
+                If the answer surface is where attention is going, then the ad units belong inside the
+                answer. I built a proof of concept for that, from scratch, to find out what it would take.
+              </p>
+
+              <div class="sys">
+                <div class="sys__top">
+                  <h4>Embeddable AI answer surface</h4>
+                  <span class="tag tag--era">Prototype · 2026</span>
+                </div>
+                <p>
+                  A publisher drops in one <code>&lt;script&gt;</code> tag and gets an answer
+                  surface on their own site, monetised with ad units placed inside the answer.
+                </p>
+                <ul>
+                  <li><b>Retrieval-augmented against a per-partner content manifest</b>, with embeddings-based relevance scoring, so answers are grounded in that publisher's own pages.</li>
+                  <li><b>Closed Shadow DOM</b>, so the publisher's CSS and the widget's CSS cannot reach each other. On someone else's site that isn't a nice-to-have.</li>
+                  <li><b>Origin-allowlist auth</b> on partner key plus browser origin. A leaked key used from a domain that isn't on the list gets a 403. An admin can rotate a key and invalidate open sessions, or switch a partner off.</li>
+                  <li>Eight ad placements across search, display and affiliate stacks, each one toggleable per partner from a config API.</li>
+                  <li>An admin console for partner registration and embed-snippet generation, with theme inheritance that reads the host page's fonts and colours.</li>
+                  <li>A deliberately hostile demo site, built to fail the origin check, so the 403 is
+                  something you can watch happen.</li>
+                </ul>
+                <div class="sys__foot">
+                  <a class="arrow-link" href="work/answer-surface.html">Read the deep dive
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+                  </a>
+                  <span class="mono" style="color:var(--ink-3)">Vanilla JS · Shadow DOM · FastAPI · embeddings</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div><!-- /pipe__col -->
+
+        <!-- sticky schematic -->
+        <aside class="pipe__viz" aria-hidden="true">
+          <div class="schem">
+            <div class="schem__hd">
+              <span>Topology</span>
+              <b id="schem-name">Generate</b>
+            </div>
+            <div class="schem__stack">
+
+              <div class="schem__fig" data-fig="0" data-live="true">
+                <svg viewBox="0 0 320 200" role="img">
+                  <text x="6" y="26">concept</text>
+                  <rect class="s-fill" x="4" y="34" width="62" height="24" rx="2"/>
+                  <text x="12" y="50" style="fill:var(--ink-2)">keyword</text>
+                  <path class="s-line s-line--pass" d="M68 46h34"/>
+                  <rect class="s-box s-box--live" x="104" y="20" width="78" height="52" rx="2"/>
+                  <text x="112" y="40">prompt</text>
+                  <text x="112" y="54">engine</text>
+                  <path class="s-line" d="M184 46h30M214 46v-14h28M214 46h28M214 46v14h28"/>
+                  <rect class="s-fill" x="242" y="22" width="70" height="20" rx="2"/>
+                  <text x="250" y="36" style="fill:var(--ink-2)">gemini</text>
+                  <rect class="s-fill" x="242" y="48" width="70" height="20" rx="2"/>
+                  <text x="250" y="62" style="fill:var(--ink-2)">claude</text>
+                  <rect class="s-fill" x="242" y="74" width="70" height="20" rx="2"/>
+                  <text x="250" y="88" style="fill:var(--ink-2)">imagen 4</text>
+                  <path class="s-line" d="M277 96v20H150v14"/>
+                  <rect class="s-box" x="96" y="130" width="108" height="30" rx="2"/>
+                  <text x="106" y="149">article + headlines</text>
+                  <path class="s-line" d="M150 160v14"/>
+                  <rect class="s-fill" x="96" y="174" width="108" height="22" rx="2"/>
+                  <text x="106" y="189" style="fill:var(--ink-2)">ad spec + template</text>
+                  <circle class="s-dot" cx="68" cy="46" r="2.5"/>
+                  <text x="4" y="120">embeddings</text>
+                  <rect class="s-box" x="4" y="130" width="76" height="30" rx="2"/>
+                  <text x="12" y="149">image hub</text>
+                  <path class="s-line" d="M80 145h16"/>
+                </svg>
+              </div>
+
+              <div class="schem__fig" data-fig="1">
+                <svg viewBox="0 0 320 200" role="img">
+                  <text x="6" y="24">partner sheet</text>
+                  <rect class="s-fill" x="4" y="32" width="58" height="26" rx="2"/>
+                  <text x="12" y="49" style="fill:var(--ink-2)">.xlsx</text>
+                  <path class="s-line s-line--pass" d="M64 45h30"/>
+                  <rect class="s-box s-box--live" x="96" y="30" width="60" height="30" rx="2"/>
+                  <text x="104" y="49">parse</text>
+                  <path class="s-line" d="M158 45h26"/>
+                  <rect class="s-box" x="186" y="30" width="60" height="30" rx="2"/>
+                  <text x="194" y="49">queue</text>
+                  <path class="s-line" d="M248 45h22"/>
+                  <text x="272" y="49" style="fill:var(--ink-2)">SSE</text>
+                  <path class="s-line" d="M216 60v18"/>
+                  <text x="6" y="96">created paused</text>
+                  <g>
+                    <rect class="s-box" x="96" y="86" width="34" height="16" rx="2"/><text x="101" y="98" style="font-size:6px">ad</text>
+                    <rect class="s-box" x="136" y="86" width="34" height="16" rx="2"/><text x="141" y="98" style="font-size:6px">ad</text>
+                    <rect class="s-box" x="176" y="86" width="34" height="16" rx="2"/><text x="181" y="98" style="font-size:6px">ad</text>
+                    <rect class="s-box" x="216" y="86" width="34" height="16" rx="2"/><text x="221" y="98" style="font-size:6px">ad</text>
+                    <rect class="s-box" x="256" y="86" width="34" height="16" rx="2"/><text x="261" y="98" style="font-size:6px">ad</text>
+                    <rect class="s-box" x="96" y="108" width="34" height="16" rx="2"/><text x="101" y="120" style="font-size:6px">ad</text>
+                    <rect class="s-box" x="136" y="108" width="34" height="16" rx="2"/><text x="141" y="120" style="font-size:6px">ad</text>
+                    <rect class="s-box" x="176" y="108" width="34" height="16" rx="2"/><text x="181" y="120" style="font-size:6px">ad</text>
+                    <rect class="s-box" x="216" y="108" width="34" height="16" rx="2"/><text x="221" y="120" style="font-size:6px">ad</text>
+                    <rect class="s-box" x="256" y="108" width="34" height="16" rx="2"/><text x="261" y="120" style="font-size:6px">×5000</text>
+                  </g>
+                  <path class="s-line" d="M193 124v16"/>
+                  <rect class="s-fill" x="120" y="140" width="146" height="24" rx="2"/>
+                  <text x="128" y="156" style="fill:var(--hold)">operator activates</text>
+                  <text x="6" y="180">cli</text>
+                  <rect class="s-box" x="4" y="126" width="58" height="18" rx="2"/>
+                  <text x="10" y="139" style="font-size:6px">parse|push</text>
+                  <rect class="s-box" x="4" y="150" width="58" height="18" rx="2"/>
+                  <text x="10" y="163" style="font-size:6px">web ui</text>
+                  <path class="s-line" d="M62 135h20M62 159h20M82 135v24"/>
+                  <text x="6" y="196" style="font-size:6px">one sqlite db</text>
+                </svg>
+              </div>
+
+              <div class="schem__fig" data-fig="2">
+                <svg viewBox="0 0 320 200" role="img">
+                  <text x="6" y="24">campaign</text>
+                  <rect class="s-fill" x="4" y="32" width="56" height="24" rx="2"/>
+                  <text x="11" y="48" style="fill:var(--ink-2)">creative</text>
+                  <path class="s-line" d="M62 44h32"/>
+                  <text x="96" y="20">hmac signed</text>
+                  <rect class="s-box s-box--live" x="96" y="26" width="96" height="72" rx="2"/>
+                  <text x="104" y="44">validation</text>
+                  <path class="s-line" d="M104 52h80M104 64h80M104 76h80"/>
+                  <text x="104" y="62" style="font-size:6px">network policy</text>
+                  <text x="104" y="74" style="font-size:6px">approval state</text>
+                  <text x="104" y="86" style="font-size:6px">llm review</text>
+                  <path class="s-line s-line--pass" d="M194 50h44"/>
+                  <rect class="s-box" x="240" y="38" width="74" height="24" rx="2"/>
+                  <text x="248" y="54" style="fill:var(--pass)">approved</text>
+                  <path class="s-line s-line--block" d="M194 76h44"/>
+                  <rect class="s-box" x="240" y="64" width="74" height="24" rx="2"/>
+                  <text x="248" y="80" style="fill:var(--block)">blocked</text>
+                  <path class="s-line" d="M144 98v18"/>
+                  <rect class="s-box" x="88" y="116" width="112" height="26" rx="2"/>
+                  <text x="96" y="133">redis approval state</text>
+                  <path class="s-line" d="M144 142v14"/>
+                  <rect class="s-box" x="76" y="156" width="136" height="26" rx="2"/>
+                  <text x="84" y="173">creative-change poller</text>
+                  <path class="s-line s-line--block" d="M212 169h44v-81"/>
+                  <text x="222" y="192" style="font-size:6px;fill:var(--block)">auto-pause</text>
+                  <circle class="s-dot" cx="238" cy="50" r="2.5"/>
+                  <circle class="s-dot--block" cx="238" cy="76" r="2.5"/>
+                  <path class="s-line" style="stroke-dasharray:2 3" d="M277 62v2"/>
+                  <text x="248" y="18" style="font-size:6px">google serving →</text>
+                </svg>
+              </div>
+
+              <div class="schem__fig" data-fig="3">
+                <svg viewBox="0 0 320 200" role="img">
+                  <text x="6" y="20">partner page</text>
+                  <rect class="s-box" x="4" y="26" width="200" height="164" rx="2"/>
+                  <text x="12" y="44" style="font-size:6px">host css cannot reach in</text>
+                  <rect class="s-box s-box--live" x="14" y="52" width="180" height="128" rx="2"/>
+                  <text x="22" y="68">closed shadow dom</text>
+                  <rect class="s-fill" x="22" y="76" width="164" height="30" rx="2"/>
+                  <text x="30" y="95" style="fill:var(--ink-2)">answer</text>
+                  <g>
+                    <rect class="s-box" x="22" y="112" width="38" height="14" rx="1"/><text x="26" y="122" style="font-size:5px">ad 1</text>
+                    <rect class="s-box" x="64" y="112" width="38" height="14" rx="1"/><text x="68" y="122" style="font-size:5px">ad 2</text>
+                    <rect class="s-box" x="106" y="112" width="38" height="14" rx="1"/><text x="110" y="122" style="font-size:5px">ad 3</text>
+                    <rect class="s-box" x="148" y="112" width="38" height="14" rx="1"/><text x="152" y="122" style="font-size:5px">ad 4</text>
+                    <rect class="s-box" x="22" y="132" width="38" height="14" rx="1"/><text x="26" y="142" style="font-size:5px">ad 5</text>
+                    <rect class="s-box" x="64" y="132" width="38" height="14" rx="1"/><text x="68" y="142" style="font-size:5px">ad 6</text>
+                    <rect class="s-box" x="106" y="132" width="38" height="14" rx="1"/><text x="110" y="142" style="font-size:5px">ad 7</text>
+                    <rect class="s-box" x="148" y="132" width="38" height="14" rx="1"/><text x="152" y="142" style="font-size:5px">ad 8</text>
+                  </g>
+                  <text x="22" y="164" style="font-size:6px">toggleable per partner</text>
+                  <path class="s-line s-line--pass" d="M204 96h34"/>
+                  <rect class="s-box" x="240" y="60" width="76" height="34" rx="2"/>
+                  <text x="248" y="74">origin</text>
+                  <text x="248" y="86">allowlist</text>
+                  <path class="s-line" d="M278 94v10"/>
+                  <rect class="s-box" x="240" y="104" width="76" height="34" rx="2"/>
+                  <text x="248" y="118">manifest</text>
+                  <text x="248" y="130" style="font-size:6px">+ embeddings</text>
+                  <path class="s-line s-line--block" d="M238 96h-34"/>
+                  <text x="240" y="156" style="font-size:6px;fill:var(--block)">bad origin → 403</text>
+                  <circle class="s-dot" cx="238" cy="96" r="2.5"/>
+                </svg>
+              </div>
+
+            </div>
+            <p class="schem__cap" id="schem-cap">The generation surface: one concept in, an article, headline set, imagery and ad spec out.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== GATE DEMO ========================== -->
+  <section class="gate" id="gate" aria-labelledby="h-gate">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-head__row">
+          <span class="sec-head__idx">02</span>
+          <h2 id="h-gate">Try the gate</h2>
+          <span class="sec-head__note">Runs in your browser</span>
+        </div>
+      </div>
+
+      <div class="pipe__intro stack measure" style="margin-bottom:var(--s-4)">
+        <p>
+          Write an ad headline the way an affiliate would, and watch the rule stack rule on it.
+          Every verdict shows which rule fired, next to a sketch of what a signed validation request
+          carries.
+        </p>
+      </div>
+
+      <div class="gate__wrap">
+        <div class="gate__side">
+          <p class="gate__disclaimer">
+            The rules here are illustrative. The real service is written in Python and its rules are
+            internal. This is a small deterministic version running locally in this page, so you can
+            poke at the decision path.
+          </p>
+
+          <div class="gate__field">
+            <label for="gate-input">Ad headline and description</label>
+            <textarea class="gate__input" id="gate-input" rows="3" spellcheck="false"
+              placeholder="e.g. 10 best SUVs under ₹15 lakh in 2026">Doctors hate this one weird trick to cure diabetes overnight — guaranteed</textarea>
+          </div>
+
+          <div>
+            <p class="kicker" style="margin-bottom:var(--s-2)">Or load a sample</p>
+            <div class="gate__samples" id="gate-samples">
+              <button class="gate__sample" type="button" data-sample="10 best SUVs under ₹15 lakh in 2026">clean listicle</button>
+              <button class="gate__sample" type="button" data-sample="Doctors hate this one weird trick to cure diabetes overnight — guaranteed">health claim</button>
+              <button class="gate__sample" type="button" data-sample="Make ₹80,000 a week from home, no experience needed. Act now!!!">get rich quick</button>
+              <button class="gate__sample" type="button" data-sample="Government approved scheme: claim your free ₹50,000 subsidy today">official impersonation</button>
+              <button class="gate__sample" type="button" data-sample="Top 7 mutual funds for first-time investors, reviewed">finance, allowed</button>
+              <button class="gate__sample" type="button" data-sample="She lost 30kg in 2 weeks and you won't believe what happened next">clickbait + weight loss</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="gate__side">
+          <div class="verdict" id="verdict" data-verdict="pass" aria-live="polite">
+            <div class="verdict__row">
+              <span class="verdict__badge"><i aria-hidden="true"></i><span id="verdict-label">approved</span></span>
+              <span class="verdict__meta" id="verdict-meta">0 rules fired</span>
+            </div>
+            <div class="verdict__rules" id="verdict-rules"></div>
+            <div class="trace" id="verdict-trace"></div>
+          </div>
+          <p class="mono" style="color:var(--ink-3);line-height:1.6">
+            In production a blocked campaign never reaches the network, a held one waits for a
+            human in the review API, and an approved one gets watched by the poller in case its
+            creative changes later.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= FOUNDATION ========================= -->
+  <section class="found" id="foundation" data-viz-mode="foundation" aria-labelledby="h-found">
+    <div class="wrap">
+      <div class="sec-head" style="border-top:0;padding-top:0">
+        <div class="sec-head__row">
+          <span class="sec-head__idx">03</span>
+          <h2 id="h-found">The substrate under all of it</h2>
+          <span class="sec-head__note">Current platform · 2026</span>
+        </div>
+      </div>
+
+      <div class="found__lead">
+        <p class="lede">
+          Every request in that pipeline crosses the same four things: identity, latency, storage, and
+          whether any of it survives a penetration test.
+        </p>
+        <p>
+          I'm one of three founding engineers on this platform, and I've owned identity since the
+          backend's first commit.
+        </p>
+      </div>
+
+      <div class="found__grid">
+        <article class="found__card" data-reveal>
+          <span class="found__num">01 / identity</span>
+          <h3>IAM v3, clean slate</h3>
+          <p>
+            The previous identity model couldn't express the customer shape we needed, so I rebuilt
+            it rather than patched it.
+          </p>
+          <ul>
+            <li>three-tier org hierarchy</li>
+            <li>dynamic roles + permission mapping</li>
+            <li>SSO, JWT, invite flows</li>
+            <li>org-based access control</li>
+          </ul>
+          <a class="arrow-link" href="work/identity.html">Deep dive
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+          </a>
+        </article>
+
+        <article class="found__card" data-reveal>
+          <span class="found__num">02 / latency</span>
+          <h3>Roughly 8&times; on the degraded path</h3>
+          <p>
+            A dead Redis was costing about two seconds per operation, and five of those in a row
+            timed a page out. The fix was to stop waiting.
+          </p>
+          <ul>
+            <li>circuit breaker: fail fast, alert on open</li>
+            <li>cluster client + L1 cache</li>
+            <li>N+1 elimination</li>
+            <li>2s → 0.25s per operation</li>
+          </ul>
+        </article>
+
+        <article class="found__card" data-reveal>
+          <span class="found__num">03 / storage</span>
+          <h3>S3 to Google Cloud Storage</h3>
+          <p>
+            Moved image and asset storage across clouds on both the backend and the frontend, with
+            a CDN cutover and a backfill of everything already in flight.
+          </p>
+          <ul>
+            <li>bucket flip + DNS cutover</li>
+            <li>backfill from the old provider</li>
+            <li>done under the launch track</li>
+          </ul>
+        </article>
+
+        <article class="found__card" data-reveal>
+          <span class="found__num">04 / hardening</span>
+          <h3>Pen-test remediation</h3>
+          <p>
+            The findings that came back were mostly about session lifetime and authorisation
+            boundaries, which is where they usually are.
+          </p>
+          <ul>
+            <li>layered session invalidation</li>
+            <li>idle timeout + hard 24h cap</li>
+            <li>super-admin authz gates</li>
+            <li>logout: cleared cookies, Clear-Site-Data</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="tiers" data-reveal>
+        <div class="tiers__row"><span class="tiers__k">Tier 1</span><span class="tiers__v">Organisation. Holds the top-level grant of modules.</span></div>
+        <div class="tiers__row"><span class="tiers__k">Tier 2</span><span class="tiers__v">Business. A product boundary inside the org. Routes are gated on whether one is active.</span></div>
+        <div class="tiers__row"><span class="tiers__k">Tier 3</span><span class="tiers__v">User. Holds dynamic roles, resolved to permissions per request.</span></div>
+      </div>
+      <p class="mono" style="color:var(--ink-3);margin-top:var(--s-2)">
+        The hierarchy took the longest to get right. Everything above now resolves against it.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========================== PROJECTS ========================== -->
+  <section id="projects" aria-labelledby="h-projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-head__row">
+          <span class="sec-head__idx">04</span>
+          <h2 id="h-projects">Built in public</h2>
+          <span class="sec-head__note">Open source · buildathons</span>
+        </div>
+      </div>
+
+      <div class="pipe__intro stack measure" style="margin-bottom:var(--s-4)">
+        <p>
+          Both of these were built with <strong>Piyush Rane</strong> at GrowthX buildathons in
+          July 2026. They're the code you can actually read.
+        </p>
+      </div>
+
+      <div class="work__grid">
+        <article class="card" data-reveal>
+          <div class="card__top">
+            <h3>Mercury Works</h3>
+            <span class="card__sub">MIT · open source</span>
+          </div>
+          <p>
+            An autonomous AI creative agency. One sentence of brand brief goes in, and a complete
+            live brand comes out: research, naming, design, illustration, a voiceover radio ad, and
+            a deployed website with checkout. No human edits anywhere in the chain.
+          </p>
+          <p>
+            <strong>It shipped 11 real live brand sites during an 8-hour buildathon.</strong>
+          </p>
+          <div class="tags">
+            <span class="tag">multi-agent</span><span class="tag">image gen</span>
+            <span class="tag">voice</span><span class="tag">deploy pipeline</span>
+          </div>
+          <div class="card__links">
+            <a class="arrow-link" href="work/mercury-works.html">Deep dive
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+            </a>
+            <a class="arrow-link" href="https://github.com/SuryanshD/mercury-works" target="_blank" rel="noopener">Source
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 10l4-4M10 6H6.5M10 6v3.5"/><rect x="2.5" y="2.5" width="11" height="11" rx="2"/></svg>
+            </a>
+          </div>
+          <p class="card__credit">
+            World's Largest Hermes Buildathon, GrowthX, Bengaluru, 12 July 2026. Sponsored by
+            OpenAI, Cloudflare, Convex, ElevenLabs and Razorpay. Built with Piyush Rane.
+          </p>
+        </article>
+
+        <article class="card" data-reveal>
+          <div class="card__top">
+            <h3>Munshi</h3>
+            <span class="card__sub">Hindi + English</span>
+          </div>
+          <p>
+            A health-insurance claims processor that reads handwritten medical documents and
+            produces a submittable claim packet. Indian claim paperwork is handwritten and bilingual, and the required format is
+            unforgiving.
+          </p>
+          <p>
+            A confidently wrong number on a medical claim is worse than an empty one, so
+            <strong>two models have to agree before it commits to a reading.</strong> When they
+            disagree it abstains and flags what it could not read.
+          </p>
+          <div class="tags">
+            <span class="tag">handwriting OCR</span><span class="tag">bilingual</span>
+            <span class="tag">model agreement</span><span class="tag">abstention</span>
+          </div>
+          <div class="card__links">
+            <a class="arrow-link" href="work/munshi.html">Deep dive
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+            </a>
+            <a class="arrow-link" href="https://github.com/SuryanshD/munshi" target="_blank" rel="noopener">Source
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 10l4-4M10 6H6.5M10 6v3.5"/><rect x="2.5" y="2.5" width="11" height="11" rx="2"/></svg>
+            </a>
+          </div>
+          <p class="card__credit">
+            Sarvam &times; GrowthX Epoch Buildathon, 26 July 2026. Built with Piyush Rane.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== BEFORE INMOBI ======================== -->
+  <section id="before" aria-labelledby="h-before">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-head__row">
+          <span class="sec-head__idx">05</span>
+          <h2 id="h-before">Before InMobi</h2>
+          <span class="sec-head__note">2021 – 2024</span>
+        </div>
+      </div>
+
+      <div class="pipe__intro stack measure" style="margin-bottom:var(--s-5)">
+        <p>
+          I graduated in May 2025 and joined InMobi that June. Every college summer before it I was
+          inside somebody else's organisation, and each one wanted something delivered.
+        </p>
+      </div>
+
+      <div class="before__cluster" data-reveal>
+        <span class="before__kicker">Ministry of Defence, three times</span>
+
+        <div class="before__item">
+          <span class="before__when">DRDO · DEAL, Dehradun · Summer trainee · Jun–Jul 2023</span>
+          <h3>MAC protocols in tactical MANETs</h3>
+          <p>
+            I was a trainee in the IP Based Protocols Group at DEAL, a DRDO lab in Dehradun. The
+            subject was medium-access control in tactical mobile ad-hoc networks: radio networks
+            that self-organise where no fixed infrastructure exists, and where the choice of MAC
+            protocol decides whether the network holds up when nodes move. I built simulated
+            network environments in NS2, compared protocols under varying conditions, and delivered
+            a technical report with 10 recommendations to the group. It was my second consecutive
+            DRDO summer. The year before I'd worked on electronic circuit design at IRDE, another
+            DRDO lab.
+          </p>
+        </div>
+
+        <div class="before__item">
+          <span class="before__when">IIT Delhi · Summer research intern · 2023</span>
+          <h3>Fault detection and diagnosis in PEMFCs using AI</h3>
+          <p>
+            A research summer in Dr. Anil Verma's lab at IIT Delhi. The work applied AI methods to
+            a physical system while it was operating, spotting faults in proton-exchange-membrane
+            fuel cells, as part of the lab's wider sustainable-energy research. I was two years
+            into a B.Tech at UPES when I got the seat.
+          </p>
+        </div>
+
+        <div class="before__item">
+          <span class="before__when">DGQA journal · Published article</span>
+          <h3>"Use of AI and Its Benefits on Quality Assurance (QA)"</h3>
+          <p>
+            Published in the official journal of the DGQA, the Directorate General of Quality
+            Assurance under India's Ministry of Defence. It's DGQA's own departmental publication,
+            circulation 5,000+. The subject was putting AI into the quality-assurance loop, which
+            is close to what I shipped years later at InMobi, where an LLM now sits inside the
+            campaign-compliance path I built.
+          </p>
+        </div>
+      </div>
+
+      <div class="before__grid">
+        <div>
+          <div class="before__item" data-reveal style="margin-bottom:var(--s-5)">
+            <span class="before__when">Co-founder · Nov 2021 – Sep 2022</span>
+            <h3>A fintech prototype, and a $50,000 exit</h3>
+            <p>
+              We sold the prototype and its IP for <strong>$50,000</strong> while I was still in
+              college. The product was an investment aggregator: crypto, stocks and NFTs managed
+              from one account, with portfolio tracking and personalised insights. I co-founded it
+              in 2021 with two co-founders and owned the market research that told us whether
+              anyone wanted it. It was my first exit.
+            </p>
+          </div>
+
+          <div class="oneliners" data-reveal>
+            <div class="oneliner">
+              <h4>IBM India <span>· AI Project Intern · Jun–Jul 2024</span></h4>
+              <p>
+                Led a plant-disease detection and prediction project to <strong>92% accuracy</strong>,
+                refining the model with agricultural experts, alongside NLP research.
+              </p>
+            </div>
+            <div class="oneliner">
+              <h4>Glance <span>· Product Analyst · Jun–Aug 2024</span></h4>
+              <p>
+                Built and maintained 4 Superset dashboards carrying 50+ charts across the USA and
+                Singapore clusters, including a product-alert dashboard that surfaced daily
+                engagement deviations by OEM and region. Regional deep dives across 30+ engagement
+                metrics went to product managers every two weeks. A year before I joined InMobi as
+                an engineer.
+              </p>
+            </div>
+            <div class="oneliner">
+              <h4>UPES Coding Club <span>· Core member &amp; event coordinator</span></h4>
+              <p>
+                Organised a hackathon with 150+ participants and ran the technical workshop
+                programme.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="quiet" style="margin-top:0;border-top:0;padding-top:0">
+            <div class="quiet__row">
+              <span class="quiet__k">Education</span>
+              <span class="quiet__v">
+                B.Tech, Computer Science &amp; Engineering — UPES, Dehradun, Aug 2021 – May 2025.
+                Coursework in artificial intelligence and machine learning, and cloud computing.<br>
+                Higher Secondary, PCM — Grace Academy, Dehradun, 2017 – 2021.
+              </span>
+            </div>
+            <div class="quiet__row">
+              <span class="quiet__k">Certifications</span>
+              <span class="quiet__v">
+                Microsoft AI-102, Azure AI &nbsp;·&nbsp; AWS Academy Graduate &nbsp;·&nbsp;
+                QSim quantum computing, IIT Roorkee
+              </span>
+            </div>
+            <div class="quiet__row">
+              <span class="quiet__k">Student ML work</span>
+              <span class="quiet__v">
+                A brain-tumor detection CNN on MRI scans at <strong>91% accuracy</strong>; SkinNectar,
+                a skincare recommender using TF-IDF over 1,000+ product descriptions; a real-time
+                face-detection attendance system on a custom Haar cascade with OpenCV.
+                <a href="work/earlier-research.html">More on the research work</a>.
+              </span>
+            </div>
+            <div class="quiet__row">
+              <span class="quiet__k">Community</span>
+              <span class="quiet__v">
+                GrowthX builder community, competing in the Hermes and Sarvam Epoch buildathons.
+                Student ambassador at Internshala in 2021, running 3 workshops for 500+ students.
+              </span>
+            </div>
+            <div class="quiet__row">
+              <span class="quiet__k">Outside work</span>
+              <span class="quiet__v">
+                I've run 5+ life-skills workshops with prison inmates through Ardas Samaj Kalyan,
+                and volunteered on waste-management and rural education campaigns with Waste
+                Warriors and the Swami Vivekananda Foundation.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== EXPERIENCE ========================== -->
+  <section id="experience" aria-labelledby="h-xp">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-head__row">
+          <span class="sec-head__idx">06</span>
+          <h2 id="h-xp">Where I've worked</h2>
+        </div>
+      </div>
+      <div class="xp">
+        <div class="xp__row">
+          <span class="xp__when">Jun 2025 – now</span>
+          <span class="xp__what"><b>Software Development Engineer</b><span>One of three founding engineers on a new AI monetization platform. Earlier: the ad-compliance proxy and the content-automation platform.</span></span>
+          <span class="xp__where">InMobi · Bengaluru</span>
+        </div>
+        <div class="xp__row">
+          <span class="xp__when">Jun–Aug 2024</span>
+          <span class="xp__what"><b>Product Analyst</b><span>User-data analysis, Superset dashboards, market research on demographics and smartphone usage.</span></span>
+          <span class="xp__where">Glance · Bengaluru</span>
+        </div>
+        <div class="xp__row">
+          <span class="xp__when">Jun–Jul 2024</span>
+          <span class="xp__what"><b>AI Project Intern</b><span>NLP research; led the plant-disease detection project.</span></span>
+          <span class="xp__where">IBM India</span>
+        </div>
+        <div class="xp__row">
+          <span class="xp__when">2023</span>
+          <span class="xp__what"><b>Summer Research Intern</b><span>Fault detection and diagnosis in PEMFCs using AI, under Dr. Anil Verma.</span></span>
+          <span class="xp__where">IIT Delhi</span>
+        </div>
+        <div class="xp__row">
+          <span class="xp__when">Jun–Jul 2023</span>
+          <span class="xp__what"><b>Summer Trainee</b><span>MAC protocols in tactical MANET, IP Based Protocols Group.</span></span>
+          <span class="xp__where">DRDO · DEAL, Dehradun</span>
+        </div>
+        <div class="xp__row">
+          <span class="xp__when">Nov 2021 – Sep 2022</span>
+          <span class="xp__what"><b>Co-founder</b><span>Investment-aggregator prototype, with two co-founders. Prototype and IP sold for $50,000.</span></span>
+          <span class="xp__where">Fintech prototype</span>
+        </div>
+        <div class="xp__row">
+          <span class="xp__when">Jun–Aug 2022</span>
+          <span class="xp__what"><b>Summer Intern</b><span>Electronic circuit design and logic gates.</span></span>
+          <span class="xp__where">IRDE · DRDO</span>
+        </div>
+        <div class="xp__row">
+          <span class="xp__when">Oct–Dec 2021</span>
+          <span class="xp__what"><b>Student Ambassador</b><span>Ran 3 workshops for 500+ students.</span></span>
+          <span class="xp__where">Internshala</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ STACK ============================ -->
+  <section id="stack" aria-labelledby="h-stack">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-head__row">
+          <span class="sec-head__idx">07</span>
+          <h2 id="h-stack">What I build with</h2>
+          <span class="sec-head__note">Things I've shipped with, not read about</span>
+        </div>
+      </div>
+      <div class="stack-grid">
+        <div class="stack-col">
+          <h3>Languages &amp; frameworks</h3>
+          <p>Python, FastAPI · TypeScript, JavaScript · Next.js, React · React Native, Expo · NestJS · PHP, Laravel · SQL, dbt · htmx, Jinja2</p>
+        </div>
+        <div class="stack-col">
+          <h3>Applied AI</h3>
+          <p>Gemini · Claude · Imagen 4 · Groq, Llama · RAG · embeddings, semantic search · prompt engineering · agent pipelines · evals and abstention · PyTorch, scikit-learn, OpenCV</p>
+        </div>
+        <div class="stack-col">
+          <h3>Data &amp; storage</h3>
+          <p>PostgreSQL, AlloyDB, Neon · pgvector · Redis, cluster and circuit breaker · SQLite, WAL · IndexedDB · Superset · Pandas, NumPy</p>
+        </div>
+        <div class="stack-col">
+          <h3>Cloud &amp; delivery</h3>
+          <p>GCP: Cloud Storage, AlloyDB, Artifact Registry, Secret Manager · AWS: S3, SES · Docker · Jenkins · Helm · Nginx · CI and coverage gates</p>
+        </div>
+        <div class="stack-col">
+          <h3>Security</h3>
+          <p>IAM and RBAC · OAuth, SSO · JWT · HMAC request signing · session invalidation · origin-allowlist auth · pen-test remediation · dependency and CVE audit</p>
+        </div>
+        <div class="stack-col">
+          <h3>Ad platforms</h3>
+          <p>Meta Ads API · Google Ads, AFS, RSOC · Bing Ads · Outbrain · Taboola · MGID · Yahoo · AdSense · embeddable SDKs, Shadow DOM · Server-Sent Events</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ftr" id="contact" data-viz-mode="quiet">
+  <div class="wrap">
+    <div class="ftr__grid">
+      <div class="stack" style="--flow:var(--s-3)">
+        <h2>Worth a conversation?</h2>
+        <p class="lede" style="max-width:34ch">
+          I build AI monetization systems at InMobi. Bengaluru, and open to a conversation.
+        </p>
+        <a class="btn btn--primary" href="mailto:suryanshdeoliofficial@gmail.com">suryanshdeoliofficial@gmail.com</a>
+      </div>
+      <div>
+        <p class="kicker" style="margin-bottom:var(--s-2)">Elsewhere</p>
+        <div class="ftr__list">
+          <a href="https://github.com/SuryanshD" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://www.linkedin.com/in/suryansh-deoli-22746b212" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="resume.html">Résumé</a>
+        </div>
+      </div>
+      <div>
+        <p class="kicker" style="margin-bottom:var(--s-2)">Deep dives</p>
+        <div class="ftr__list">
+          <a href="work/compliance-gate.html">The compliance gate</a>
+          <a href="work/identity.html">Identity, rebuilt</a>
+          <a href="work/answer-surface.html">The answer surface</a>
+          <a href="work/generation-surface.html">The generation surface</a>
+          <a href="work/bulk-uploader.html">The bulk uploader</a>
+          <a href="work/earlier-research.html">Earlier research</a>
+        </div>
+      </div>
+    </div>
+    <div class="ftr__base">
+      <span>Suryansh Deoli · Bengaluru, India</span>
+      <span>Hand-written HTML, CSS and WebGL. No framework, no build step.</span>
+    </div>
+  </div>
+</footer>
+</div><!-- /page -->
+
+<!-- ======================= COMMAND PALETTE ======================= -->
+<div class="pal" id="pal" data-open="false" role="dialog" aria-modal="true" aria-labelledby="pal-title">
+  <h2 class="vh" id="pal-title">Jump to a section or page</h2>
+  <div class="pal__box">
+    <input class="pal__input" id="pal-input" type="text" role="combobox"
+      aria-expanded="true" aria-controls="pal-list" aria-autocomplete="list"
+      placeholder="Jump to…  (try &quot;gate&quot;, &quot;identity&quot;, &quot;resume&quot;)" autocomplete="off" spellcheck="false">
+    <div class="pal__list" id="pal-list" role="listbox" aria-label="Results"></div>
+  </div>
+</div>
+
+<script src="assets/js/vendor/gsap.min.js" defer></script>
+<script src="assets/js/vendor/ScrollTrigger.min.js" defer></script>
+<script src="assets/js/vendor/SplitText.min.js" defer></script>
+<script src="assets/js/pipeline.js" defer></script>
+<script src="assets/js/gate.js" defer></script>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Munshi — Suryansh Deoli</title>
+<meta name="description" content="A bilingual health-insurance claims processor that reads handwritten medical documents, with a two-model agreement check that abstains instead of guessing.">
+<link rel="canonical" href="https://suryanshd.github.io/work/munshi.html">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://suryanshd.github.io/work/munshi.html">
+<meta property="og:title" content="Munshi — Suryansh Deoli">
+<meta property="og:description" content="Handwritten Hindi and English medical documents into submittable claim packets, designed to abstain when two models disagree.">
+<meta property="og:image" content="https://suryanshd.github.io/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbfaf8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08090b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/space-grotesk-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/case.css">
+<script>
+(function () {
+  try { var t = localStorage.getItem('sd-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  document.documentElement.classList.add('js');
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr" id="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__mark" href="../index.html"><b>SD</b> Suryansh Deoli</a>
+    <nav class="hdr__nav" aria-label="Sections">
+      <a href="../index.html#pipeline">Work</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#before">Before InMobi</a>
+      <a href="../resume.html">Résumé</a>
+    </nav>
+    <div class="hdr__tools">
+      <button class="kbd-btn" id="pal-open" aria-label="Open command palette ⌘K"><span>⌘</span>K</button>
+      <button class="icon-btn" id="theme-btn" data-theme-icon aria-label="Switch colour theme">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 14.4A8.5 8.5 0 1 1 9.6 4a6.8 6.8 0 0 0 10.4 10.4Z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="case" id="main">
+  <div class="wrap">
+    <p class="crumb"><a href="../index.html#projects">Built in public</a> <span aria-hidden="true">/</span> Deep dive</p>
+
+    <div class="case__head">
+      <h1>Munshi</h1>
+      <p class="case__sum">
+        Handwritten medical documents in Hindi and English become a claim packet an insurer will
+        accept. When the models disagree, it stops.
+      </p>
+    </div>
+
+    <div class="facts">
+      <div class="facts__cell"><span class="facts__k">Built with</span><span class="facts__v">Piyush Rane</span></div>
+      <div class="facts__cell"><span class="facts__k">Where</span><span class="facts__v">Sarvam × GrowthX Epoch Buildathon, 26 July 2026</span></div>
+      <div class="facts__cell"><span class="facts__k">The design idea</span><span class="facts__v">Two-model agreement, with abstention on disagreement</span></div>
+      <div class="facts__cell"><span class="facts__k">Code</span><span class="facts__v"><a href="https://github.com/SuryanshD/munshi" target="_blank" rel="noopener">github.com/SuryanshD/munshi</a></span></div>
+    </div>
+
+    <div class="prose">
+      <h2>The problem</h2>
+      <p>
+        Filing a health-insurance claim in India means assembling paperwork that was written by hand,
+        often in a mix of Hindi and English, sometimes both inside one line. Doctors' handwriting is
+        the joke that it is. The forms have a required shape, and a packet that's missing a field or
+        has the wrong figure in one comes back rejected, which for the person filing it means weeks.
+      </p>
+      <p>
+        The errors here are not symmetric. A blank field is an inconvenience. A confidently wrong
+        number on a medical claim is a rejection, or a claim settled for the wrong amount.
+      </p>
+
+      <h2>The decision the whole thing turns on</h2>
+      <p>
+        <strong>Two models have to agree before the system commits to a reading. When they disagree,
+        it abstains and flags the field.</strong>
+      </p>
+      <p>
+        Most extraction pipelines return a best guess with a confidence score, and a model will
+        report high confidence on a figure it invented. So rather than asking one model how sure it is,
+        we ask two models independently and use their agreement as the signal.
+      </p>
+      <p>
+        Disagreement is a genuinely useful signal because it correlates with the thing you actually
+        care about: illegibility and ambiguity. When two models reading the same smudged number produce
+        different answers, that number is probably not legible, and the right output is to say so
+        rather than pick one.
+      </p>
+
+      <figure class="fig">
+        <div class="fig__hd">Extraction and agreement</div>
+        <div class="fig__body">
+          <svg viewBox="0 0 700 220" role="img" aria-label="A handwritten bilingual document is read independently by two models. Fields where they agree are committed to the claim packet. Fields where they disagree are abstained on and flagged for a human.">
+            <rect class="bx" x="0" y="76" width="104" height="52" rx="3"/>
+            <text x="9" y="96">handwritten</text>
+            <text x="9" y="112" class="dim">hindi + english</text>
+            <text x="9" y="126" class="dim">medical docs</text>
+
+            <path class="ln" d="M104 102h34M138 102V56h40M138 102v46h40"/>
+
+            <rect class="bx bx--live" x="178" y="36" width="120" height="40" rx="3"/>
+            <text x="188" y="56">model a</text>
+            <text x="188" y="70" class="dim">reads fields</text>
+            <rect class="bx bx--live" x="178" y="128" width="120" height="40" rx="3"/>
+            <text x="188" y="148">model b</text>
+            <text x="188" y="162" class="dim">reads fields</text>
+
+            <path class="ln" d="M298 56h30v46h-30M298 148h30"/>
+
+            <rect class="bx bx--live" x="328" y="76" width="130" height="52" rx="3"/>
+            <text x="338" y="96">compare</text>
+            <text x="338" y="112" class="dim">field by field</text>
+            <text x="338" y="126" class="dim">not whole doc</text>
+
+            <path class="ln ln--pass" d="M458 90h50"/>
+            <rect class="bx" x="508" y="42" width="180" height="52" rx="3"/>
+            <text x="518" y="62" style="fill:var(--pass)">agree → commit</text>
+            <text x="518" y="82" class="dim">goes into the packet</text>
+
+            <path class="ln ln--block" d="M458 116h50"/>
+            <rect class="bx" x="508" y="112" width="180" height="66" rx="3"/>
+            <text x="518" y="132" style="fill:var(--hold)">disagree → abstain</text>
+            <text x="518" y="152" class="dim">field left empty,</text>
+            <text x="518" y="168" class="dim">flagged for a human</text>
+            <text x="508" y="204" class="dim">an empty field beats a wrong one</text>
+          </svg>
+        </div>
+        <figcaption>
+          Two independent reads, compared. Disagreement is the signal, and the fields it fires on are
+          the ones a human should look at.
+        </figcaption>
+      </figure>
+
+      <h2>Decisions, and what each one cost</h2>
+
+      <div class="decision">
+        <h3>Agreement instead of self-reported confidence</h3>
+        <p>Two independent reads, compared, rather than one read with a confidence number.</p>
+        <div class="decision__cost"><b>cost</b>
+          <span>Roughly double the inference for every document. For a claim, that's obviously worth it. For a high-volume low-stakes pipeline it wouldn't be.</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <h3>Abstaining rather than filling the field</h3>
+        <p>The system will hand back an incomplete packet instead of a complete guess.</p>
+        <div class="decision__cost"><b>cost</b>
+          <span>It looks worse in a demo, because a full output reads as success and a partial one reads as failure. It's the right behaviour anyway, and the flagged fields tell a human exactly where to look.</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <h3>Committing only what survives the check</h3>
+        <p>What both reads agree on goes into the packet. What they do not is left for a human.</p>
+        <div class="decision__cost"><b>cost</b>
+          <span>The packet a human receives can be incomplete, so the flags have to be clear enough to act on without re-reading the whole document.</span>
+        </div>
+      </div>
+
+      <h2>Why bilingual matters more than it sounds</h2>
+      <p>
+        Real documents mix scripts inside a single line: a Devanagari word, a Latin drug name and a
+        numeral. Anything that picks one language for the whole page will misread the parts that are not
+        in it.
+      </p>
+      <p>
+        It was built at the Sarvam × GrowthX Epoch Buildathon. Documents like these are what break any
+        tool that assumes monolingual input.
+      </p>
+
+      <div class="retro">
+        <span class="retro__tag">What I'd change</span>
+        <p>
+          We have no measured abstention rate. The design is right and I'd defend it, but the number
+          that decides whether it's useful is what fraction of fields it refuses on a real stack of
+          documents. Too high and a human is doing the work anyway, which means the tool has just added
+          a step. Getting that number is the first thing I'd do with more than a buildathon's worth of
+          time, and it needs a labelled set of real claims to measure against.
+        </p>
+      </div>
+    </div>
+
+    <nav class="case__nav" aria-label="Other deep dives">
+      <a href="mercury-works.html"><span>Previous</span><b>Mercury Works</b></a>
+      <a href="earlier-research.html"><span>Next</span><b>Earlier research and ML</b></a>
+    </nav>
+  </div>
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__base">
+      <span><a href="../index.html">Suryansh Deoli</a> · Bengaluru, India</span>
+      <span><a href="mailto:suryanshdeoliofficial@gmail.com">suryanshdeoliofficial@gmail.com</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="pal" id="pal" data-open="false" role="dialog" aria-modal="true" aria-labelledby="pal-title">
+  <h2 class="vh" id="pal-title">Jump to a section or page</h2>
+  <div class="pal__box">
+    <input class="pal__input" id="pal-input" type="text" role="combobox" aria-expanded="true"
+      aria-controls="pal-list" aria-autocomplete="list" placeholder="Jump to…" autocomplete="off" spellcheck="false">
+    <div class="pal__list" id="pal-list" role="listbox" aria-label="Results"></div>
+  </div>
+</div>
+
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>
