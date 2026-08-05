@@ -59,6 +59,20 @@ Everything in it is additive: with JavaScript off the page is still a complete d
 - All paths relative, so the site works from `file://` as well as from the deployed root.
 - Nothing loads from a CDN. GSAP and both fonts are vendored into the repo.
 
+## Keeping the résumé PDF in step
+
+`resume.html` is the source of truth. `assets/Suryansh-Deoli-Resume.pdf` is a rendered copy, for
+recruiters who want a file and for job forms that only accept an upload. Regenerate it after any
+edit to the résumé:
+
+```sh
+chrome --headless --no-pdf-header-footer \
+  --print-to-pdf=assets/Suryansh-Deoli-Resume.pdf resume.html
+```
+
+It should come out as exactly one A4 page (595 x 842 pt). If it spills to two, the print stylesheet's
+`zoom` on `.cv__sheet` is the dial.
+
 ## Local
 
 ```sh
