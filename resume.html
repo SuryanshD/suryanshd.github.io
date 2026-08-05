@@ -40,7 +40,7 @@
       <a href="resume.html" aria-current="page">Résumé</a>
     </nav>
     <div class="hdr__tools">
-      <button class="kbd-btn" id="pal-open" aria-label="Open command palette ⌘K"><span>⌘</span>K</button>
+      <button class="kbd-btn" id="pal-open" aria-label="Open menu and search ⌘K"><span class="kbd-btn__cmd">⌘</span><span class="kbd-btn__k">K</span><span class="kbd-btn__menu">Menu</span></button>
       <button class="icon-btn" id="theme-btn" data-theme-icon aria-label="Switch colour theme">
         <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
         <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 14.4A8.5 8.5 0 1 1 9.6 4a6.8 6.8 0 0 0 10.4 10.4Z"/></svg>
@@ -71,10 +71,11 @@
       </div>
 
       <p class="cv__lede">
-        <strong>Founding engineer, one of three</strong>, on a new AI monetization platform at InMobi,
-        there since the backend&rsquo;s first commit, where I own the monetization surface. I ship LLM systems
-        that make live decisions. Before graduating I co-founded a fintech prototype that sold with its IP
-        for $50,000.
+        <strong>Founding engineer on two products at InMobi</strong>: one of three on a new AI
+        monetization platform, there since the backend&rsquo;s first commit, where I own the monetization
+        surface; and the embeddable answer surface I started building on top of it. I ship LLM systems that
+        make live decisions. Before graduating I co-founded a fintech prototype that sold with its IP for
+        $50,000.
       </p>
 
       <h2>Experience</h2>
@@ -85,13 +86,14 @@
           <span class="job__org">&middot; InMobi, Bengaluru</span>
           <span class="job__when">Jun 2025 &ndash; present</span>
         </div>
-        <p class="job__sub">Founding engineer (one of three) on the current platform since Mar 2026; before that, ad compliance and content automation.</p>
+        <p class="job__sub">Founding engineer on two products: the monetization platform (one of three) since Mar 2026, and the answer surface I started; before that, ad compliance and content automation.</p>
         <ul>
           <li><b>LLM systems in production.</b> Built the generation surface on Gemini and Claude with Imagen 4, behind a prompt engine with per-feed config. Also a concept-discovery service and semantic image search over embeddings.</li>
           <li><b>Ad-compliance proxy (Python/FastAPI).</b> Validates campaigns against network policy before their traffic reaches Google: HMAC-signed requests, Redis-backed approval state, a creative-change poller that auto-pauses drift, a review API, and <b>an LLM auto-approval layer</b>.</li>
           <li><b>Identity rebuilt from scratch (IAM v3).</b> Three-tier org hierarchy, dynamic roles and permission mapping, SSO and JWT, invite flows. Owned across the FastAPI backend and Next.js frontend.</li>
-          <li><b>Cut auth and dashboard latency ~8&times;</b> (2s to 0.25s per operation) with a Redis circuit breaker, cluster client, L1 cache and N+1 elimination. Migrated image storage S3 &rarr; Google Cloud Storage with CDN cutover.</li>
-          <li><b>Two tools built solo, end to end.</b> An embeddable AI answer surface (prototype): one script tag, retrieval-augmented against a per-partner manifest, closed Shadow DOM isolation, origin-allowlist auth, 8 in-answer ad placements. And a Meta Ads bulk uploader turning a spreadsheet into up to <b>5,000 ads</b>, every entity created paused so nothing spends by accident.</li>
+          <li><b>Cut auth and dashboard latency ~8&times; on the Redis-degraded path</b> (2s to 0.25s per operation) with a circuit breaker, cluster client, L1 cache and N+1 elimination. Migrated image storage S3 &rarr; Google Cloud Storage with CDN cutover.</li>
+          <li><b>Embeddable AI answer surface &mdash; founding engineer, and I started the build.</b> One script tag puts a retrieval-augmented answer surface on a publisher&rsquo;s site: per-partner content manifest, closed Shadow DOM isolation, origin-allowlist auth, 8 configurable in-answer ad placements. Wrote the proof of concept end to end (SDK, backend, admin console); now a product in development.</li>
+          <li><b>Meta Ads bulk uploader</b>, built and deployed solo: a spreadsheet becomes up to <b>5,000 ads</b>, every entity created paused so nothing spends by accident. Python CLI + FastAPI/htmx, SSE, pytest suite.</li>
           <li><b>Breadth and hardening.</b> Integrations across <b>8 ad networks and feeds</b> with per-partner config. Pen-test remediation, the backend&rsquo;s Docker/Jenkins container build, dbt revenue models.</li>
         </ul>
       </div>
@@ -161,7 +163,7 @@
 
       <h2>Skills</h2>
       <div class="cv__rows">
-        <p class="cv__row"><span class="k">Languages</span><span>Python (FastAPI) &middot; TypeScript / JavaScript &middot; PHP (Laravel) &middot; SQL &middot; C++ &middot; Java</span></p>
+        <p class="cv__row"><span class="k">Languages</span><span>Python (FastAPI) &middot; TypeScript / JavaScript &middot; PHP (Laravel) &middot; SQL</span></p>
         <p class="cv__row"><span class="k">Applied AI</span><span>Gemini &middot; Claude &middot; Imagen 4 &middot; Groq/Llama &middot; RAG &middot; embeddings and semantic search &middot; prompt engineering &middot; agent pipelines &middot; evals and abstention &middot; PyTorch &middot; scikit-learn &middot; OpenCV</span></p>
         <p class="cv__row"><span class="k">Systems &amp; data</span><span>Next.js / React &middot; React Native &middot; NestJS &middot; htmx &middot; PostgreSQL / AlloyDB / Neon &middot; pgvector &middot; Redis (cluster, circuit breaker) &middot; dbt &middot; Server-Sent Events &middot; Shadow DOM SDKs</span></p>
         <p class="cv__row"><span class="k">Cloud &amp; security</span><span>GCP &middot; AWS &middot; Docker &middot; Jenkins &middot; Helm &middot; Nginx &middot; IAM/RBAC &middot; OAuth/SSO &middot; JWT &middot; HMAC &middot; session invalidation &middot; pen-test remediation</span></p>

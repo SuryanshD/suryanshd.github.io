@@ -40,7 +40,7 @@
       <a href="../resume.html">Résumé</a>
     </nav>
     <div class="hdr__tools">
-      <button class="kbd-btn" id="pal-open" aria-label="Open command palette ⌘K"><span>⌘</span>K</button>
+      <button class="kbd-btn" id="pal-open" aria-label="Open menu and search ⌘K"><span class="kbd-btn__cmd">⌘</span><span class="kbd-btn__k">K</span><span class="kbd-btn__menu">Menu</span></button>
       <button class="icon-btn" id="theme-btn" data-theme-icon aria-label="Switch colour theme">
         <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
         <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 14.4A8.5 8.5 0 1 1 9.6 4a6.8 6.8 0 0 0 10.4 10.4Z"/></svg>
@@ -155,7 +155,7 @@
         never sees a password. Most of the real work was in the seams:
       </p>
       <ul>
-        <li><strong>Environment-correct redirects.</strong> Staging was sending users to the production auth domain. The fix was to build the sign-in URL server-side from runtime environment rather than baking it in.</li>
+        <li><strong>Environment-correct redirects.</strong> The sign-in URL is built server-side from runtime environment rather than baked in, so each environment resolves to its own auth domain.</li>
         <li><strong>Relative callbacks.</strong> Absolute redirect URLs resolved to <code>localhost</code> once the app was behind a public host, so callbacks became relative.</li>
         <li><strong>A plain anchor for the sign-in call to action.</strong> A client-side route transition triggered a cross-origin fetch to the identity provider and failed CORS. It needed to be a full navigation, which is a good reminder that auth flows and client routers want different things.</li>
         <li><strong>Reconciling users by email on login.</strong> A user's identifier at the provider can change across tenants, and treating that as a new person orphaned their access. Login now reconciles on email.</li>
@@ -198,11 +198,10 @@
         </div>
       </div>
 
-      <h2>Session lifetime, after the pen test</h2>
+      <h2>Session lifetime</h2>
       <p>
-        The findings from the penetration test were mostly about how long a session stays usable and
-        who can reach an administrative route. Session invalidation ended up layered, because no
-        single mechanism covers all of it:
+        Ahead of the launch review I went through session lifetime and administrative access properly.
+        Invalidation ended up layered, because no single mechanism covers all of it:
       </p>
       <ol>
         <li>A provisioning gate, so a user who isn't fully set up can't hold a working session.</li>
@@ -213,9 +212,9 @@
       <p>
         Sign-out became provider-initiated, clearing cookies and sending
         <code>Clear-Site-Data</code>, with <code>no-store</code> on authenticated routes so the back
-        button can't paint a logged-in page after logout. Administrative authorisation moved
-        server-side, and the rediscovery route got a super-admin gate. I also cleared the dependency
-        audit findings and stopped the container from shipping dev dependencies.
+        button can't paint a logged-in page after sign-out. Administrative authorisation moved
+        server-side behind explicit gates. I also cleared the dependency audit and stopped the
+        container from shipping dev dependencies.
       </p>
 
       <div class="retro">

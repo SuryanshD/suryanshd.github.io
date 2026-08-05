@@ -15,7 +15,7 @@
   font-display: swap;
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
                  U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
-                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+                 U+2191, U+2193, U+2197, U+20B9, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
   font-family: 'JetBrains Mono';
@@ -26,7 +26,7 @@
   font-display: swap;
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
                  U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
-                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+                 U+2191, U+2193, U+2197, U+20B9, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 /* ---------- tokens ------------------------------------------------------- */
@@ -450,7 +450,9 @@ section { position: relative; }
 :root[data-theme='light'] .icon-btn[data-theme-icon] .i-moon { display: block; }
 
 .kbd-btn {
-  display: none;
+  /* Shown at every width: below 700px this button is the only navigation,
+     because the header nav collapses and the palette lists every destination. */
+  display: inline-flex;
   align-items: center;
   gap: 0.45em;
   padding: 0.42em 0.6em;
@@ -465,7 +467,11 @@ section { position: relative; }
   transition: border-color 0.18s var(--ease), color 0.18s var(--ease);
 }
 .kbd-btn:hover { border-color: var(--line-strong); color: var(--ink); }
-@media (min-width: 700px) { .kbd-btn { display: inline-flex; } }
+.kbd-btn__menu { display: none; }
+@media (max-width: 699px) {
+  .kbd-btn__cmd, .kbd-btn__k { display: none; }
+  .kbd-btn__menu { display: inline; letter-spacing: 0.1em; text-transform: uppercase; }
+}
 
 @media (max-width: 699px) {
   .hdr__nav { display: none; }

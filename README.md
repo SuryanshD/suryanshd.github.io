@@ -47,7 +47,8 @@ loop pauses when the tab is hidden.
 returns approved, held or blocked and shows which rule fired. The rules are illustrative and the page
 says so; the production policy set is internal.
 
-**`assets/js/site.js`**: theme, the ⌘K palette, scroll orchestration, and the reveal observer.
+**`assets/js/site.js`**: theme, the ⌘K palette (which doubles as the mobile menu), scroll
+orchestration, and a position-based reveal.
 Everything in it is additive: with JavaScript off the page is still a complete document.
 
 ## Conventions

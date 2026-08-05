@@ -40,7 +40,7 @@
       <a href="../resume.html">Résumé</a>
     </nav>
     <div class="hdr__tools">
-      <button class="kbd-btn" id="pal-open" aria-label="Open command palette ⌘K"><span>⌘</span>K</button>
+      <button class="kbd-btn" id="pal-open" aria-label="Open menu and search ⌘K"><span class="kbd-btn__cmd">⌘</span><span class="kbd-btn__k">K</span><span class="kbd-btn__menu">Menu</span></button>
       <button class="icon-btn" id="theme-btn" data-theme-icon aria-label="Switch colour theme">
         <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
         <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 14.4A8.5 8.5 0 1 1 9.6 4a6.8 6.8 0 0 0 10.4 10.4Z"/></svg>
@@ -152,7 +152,7 @@
         large asset library anyway. The Image Hub indexes assets as embeddings, so an editor finds an
         image by describing it rather than by remembering a filename. I built the universal-access
         module for it, ran the database migration and the backfill, added vertical and content-type
-        metadata to AI-generated images, and fixed the search endpoint when it was returning 500s.
+        metadata to AI-generated images, and got the search endpoint working reliably.
       </p>
 
       <h2>Decisions, and what each one cost</h2>

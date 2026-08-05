@@ -40,7 +40,7 @@
       <a href="../resume.html">Résumé</a>
     </nav>
     <div class="hdr__tools">
-      <button class="kbd-btn" id="pal-open" aria-label="Open command palette ⌘K"><span>⌘</span>K</button>
+      <button class="kbd-btn" id="pal-open" aria-label="Open menu and search ⌘K"><span class="kbd-btn__cmd">⌘</span><span class="kbd-btn__k">K</span><span class="kbd-btn__menu">Menu</span></button>
       <button class="icon-btn" id="theme-btn" data-theme-icon aria-label="Switch colour theme">
         <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
         <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 14.4A8.5 8.5 0 1 1 9.6 4a6.8 6.8 0 0 0 10.4 10.4Z"/></svg>
@@ -62,10 +62,10 @@
     </div>
 
     <div class="facts">
-      <div class="facts__cell"><span class="facts__k">What it is</span><span class="facts__v">Prototype, proof of concept. No public repo.</span></div>
-      <div class="facts__cell"><span class="facts__k">When</span><span class="facts__v">2026</span></div>
+      <div class="facts__cell"><span class="facts__k">What it is</span><span class="facts__v">A second product, now in development. No public repo.</span></div>
+      <div class="facts__cell"><span class="facts__k">When</span><span class="facts__v">2026 &ndash; ongoing</span></div>
       <div class="facts__cell"><span class="facts__k">Stack</span><span class="facts__v">Vanilla JS, closed Shadow DOM, FastAPI, embeddings</span></div>
-      <div class="facts__cell"><span class="facts__k">My role</span><span class="facts__v">Designed and hand-built the whole thing, SDK, backend and admin console</span></div>
+      <div class="facts__cell"><span class="facts__k">My role</span><span class="facts__v">Founding engineer. I started the build and wrote the proof of concept end to end: SDK, backend and admin console.</span></div>
     </div>
 
     <div class="prose">
@@ -78,7 +78,8 @@
       <p>
         Search traffic is shifting from link lists to answers. A publisher who runs the answer surface
         on their own site keeps the monetisation attached to it. I built a proof of concept to find out
-        what standing one up requires. The model call was the smallest part.
+        what standing one up requires. The model call was the smallest part, and the proof of concept
+        was convincing enough that it became a product we're now building.
       </p>
 
       <h2>The three problems that matter</h2>
@@ -205,7 +206,7 @@
       </div>
 
       <div class="decision">
-        <h3>A mock backend for the prototype</h3>
+        <h3>A mock backend, to prove the model before building the real one</h3>
         <p>
           The FastAPI backend behind it mocks the parts that would be real infrastructure, so the
           embed, auth and monetisation flows could be exercised end to end quickly.
@@ -215,7 +216,7 @@
         </div>
       </div>
 
-      <h2>What exists</h2>
+      <h2>What the proof of concept already does</h2>
       <ul>
         <li>A single embeddable JavaScript file that a partner adds with one script tag.</li>
         <li>An admin console for partner registration, embed-snippet generation, a test-live view, primary-colour theming, and a recent-activity feed.</li>
@@ -226,10 +227,10 @@
       <div class="retro">
         <span class="retro__tag">What I'd change</span>
         <p>
-          There are no evals. For a prototype whose point was the embed and auth model that was the
-          right thing to skip, but the moment this became real the first thing I'd build is a
-          retrieval-quality harness: a fixed set of questions per partner manifest, scored on whether
-          the answer is actually supported by a retrieved page. Without that you can't tell an
+          There are no evals yet. For a proof of concept whose point was the embed and auth model that
+          was the right thing to skip. Now that it's a product, it's first on my list: a
+          retrieval-quality harness with a fixed set of questions per partner manifest, scored on
+          whether the answer is actually supported by a retrieved page. Without that you cannot tell an
           improvement from a regression.
         </p>
       </div>
