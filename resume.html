@@ -79,7 +79,7 @@
         <strong>One of three engineers on InMobi&rsquo;s new AI monetization platform, there since the
         backend&rsquo;s first commit</strong>, owning identity and the monetization surface. Put an LLM inside a
         live ad-approval path: it clears campaigns, humans rule on the rest, and a poller auto-pauses creatives
-        that drift after approval. Wrote the end-to-end proof of concept for an embeddable RAG answer surface,
+        that drift after approval. Wrote the end-to-end proof of concept for an embeddable answer surface,
         now a second product in development. Builds inside constraints set by someone else: another
         platform&rsquo;s policy, a partner&rsquo;s site, a client&rsquo;s spreadsheet.
       </p>
@@ -92,15 +92,15 @@
           <span class="job__org">&middot; InMobi, Bengaluru</span>
           <span class="job__when">Jun 2025 &ndash; present</span>
         </div>
-        <p class="job__sub">One of three engineers on a new AI monetization platform since its backend&rsquo;s first commit (Mar 2026); founding engineer on a second product started on top of it. Earlier: ad compliance and content automation.</p>
+        <p class="job__sub">Joined on ad compliance and content automation; on the new platform since its first day (Mar 2026), and founding engineer on a second product built on top of it.</p>
         <ul>
-          <li><b>LLM systems in production.</b> Shipped the content and keyword generation surface on Gemini and Claude with Imagen 4, behind a prompt engine with per-feed config, plus a concept-discovery service and semantic image search over embeddings.</li>
-          <li><b>Ad-compliance proxy (Python/FastAPI).</b> Validated campaigns against <b>6 ad networks&rsquo;</b> policies before traffic reached Google: HMAC-signed requests, Redis-backed approval state, a poller that auto-paused creative drift, a human review API, and <b>an LLM auto-approval layer</b>.</li>
+          <li>Shipped the <b>content and keyword generation surface</b> on Gemini and Claude with Imagen 4, behind a prompt engine with per-feed config, plus a concept-discovery service and <b>semantic image search over embeddings</b>.</li>
+          <li>Validated campaigns against <b>6 ad networks&rsquo;</b> policies before traffic reached Google, through an ad-compliance proxy in Python/FastAPI: HMAC-signed requests, Redis-backed approval state, a poller that auto-paused creative drift, a human review API, and <b>an LLM auto-approval layer</b>.</li>
           <li><b>Rebuilt identity from scratch (IAM v3).</b> Three-tier org hierarchy, roles and permissions resolved per request, SSO and JWT, invite flows. Owned end to end across the FastAPI backend and Next.js frontend.</li>
-          <li><b>Cut auth and dashboard latency ~8&times; on the Redis-degraded path</b> (2s to 0.25s per operation) with a circuit breaker, cluster client, L1 cache and N+1 elimination. Migrated image storage S3 &rarr; Google Cloud Storage with CDN cutover.</li>
-          <li><b>Embeddable RAG answer surface, written end to end.</b> One script tag puts a retrieval-augmented answer surface on a publisher&rsquo;s site: per-partner manifest, closed Shadow DOM isolation, origin-allowlist auth, <b>8 in-answer ad placements</b>. SDK, backend, admin console; now a product.</li>
-          <li><b>Meta Ads bulk uploader</b>, built and deployed solo: a client spreadsheet becomes up to <b>5,000 ads</b>, every entity created paused so nothing spends by accident. CLI for engineers, web UI for the business team, one database.</li>
-          <li><b>Breadth and hardening.</b> Integrated <b>8 ad networks and feeds</b> with per-partner config. Partnered with business teams through production testing. Pen-test remediation, Docker/Jenkins container build, dbt revenue models.</li>
+          <li><b>Cut auth and dashboard latency ~8&times; on the Redis-degraded path</b> (2s to 0.25s per operation) via a circuit breaker, cluster client, L1 cache and N+1 elimination. Migrated image storage S3 &rarr; GCS with CDN cutover.</li>
+          <li>Engineered a <b>RAG answer surface</b> that one script tag drops onto a publisher&rsquo;s site: per-partner manifest, closed Shadow DOM isolation, origin-allowlist auth, <b>8 in-answer ad placements</b>. SDK, backend and admin console.</li>
+          <li>Automated Meta Ads campaign creation single-handedly: a client spreadsheet becomes up to <b>5,000 ads</b>, every entity created paused so nothing spends by accident. CLI for engineers, web UI for the business team.</li>
+          <li>Integrated <b>8 ad networks and feeds</b> with per-partner config, partnering with business teams through production testing, and handled pen-test remediation, Docker/Jenkins container builds and dbt revenue models.</li>
         </ul>
       </div>
 
@@ -129,11 +129,11 @@
       <div class="job">
         <div class="job__top">
           <span class="job__what">Research internships</span>
-          <span class="job__org">&middot; IIT Delhi &middot; DRDO, Ministry of Defence</span>
+          <span class="job__org">&middot; IIT Delhi &middot; DRDO</span>
           <span class="job__when">2022, 2023</span>
         </div>
         <ul>
-          <li><b>IIT Delhi (2023):</b> diagnosed faults in operating PEM fuel cells using AI, under Dr. Anil Verma. <b>DRDO DEAL (2023):</b> simulated tactical MANET environments in NS2, presenting <b>10 recommendations</b> to the IP Based Protocols Group. <b>DRDO IRDE (2022):</b> electronics R&amp;D.</li>
+          <li>Diagnosed faults in operating PEM fuel cells using AI at <b>IIT Delhi</b> under Dr. Anil Verma (2023); simulated tactical MANET environments in NS2 at <b>DRDO DEAL</b>, presenting <b>10 recommendations</b> (2023); electronics R&amp;D at DRDO IRDE (2022).</li>
         </ul>
       </div>
 
@@ -144,7 +144,7 @@
           <span class="job__when">Nov 2021 &ndash; Sep 2022</span>
         </div>
         <ul>
-          <li>Co-founded an investment-aggregator prototype with <b>2 co-founders</b>: <b>3</b> asset classes (crypto, stocks, NFTs) in one account, with portfolio tracking and personalised insights. Owned the market research. <b>Sold the prototype and its IP</b> while still an undergraduate.</li>
+          <li>Co-founded an investment-aggregator prototype with <b>2 co-founders</b>: <b>3</b> asset classes in one account, with portfolio tracking and personalized insights. Owned the market research. <b>Sold the prototype and its IP</b> as an undergraduate.</li>
         </ul>
       </div>
 
@@ -153,7 +153,7 @@
         <ul>
           <li><b>Mercury Works</b> (open source, MIT &middot; with Piyush Rane) &mdash; autonomous AI creative agency. One sentence of brief becomes a live brand: naming, design, illustration, voiceover ad, deployed site with checkout. <b>11 live sites in 8 hours</b>.</li>
           <li><b>suryanshd.github.io</b> &mdash; this r&eacute;sum&eacute;&rsquo;s portfolio: hand-written HTML, CSS and WebGL, no framework and no build step, scoring 100 on Lighthouse accessibility, best practices and SEO.</li>
-          <li><b>Munshi</b> (with Piyush Rane) &mdash; bilingual Hindi/English health-insurance claims processor. Reads handwritten medical documents and produces claim packets in the insurer&rsquo;s format, using a <b>2-model agreement check that abstains instead of guessing</b>. Sarvam &times; GrowthX Epoch Buildathon.</li>
+          <li><b>Munshi</b> (with Piyush Rane) &mdash; bilingual Hindi/English health-insurance claims processor. Reads handwritten medical records into insurer-format claim packets, using a <b>2-model agreement check that abstains instead of guessing</b>.</li>
         </ul>
       </div>
 
@@ -173,7 +173,7 @@
 
       <h2>Certifications &amp; recognition</h2>
       <div class="cv__compact">
-        <p><b>Published</b> &ldquo;Use of AI and Its Benefits on Quality Assurance (QA)&rdquo; in the journal of the DGQA, India&rsquo;s Ministry of Defence (circulation 5,000+). Core member and event coordinator, UPES Coding Club: organised a 150+ participant hackathon. GrowthX builder community. Microsoft AI-102 (Azure AI Engineer), QSim quantum computing (IIT Roorkee).</p>
+        <p><b>Published</b> &ldquo;Use of AI and Its Benefits on Quality Assurance (QA)&rdquo; in the journal of the DGQA, India&rsquo;s Ministry of Defence (circulation 5,000+). Core member and event coordinator, UPES Coding Club: organized a 150+ participant hackathon. GrowthX builder community. Microsoft AI-102 (Azure AI Engineer), QSim quantum computing (IIT Roorkee).</p>
       </div>
     </article>
   </div>
