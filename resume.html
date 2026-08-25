@@ -76,11 +76,12 @@
 
       <h2 class="cv__sum-h">Summary</h2>
       <p class="cv__lede">
-        <strong>Founding engineer on two products at InMobi.</strong> I build AI systems that run inside
-        constraints I don&rsquo;t control: another platform&rsquo;s policy, a partner&rsquo;s own site, a
-        client&rsquo;s spreadsheet. One of three on a new AI monetization platform since its first commit,
-        where I own the monetization surface, plus the embeddable answer surface I started building on it.
-        Two tools shipped solo, end to end, and an LLM inside a live approval path.
+        <strong>One of three engineers on InMobi&rsquo;s new AI monetization platform, there since the
+        backend&rsquo;s first commit</strong>, owning identity and the monetization surface. Put an LLM inside a
+        live ad-approval path: it clears campaigns, humans rule on the rest, and a poller auto-pauses creatives
+        that drift after approval. Wrote the end-to-end proof of concept for an embeddable RAG answer surface,
+        now a second product in development. Builds inside constraints set by someone else: another
+        platform&rsquo;s policy, a partner&rsquo;s site, a client&rsquo;s spreadsheet.
       </p>
 
       <h2>Experience</h2>
@@ -91,26 +92,26 @@
           <span class="job__org">&middot; InMobi, Bengaluru</span>
           <span class="job__when">Jun 2025 &ndash; present</span>
         </div>
-        <p class="job__sub">Founding engineer on two products (one of three on the platform) since Mar 2026. Earlier: ad compliance and content automation.</p>
+        <p class="job__sub">One of three engineers on a new AI monetization platform since its backend&rsquo;s first commit (Mar 2026); founding engineer on a second product started on top of it. Earlier: ad compliance and content automation.</p>
         <ul>
-          <li><b>LLM systems in production.</b> Built the generation surface on Gemini and Claude with Imagen 4, behind a prompt engine with per-feed config. Also a concept-discovery service and semantic image search over embeddings.</li>
-          <li><b>Ad-compliance proxy (Python/FastAPI).</b> Validates campaigns against network policy before their traffic reaches Google: HMAC-signed requests, Redis-backed approval state, a creative-change poller that auto-pauses drift, a review API, and <b>an LLM auto-approval layer</b>.</li>
-          <li><b>Identity rebuilt from scratch (IAM v3).</b> Three-tier org hierarchy, dynamic roles and permission mapping, SSO and JWT, invite flows. Owned across the FastAPI backend and Next.js frontend.</li>
+          <li><b>LLM systems in production.</b> Shipped the content and keyword generation surface on Gemini and Claude with Imagen 4, behind a prompt engine with per-feed config, plus a concept-discovery service and semantic image search over embeddings.</li>
+          <li><b>Ad-compliance proxy (Python/FastAPI).</b> Validated campaigns against <b>6 ad networks&rsquo;</b> policies before traffic reached Google: HMAC-signed requests, Redis-backed approval state, a poller that auto-paused creative drift, a human review API, and <b>an LLM auto-approval layer</b>.</li>
+          <li><b>Rebuilt identity from scratch (IAM v3).</b> Three-tier org hierarchy, roles and permissions resolved per request, SSO and JWT, invite flows. Owned end to end across the FastAPI backend and Next.js frontend.</li>
           <li><b>Cut auth and dashboard latency ~8&times; on the Redis-degraded path</b> (2s to 0.25s per operation) with a circuit breaker, cluster client, L1 cache and N+1 elimination. Migrated image storage S3 &rarr; Google Cloud Storage with CDN cutover.</li>
-          <li><b>Embeddable AI answer surface &mdash; founding engineer, and I started the build.</b> One script tag puts a retrieval-augmented answer surface on a publisher&rsquo;s site: per-partner content manifest, closed Shadow DOM isolation, origin-allowlist auth, 8 configurable in-answer ad placements. Wrote the proof of concept end to end (SDK, backend, admin console); now a product in development.</li>
-          <li><b>Meta Ads bulk uploader</b>, built and deployed solo: a spreadsheet becomes up to <b>5,000 ads</b>, every entity created paused so nothing spends by accident. Python CLI + FastAPI/htmx, SSE, pytest suite.</li>
-          <li><b>Breadth and hardening.</b> Integrations across <b>8 ad networks and feeds</b> with per-partner config. Pen-test remediation, the backend&rsquo;s Docker/Jenkins container build, dbt revenue models.</li>
+          <li><b>Embeddable RAG answer surface, written end to end.</b> One script tag puts a retrieval-augmented answer surface on a publisher&rsquo;s site: per-partner manifest, closed Shadow DOM isolation, origin-allowlist auth, <b>8 in-answer ad placements</b>. SDK, backend, admin console; now a product.</li>
+          <li><b>Meta Ads bulk uploader</b>, built and deployed solo: a client spreadsheet becomes up to <b>5,000 ads</b>, every entity created paused so nothing spends by accident. CLI for engineers, web UI for the business team, one database.</li>
+          <li><b>Breadth and hardening.</b> Integrated <b>8 ad networks and feeds</b> with per-partner config. Partnered with business teams through production testing. Pen-test remediation, Docker/Jenkins container build, dbt revenue models.</li>
         </ul>
       </div>
 
       <div class="job">
         <div class="job__top">
           <span class="job__what">Product Analyst</span>
-          <span class="job__org">&middot; Glance, Bengaluru</span>
+          <span class="job__org">&middot; Glance (consumer content platform, InMobi group), Bengaluru</span>
           <span class="job__when">Jun &ndash; Aug 2024</span>
         </div>
         <ul>
-          <li>Built and maintained <b>4 Superset dashboards carrying 50+ charts</b> across the USA and Singapore clusters, including a product-alert dashboard surfacing daily engagement deviations by OEM and region. Regional deep dives across 30+ metrics, reported fortnightly.</li>
+          <li>Delivered <b>4 Superset dashboards carrying 50+ charts</b> across the USA and Singapore clusters, including a product-alert dashboard tracking engagement deviations by OEM and region. Reported deep dives across <b>30+ metrics</b> to product managers fortnightly.</li>
         </ul>
       </div>
 
@@ -121,29 +122,18 @@
           <span class="job__when">Jun &ndash; Jul 2024</span>
         </div>
         <ul>
-          <li>Led a plant-disease detection and prediction project to <b>92% accuracy</b>, refining the model with agricultural experts. NLP research alongside it.</li>
+          <li>Led a plant-disease detection project to <b>92% accuracy</b>, directing a team of <b>3 interns</b> and refining the model with agricultural experts. NLP research alongside it.</li>
         </ul>
       </div>
 
       <div class="job">
         <div class="job__top">
-          <span class="job__what">Summer Research Intern</span>
-          <span class="job__org">&middot; IIT Delhi</span>
-          <span class="job__when">2023</span>
-        </div>
-        <ul>
-          <li>&ldquo;Fault Detection and Diagnosis in PEMFC using AI&rdquo;, under Dr. Anil Verma. AI methods applied to fault detection in operating proton-exchange-membrane fuel cells.</li>
-        </ul>
-      </div>
-
-      <div class="job">
-        <div class="job__top">
-          <span class="job__what">Summer Trainee, twice</span>
-          <span class="job__org">&middot; DRDO, Ministry of Defence</span>
+          <span class="job__what">Research internships</span>
+          <span class="job__org">&middot; IIT Delhi &middot; DRDO, Ministry of Defence</span>
           <span class="job__when">2022, 2023</span>
         </div>
         <ul>
-          <li><b>DEAL, Dehradun (2023):</b> &ldquo;MAC Protocols in Tactical MANET&rdquo;, IP Based Protocols Group. Built simulated network environments in NS2, compared MAC protocols under varying conditions, delivered a technical report with <b>10 recommendations</b>. <b>IRDE (2022):</b> electronic circuit design and logic gates.</li>
+          <li><b>IIT Delhi (2023):</b> diagnosed faults in operating PEM fuel cells using AI, under Dr. Anil Verma. <b>DRDO DEAL (2023):</b> simulated tactical MANET environments in NS2, presenting <b>10 recommendations</b> to the IP Based Protocols Group. <b>DRDO IRDE (2022):</b> electronics R&amp;D.</li>
         </ul>
       </div>
 
@@ -154,22 +144,23 @@
           <span class="job__when">Nov 2021 &ndash; Sep 2022</span>
         </div>
         <ul>
-          <li>With <b>two co-founders</b>, built an investment-aggregator prototype: crypto, stocks and NFTs in one account, with portfolio tracking and personalised insights. I owned the market research. <b>Sold the prototype and its IP</b> while still an undergraduate.</li>
+          <li>Co-founded an investment-aggregator prototype with <b>2 co-founders</b>: <b>3</b> asset classes (crypto, stocks, NFTs) in one account, with portfolio tracking and personalised insights. Owned the market research. <b>Sold the prototype and its IP</b> while still an undergraduate.</li>
         </ul>
       </div>
 
       <h2>Selected projects</h2>
       <div class="job">
         <ul>
-          <li><b>Mercury Works</b> (open source, MIT &middot; with Piyush Rane) &mdash; an autonomous AI creative agency: one sentence of brand brief becomes a live brand, from research and naming through design, illustration, a voiceover radio ad and a deployed site with checkout, with zero human edits. <b>Shipped 11 real live brand sites in an 8-hour buildathon</b> (GrowthX Hermes).</li>
-          <li><b>Munshi</b> (with Piyush Rane) &mdash; a bilingual Hindi/English health-insurance claims processor: reads handwritten medical documents and generates submittable claim packets, using a <b>two-model agreement check that abstains instead of guessing</b>. Sarvam &times; GrowthX Epoch Buildathon.</li>
+          <li><b>Mercury Works</b> (open source, MIT &middot; with Piyush Rane) &mdash; autonomous AI creative agency. One sentence of brief becomes a live brand: naming, design, illustration, voiceover ad, deployed site with checkout. <b>11 live sites in 8 hours</b>.</li>
+          <li><b>suryanshd.github.io</b> &mdash; this r&eacute;sum&eacute;&rsquo;s portfolio: hand-written HTML, CSS and WebGL, no framework and no build step, scoring 100 on Lighthouse accessibility, best practices and SEO.</li>
+          <li><b>Munshi</b> (with Piyush Rane) &mdash; bilingual Hindi/English health-insurance claims processor. Reads handwritten medical documents and produces claim packets in the insurer&rsquo;s format, using a <b>2-model agreement check that abstains instead of guessing</b>. Sarvam &times; GrowthX Epoch Buildathon.</li>
         </ul>
       </div>
 
       <h2>Skills</h2>
       <div class="cv__rows">
         <p class="cv__row"><span class="k">Languages&nbsp;</span><span>Python (FastAPI) &middot; TypeScript / JavaScript &middot; PHP (Laravel) &middot; SQL</span></p>
-        <p class="cv__row"><span class="k">Applied AI&nbsp;</span><span>Gemini &middot; Claude &middot; Imagen 4 &middot; Groq/Llama &middot; RAG &middot; embeddings and semantic search &middot; prompt engineering &middot; agent pipelines &middot; evals and abstention &middot; PyTorch &middot; scikit-learn &middot; OpenCV</span></p>
+        <p class="cv__row"><span class="k">Applied AI&nbsp;</span><span>Gemini &middot; Claude &middot; Imagen 4 &middot; Groq/Llama &middot; RAG &middot; embeddings and semantic search &middot; prompt engineering &middot; agent pipelines &middot; abstention and model-agreement checks &middot; PyTorch &middot; scikit-learn &middot; OpenCV</span></p>
         <p class="cv__row"><span class="k">Systems &amp; data&nbsp;</span><span>Next.js / React &middot; React Native &middot; NestJS &middot; htmx &middot; PostgreSQL / AlloyDB / Neon &middot; pgvector &middot; Redis (cluster, circuit breaker) &middot; dbt &middot; Server-Sent Events &middot; Shadow DOM SDKs</span></p>
         <p class="cv__row"><span class="k">Cloud &amp; security&nbsp;</span><span>GCP &middot; AWS &middot; Docker &middot; Jenkins &middot; Helm &middot; Nginx &middot; IAM/RBAC &middot; OAuth/SSO &middot; JWT &middot; HMAC &middot; session invalidation &middot; pen-test remediation</span></p>
         <p class="cv__row"><span class="k">Ad platforms&nbsp;</span><span>Meta Ads API &middot; Google Ads / AFS / RSOC &middot; Bing &middot; Outbrain &middot; Taboola &middot; MGID &middot; Yahoo &middot; AdSense</span></p>
@@ -182,7 +173,7 @@
 
       <h2>Certifications &amp; recognition</h2>
       <div class="cv__compact">
-        <p><b>Published</b> &ldquo;Use of AI and Its Benefits on Quality Assurance (QA)&rdquo; in the journal of the DGQA, India&rsquo;s Ministry of Defence (circulation 5,000+). Core member and event coordinator, UPES Coding Club: organised a 150+ participant hackathon. GrowthX builder community. Microsoft AI-102, AWS Academy Graduate, QSim (IIT Roorkee).</p>
+        <p><b>Published</b> &ldquo;Use of AI and Its Benefits on Quality Assurance (QA)&rdquo; in the journal of the DGQA, India&rsquo;s Ministry of Defence (circulation 5,000+). Core member and event coordinator, UPES Coding Club: organised a 150+ participant hackathon. GrowthX builder community. Microsoft AI-102 (Azure AI Engineer), QSim quantum computing (IIT Roorkee).</p>
       </div>
     </article>
   </div>
