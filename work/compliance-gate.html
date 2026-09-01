@@ -122,7 +122,7 @@
     <div class="prose">
       <h2>The problem</h2>
       <p>
-        The business bought traffic on one network and monetised it with search ad units on another.
+        Traffic acquired on one network had to satisfy the policies of the network monetising it.
         The monetising network has policies about what the landing page and the creative may say, and
         the first you hear about breaking them is a restriction on the account.
       </p>
@@ -210,8 +210,7 @@
       <p>
         Anything that can write approval state can decide what serves, so requests into the
         validation surface are HMAC-signed. The proxy recomputes the signature per campaign source and
-        rejects anything that doesn't match. Secrets moved to environment variables early, with no
-        hardcoded fallbacks.
+        rejects anything that doesn't match. Secrets are read from the environment, with no hardcoded fallbacks.
       </p>
 
       <h3>The LLM auto-approval layer</h3>
@@ -253,7 +252,7 @@
           behind a database query.
         </p>
         <div class="decision__cost"><b>cost</b>
-          <span>Redis becomes a hard dependency of serving. I later hit exactly that problem on a different service, which is why the platform now has a circuit breaker around it.</span>
+          <span>Redis becomes a hard dependency of serving, which is why the platform has a circuit breaker around it.</span>
         </div>
       </div>
 
@@ -318,7 +317,7 @@
 
     <nav class="case__nav" aria-label="Other deep dives">
       <a href="bulk-uploader.html"><span>Previous</span><b>The Meta Ads bulk uploader</b></a>
-      <a href="answer-surface.html"><span>Next</span><b>The embeddable answer surface</b></a>
+      <a href="identity.html"><span>Next</span><b>Identity, rebuilt</b></a>
     </nav>
   </div>
 </main>
