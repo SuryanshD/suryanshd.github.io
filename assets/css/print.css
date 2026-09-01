@@ -126,7 +126,10 @@
   color: var(--ink-2);
 }
 .job li::before {
-  content: '\2013\00a0';
+  /* A plain space, not \00a0: the non-breaking space was surviving into the PDF
+     text layer in front of all 18 bullets, where a parser can glue it to the
+     first word ("\u2013\u00a0Shipped"). */
+  content: '\2013\0020';
   color: var(--ink-3);
 }
 .job li b, .job li strong { color: var(--ink); font-weight: 500; }
@@ -201,7 +204,13 @@
      row is links and underlining all of it turns into noise. Text colour has no
      effect on ATS extraction. */
   .cv__contact a { color: #0b4f9e !important; border: 0 !important; font-size: 6.9pt !important; }
-  .cv__sep { color: #9a9a9a !important; font-size: 6.9pt !important; }
+  /* The separators used to be &nbsp;&middot;&nbsp;. Those non-breaking spaces
+     survived into the PDF text layer as U+00A0, which some parsers glue to the
+     token beside them. Padding does the same job and extracts as nothing. */
+  .cv__sep { color: #9a9a9a !important; font-size: 6.9pt !important; padding: 0 2.2pt; }
+  /* Keeps hyphenated compounds off line ends: the extractor was emitting
+     "HMAC-\nsigned" and "origin-\nallowlist" as fractured tokens. */
+  .nb { white-space: nowrap; }
 
   .cv h2 {
     font-size: 7.6pt !important;
@@ -225,7 +234,10 @@
   .job li { padding-left: 7pt !important; text-indent: -7pt !important; }
   .job li::before { color: #000 !important; }
   .cv__rows { gap: 1.6pt !important; }
-  .cv__row { grid-template-columns: 74pt 1fr !important; gap: 0 7pt !important; }
+  /* 74pt fitted "Systems & data"; spelling the ampersand out for the parser
+     made the longest label wider than its column, so it collided with the
+     values. Sized to the longest label, "Cloud and security:". */
+  .cv__row { grid-template-columns: 90pt 1fr !important; gap: 0 7pt !important; }
   .cv__row .k { white-space: nowrap; }
   .cv__row .k { font-size: 7.4pt !important; color: #333 !important; }
   .cv__compact { gap: 2pt !important; }

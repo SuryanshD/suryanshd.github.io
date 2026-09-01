@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Identity, rebuilt from scratch — Suryansh Deoli</title>
-<meta name="description" content="IAM v3: a clean-slate identity system with a three-tier organisation hierarchy, dynamic roles, SSO and JWT, built across backend and frontend.">
+<meta name="description" content="A clean-slate identity and access system with multi-tenant RBAC, SSO and JWT, built across backend and frontend.">
 <link rel="canonical" href="https://suryanshd.github.io/work/identity.html">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://suryanshd.github.io/work/identity.html">
@@ -33,7 +33,7 @@
     {
       "@type": "TechArticle",
       "headline": "Identity, rebuilt from scratch",
-      "description": "IAM v3: a clean-slate identity system with a three-tier organisation hierarchy, dynamic roles, SSO and JWT, built across backend and frontend.",
+      "description": "A clean-slate identity and access system with multi-tenant RBAC, SSO and JWT, built across backend and frontend.",
       "url": "https://suryanshd.github.io/work/identity.html",
       "author": {
         "@type": "Person",
@@ -108,7 +108,7 @@
     <div class="case__head">
       <h1>Identity, rebuilt from scratch</h1>
       <p class="case__sum">
-        The old model couldn't express the customer shape we were selling into, so we replaced it
+        The old model couldn't express the structures the business needed, so we replaced it
         rather than kept bending it.
       </p>
     </div>
@@ -128,7 +128,7 @@
       </p>
       <p>
         That kind of gap shows up as a slow accumulation of places where "is this person allowed to
-        see this" gets answered slightly differently. So IAM v3 was a clean slate.
+        see this" gets answered slightly differently. So it was a clean slate.
       </p>
 
       <h2>The three tiers</h2>
@@ -207,7 +207,7 @@
         never sees a password. Most of the real work was in the seams:
       </p>
       <ul>
-        <li><strong>Environment-correct redirects.</strong> The sign-in URL is built server-side from runtime environment rather than baked in, so each environment resolves to its own auth domain.</li>
+        <li><strong>Environment-correct redirects.</strong> The sign-in URL is resolved at runtime rather than baked in at build time.</li>
         <li><strong>Relative callbacks.</strong> Absolute redirect URLs resolved to <code>localhost</code> once the app was behind a public host, so callbacks became relative.</li>
         <li><strong>A plain anchor for the sign-in call to action.</strong> A client-side route transition triggered a cross-origin fetch to the identity provider and failed CORS. It needed to be a full navigation, which is a good reminder that auth flows and client routers want different things.</li>
         <li><strong>Reconciling users by email on login.</strong> A user's identifier at the provider can change across tenants, and treating that as a new person orphaned their access. Login now reconciles on email.</li>
@@ -246,27 +246,26 @@
           or role changes.
         </p>
         <div class="decision__cost"><b>cost</b>
-          <span>Every write path that touches roles now has to remember to invalidate. This is the part of the system I'd most want a second pair of eyes on.</span>
+          <span>Every write path that touches roles has to invalidate, which is the constraint the epoch design exists to manage.</span>
         </div>
       </div>
 
       <h2>Session lifetime</h2>
       <p>
-        Ahead of the launch review I went through session lifetime and administrative access properly.
+        Session lifetime and administrative access were designed deliberately rather than inherited.
         Invalidation ended up layered, because no single mechanism covers all of it:
       </p>
       <ol>
         <li>A provisioning gate, so a user who isn't fully set up can't hold a working session.</li>
         <li>An epoch, so bumping a value invalidates every existing session for a user at once.</li>
         <li>An idle timeout for the abandoned-laptop case.</li>
-        <li>A hard 24-hour cap, so no session outlives a day regardless of activity.</li>
+        <li>An absolute cap, so no session outlives it regardless of activity.</li>
       </ol>
       <p>
         Sign-out became provider-initiated, clearing cookies and sending
         <code>Clear-Site-Data</code>, with <code>no-store</code> on authenticated routes so the back
         button can't paint a logged-in page after sign-out. Administrative authorisation moved
-        server-side behind explicit gates. I also cleared the dependency audit and stopped the
-        container from shipping dev dependencies.
+        server-side behind explicit gates. The production container ships without dev dependencies.
       </p>
 
       <div class="retro">
@@ -281,7 +280,7 @@
     </div>
 
     <nav class="case__nav" aria-label="Other deep dives">
-      <a href="answer-surface.html"><span>Previous</span><b>The embeddable answer surface</b></a>
+      <a href="compliance-gate.html"><span>Previous</span><b>The compliance gate</b></a>
       <a href="generation-surface.html"><span>Next</span><b>The generation surface</b></a>
     </nav>
   </div>

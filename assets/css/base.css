@@ -646,3 +646,6 @@ section { position: relative; }
   :focus-visible { outline: 3px solid Highlight; }
   .verdict__badge, .verdict__rule { forced-color-adjust: none; }
 }
+
+/* Hyphenated compounds that must not break across a line. */
+.nb { white-space: nowrap; }
