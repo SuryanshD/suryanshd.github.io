@@ -100,8 +100,7 @@
       <h1 id="h-name" data-split>Suryansh Deoli</h1>
 
       <p class="hero__role">
-        Software engineer at InMobi. Founding engineer on two products:
-        an <em>AI monetization platform</em>, and the answer surface I started building on top of it.
+        Software engineer at InMobi, on a new <em>AI monetization platform</em>.
       </p>
 
       <p class="hero__lede">
@@ -156,7 +155,7 @@
           something serves. Below is that path, stage by stage.
         </p>
         <p>
-          It spans <strong>two platforms and a prototype</strong>, so every piece below is tagged with
+          It spans <strong>two platforms</strong>, so every piece below is tagged with
           where it actually ran and what it was built in.
         </p>
       </div>
@@ -176,7 +175,7 @@
             <div class="stage__head">
               <span class="stage__num">01</span>
               <h3 class="stage__name">Generate</h3>
-              <span class="stage__of">Stage 1 of 4</span>
+              <span class="stage__of">Stage 1 of 3</span>
             </div>
             <h3>Turning a keyword into a page worth serving ads against</h3>
             <div class="stage__body">
@@ -241,7 +240,7 @@
             <div class="stage__head">
               <span class="stage__num">02</span>
               <h3 class="stage__name">Launch</h3>
-              <span class="stage__of">Stage 2 of 4</span>
+              <span class="stage__of">Stage 2 of 3</span>
             </div>
             <h3>Five thousand ads at once, and none of them spending</h3>
             <div class="stage__body">
@@ -297,7 +296,7 @@
             <div class="stage__head">
               <span class="stage__num">03</span>
               <h3 class="stage__name">Gate</h3>
-              <span class="stage__of">Stage 3 of 4</span>
+              <span class="stage__of">Stage 3 of 3</span>
             </div>
             <h3>Checking a campaign before Google ever sees its traffic</h3>
             <div class="stage__body">
@@ -337,56 +336,13 @@
               <div class="boundary">
                 <span class="boundary__tag">End of what I owned</span>
                 <p>
-                  Past this point, compliant traffic reaches Google's serving infrastructure. That
-                  is the one stage of this pipeline I didn't own, and it's the reason the next
-                  stage exists.
+                  Past this point, compliant traffic leaves the pipeline and reaches the ad
+                  network's own serving infrastructure.
                 </p>
               </div>
             </div>
           </article>
 
-          <!-- ---------------- 04 SERVE ---------------- -->
-          <article class="stage" id="stage-serve" data-stage="3" data-viz-mode="serve">
-            <div class="stage__head">
-              <span class="stage__num">04</span>
-              <h3 class="stage__name">Serve</h3>
-              <span class="stage__of">Stage 4 of 4</span>
-            </div>
-            <h3>So I started building the serve layer</h3>
-            <div class="stage__body">
-              <p>
-                If the answer surface is where attention is going, then the ad units belong inside the
-                answer. I built the proof of concept for that from scratch, and it became a second
-                product. <strong>I started the build and I'm a founding engineer on it.</strong>
-              </p>
-
-              <div class="sys">
-                <div class="sys__top">
-                  <h4>Embeddable AI answer surface</h4>
-                  <span class="tag tag--era">Second product · in development</span>
-                </div>
-                <p>
-                  A publisher drops in one <code>&lt;script&gt;</code> tag and gets an answer
-                  surface on their own site, monetised with ad units placed inside the answer.
-                </p>
-                <ul>
-                  <li><b>Retrieval-augmented against a per-partner content manifest</b>, with embeddings-based relevance scoring, so answers are grounded in that publisher's own pages.</li>
-                  <li><b>Closed Shadow DOM</b>, so the publisher's CSS and the widget's CSS cannot reach each other. On someone else's site that isn't a nice-to-have.</li>
-                  <li><b>Origin-allowlist auth</b> on partner key plus browser origin. A leaked key used from a domain that isn't on the list gets a 403. An admin can rotate a key and invalidate open sessions, or switch a partner off.</li>
-                  <li>Eight ad placements across search, display and affiliate stacks, each one toggleable per partner from a config API.</li>
-                  <li>An admin console for partner registration and embed-snippet generation, with theme inheritance that reads the host page's fonts and colours.</li>
-                  <li>A deliberately hostile demo site, built to fail the origin check, so the 403 is
-                  something you can watch happen.</li>
-                </ul>
-                <div class="sys__foot">
-                  <a class="arrow-link" href="work/answer-surface.html">Read the deep dive
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
-                  </a>
-                  <span class="mono" style="color:var(--ink-3)">Vanilla JS · closed Shadow DOM · FastAPI · embeddings</span>
-                </div>
-              </div>
-            </div>
-          </article>
 
         </div><!-- /pipe__col -->
 
@@ -503,39 +459,6 @@
                 </svg>
               </div>
 
-              <div class="schem__fig" data-fig="3">
-                <svg viewBox="0 0 320 200" role="img">
-                  <text x="6" y="20">partner page</text>
-                  <rect class="s-box" x="4" y="26" width="200" height="164" rx="2"/>
-                  <text x="12" y="44" style="font-size:6px">host css cannot reach in</text>
-                  <rect class="s-box s-box--live" x="14" y="52" width="180" height="128" rx="2"/>
-                  <text x="22" y="68">closed shadow dom</text>
-                  <rect class="s-fill" x="22" y="76" width="164" height="30" rx="2"/>
-                  <text x="30" y="95" style="fill:var(--ink-2)">answer</text>
-                  <g>
-                    <rect class="s-box" x="22" y="112" width="38" height="14" rx="1"/><text x="26" y="122" style="font-size:5px">ad 1</text>
-                    <rect class="s-box" x="64" y="112" width="38" height="14" rx="1"/><text x="68" y="122" style="font-size:5px">ad 2</text>
-                    <rect class="s-box" x="106" y="112" width="38" height="14" rx="1"/><text x="110" y="122" style="font-size:5px">ad 3</text>
-                    <rect class="s-box" x="148" y="112" width="38" height="14" rx="1"/><text x="152" y="122" style="font-size:5px">ad 4</text>
-                    <rect class="s-box" x="22" y="132" width="38" height="14" rx="1"/><text x="26" y="142" style="font-size:5px">ad 5</text>
-                    <rect class="s-box" x="64" y="132" width="38" height="14" rx="1"/><text x="68" y="142" style="font-size:5px">ad 6</text>
-                    <rect class="s-box" x="106" y="132" width="38" height="14" rx="1"/><text x="110" y="142" style="font-size:5px">ad 7</text>
-                    <rect class="s-box" x="148" y="132" width="38" height="14" rx="1"/><text x="152" y="142" style="font-size:5px">ad 8</text>
-                  </g>
-                  <text x="22" y="164" style="font-size:6px">toggleable per partner</text>
-                  <path class="s-line s-line--pass" d="M204 96h34"/>
-                  <rect class="s-box" x="240" y="60" width="76" height="34" rx="2"/>
-                  <text x="248" y="74">origin</text>
-                  <text x="248" y="86">allowlist</text>
-                  <path class="s-line" d="M278 94v10"/>
-                  <rect class="s-box" x="240" y="104" width="76" height="34" rx="2"/>
-                  <text x="248" y="118">manifest</text>
-                  <text x="248" y="130" style="font-size:6px">+ embeddings</text>
-                  <path class="s-line s-line--block" d="M238 96h-34"/>
-                  <text x="240" y="156" style="font-size:6px;fill:var(--block)">bad origin → 403</text>
-                  <circle class="s-dot" cx="238" cy="96" r="2.5"/>
-                </svg>
-              </div>
 
             </div>
             <p class="schem__cap" id="schem-cap">The generation surface: one concept in, an article, headline set, imagery and ad spec out.</p>
@@ -641,9 +564,9 @@
       <div class="found__grid">
         <article class="found__card" data-reveal>
           <span class="found__num">01 / identity</span>
-          <h3>IAM v3, clean slate</h3>
+          <h3>Identity, clean slate</h3>
           <p>
-            The previous identity model couldn't express the customer shape we needed, so I rebuilt
+            The previous identity model couldn't express the structures the business needed, so I rebuilt
             it rather than patched it.
           </p>
           <ul>
@@ -958,7 +881,7 @@
       <div class="xp">
         <div class="xp__row">
           <span class="xp__when">Jun 2025 – now</span>
-          <span class="xp__what"><b>Software Development Engineer</b><span>Founding engineer on two products: one of three on a new AI monetization platform, and the embeddable answer surface I started building. Earlier: the ad-compliance proxy and the content-automation platform.</span></span>
+          <span class="xp__what"><b>Software Development Engineer</b><span>One of three engineers on a new AI monetization platform, there since the backend&rsquo;s first commit. Earlier: the ad-compliance proxy and the content-automation platform.</span></span>
           <span class="xp__where">InMobi · Bengaluru</span>
         </div>
         <div class="xp__row">
@@ -1029,11 +952,11 @@
         </div>
         <div class="stack-col">
           <h3>Security</h3>
-          <p>IAM and RBAC · OAuth, SSO · JWT · HMAC request signing · session invalidation · origin-allowlist auth · pen-test remediation · dependency and CVE audit</p>
+          <p>IAM and RBAC · OAuth, SSO · JWT · HMAC request signing · session invalidation · origin-allowlist auth · security hardening · dependency and CVE audit</p>
         </div>
         <div class="stack-col">
           <h3>Ad platforms</h3>
-          <p>Meta Ads API · Google Ads, AFS, RSOC · Bing Ads · Outbrain · Taboola · MGID · Yahoo · AdSense · embeddable SDKs, Shadow DOM · Server-Sent Events</p>
+          <p>Meta Ads API · Google Ads, AFS, RSOC · Bing Ads · Outbrain · Taboola · MGID · Yahoo · AdSense · Server-Sent Events</p>
         </div>
       </div>
     </div>
@@ -1064,7 +987,6 @@
         <div class="ftr__list">
           <a href="work/compliance-gate.html">The compliance gate</a>
           <a href="work/identity.html">Identity, rebuilt</a>
-          <a href="work/answer-surface.html">The answer surface</a>
           <a href="work/generation-surface.html">The generation surface</a>
           <a href="work/bulk-uploader.html">The bulk uploader</a>
           <a href="work/earlier-research.html">Earlier research</a>

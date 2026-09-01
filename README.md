@@ -19,8 +19,7 @@ work/
   compliance-gate.html         ad-compliance proxy, LLM in the approval loop
   generation-surface.html      LLM content and keyword generation
   bulk-uploader.html           spreadsheet to 5,000 paused Meta ads
-  answer-surface.html          embeddable RAG answer surface, closed Shadow DOM
-  identity.html                IAM v3, three-tier org hierarchy
+  identity.html                identity and access, multi-tenant RBAC
   mercury-works.html           autonomous AI creative agency
   munshi.html                  bilingual claims processor with abstention
   earlier-research.html        DRDO, IIT Delhi, IBM, student ML

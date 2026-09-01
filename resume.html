@@ -62,26 +62,24 @@
     <article class="cv__sheet">
       <div class="cv__head">
         <h1>Suryansh Deoli</h1>
-        <p class="cv__role">Software Engineer &middot; Applied AI and LLM systems in production &middot; Bengaluru, India &middot; open to remote</p>
+        <p class="cv__role">Software Engineer &middot; Applied AI and LLM systems in production &middot; Bengaluru, India &middot; open to remote and relocation</p>
         <p class="cv__contact">
           <a href="mailto:suryanshdeoliofficial@gmail.com">suryanshdeoliofficial@gmail.com</a>
-          <span class="cv__sep" aria-hidden="true">&nbsp;&middot;&nbsp;</span>
+          <span class="cv__sep" aria-hidden="true">&middot;</span>
           <a href="https://suryanshd.github.io/">suryanshd.github.io</a>
-          <span class="cv__sep" aria-hidden="true">&nbsp;&middot;&nbsp;</span>
+          <span class="cv__sep" aria-hidden="true">&middot;</span>
           <a href="https://github.com/SuryanshD" target="_blank" rel="noopener">github.com/SuryanshD</a>
-          <span class="cv__sep" aria-hidden="true">&nbsp;&middot;&nbsp;</span>
+          <span class="cv__sep" aria-hidden="true">&middot;</span>
           <a href="https://www.linkedin.com/in/suryansh-deoli-22746b212" target="_blank" rel="noopener">linkedin.com/in/suryansh-deoli-22746b212</a>
         </p>
       </div>
 
       <h2 class="cv__sum-h">Summary</h2>
       <p class="cv__lede">
-        <strong>One of three engineers on InMobi&rsquo;s new AI monetization platform, there since the
-        backend&rsquo;s first commit</strong>, owning identity and the monetization surface. Put an LLM inside a
-        live ad-approval path: it clears campaigns, humans rule on the rest, and a poller auto-pauses creatives
-        that drift after approval. Wrote the end-to-end proof of concept for an embeddable answer surface,
-        now a second product in development. Builds inside constraints set by someone else: another
-        platform&rsquo;s policy, a partner&rsquo;s site, a client&rsquo;s spreadsheet.
+        <strong>One of three engineers on InMobi&rsquo;s new AI monetization platform since the
+        backend&rsquo;s first commit.</strong> Owns identity and the monetization surface, working with business teams from integration through go-live. Put an LLM inside a
+        live ad-approval path, where it clears campaigns and humans rule on the rest. Also wrote a proof of
+        concept for a browser-embeddable retrieval interface, front to back.
       </p>
 
       <h2>Experience</h2>
@@ -90,17 +88,17 @@
         <div class="job__top">
           <span class="job__what">Software Development Engineer</span>
           <span class="job__org">&middot; InMobi, Bengaluru</span>
-          <span class="job__when">Jun 2025 &ndash; present</span>
+          <span class="job__when">Jun 2025 &ndash; Present</span>
         </div>
-        <p class="job__sub">Joined on ad compliance and content automation; on the new platform since its first day (Mar 2026), and founding engineer on a second product built on top of it.</p>
+        <p class="job__sub">Joined on ad compliance and content automation. Moved to the new platform at its formation.</p>
         <ul>
-          <li>Shipped the <b>content and keyword generation surface</b> on Gemini and Claude with Imagen 4, behind a prompt engine with per-feed config, plus a concept-discovery service and <b>semantic image search over embeddings</b>.</li>
-          <li>Validated campaigns against <b>6 ad networks&rsquo;</b> policies before traffic reached Google, through an ad-compliance proxy in Python/FastAPI: HMAC-signed requests, Redis-backed approval state, a poller that auto-paused creative drift, a human review API, and <b>an LLM auto-approval layer</b>.</li>
-          <li><b>Rebuilt identity from scratch (IAM v3).</b> Three-tier org hierarchy, roles and permissions resolved per request, SSO and JWT, invite flows. Owned end to end across the FastAPI backend and Next.js frontend.</li>
-          <li><b>Cut auth and dashboard latency ~8&times; on the Redis-degraded path</b> (2s to 0.25s per operation) via a circuit breaker, cluster client, L1 cache and N+1 elimination. Migrated image storage S3 &rarr; GCS with CDN cutover.</li>
-          <li>Engineered a <b>RAG answer surface</b> that one script tag drops onto a publisher&rsquo;s site: per-partner manifest, closed Shadow DOM isolation, origin-allowlist auth, <b>8 in-answer ad placements</b>. SDK, backend and admin console.</li>
-          <li>Automated Meta Ads campaign creation single-handedly: a client spreadsheet becomes up to <b>5,000 ads</b>, every entity created paused so nothing spends by accident. CLI for engineers, web UI for the business team.</li>
-          <li>Integrated <b>8 ad networks and feeds</b> with per-partner config, partnering with business teams through production testing, and handled pen-test remediation, Docker/Jenkins container builds and dbt revenue models.</li>
+          <li>Shipped the <b>content and keyword generation surface</b> on Gemini, Claude and Imagen 4, driven by a prompt engine with per-feed config. Added a concept-discovery service and <b>semantic image search over embeddings</b>.</li>
+          <li>Validated campaigns against <b>6 ad networks&rsquo;</b> policies before traffic reached Google. The Python/FastAPI proxy ran in production with <span class="nb">HMAC-signed</span> requests, <span class="nb">Redis-backed</span> approval state and <b>LLM auto-approval guarded by human-in-the-loop review</b>. A poller auto-paused drifting creatives.</li>
+          <li><b>Rebuilt identity and access from scratch</b> with multi-tenant RBAC, per-request role and permission resolution, SSO, JWT and invite flows. Owned it end to end, FastAPI backend to Next.js frontend.</li>
+          <li><b>Cut auth and dashboard latency 8x</b> (2s to 0.25s per operation) via a circuit breaker, cluster client, L1 cache and N+1 elimination. Migrated image storage from S3 to GCS with CDN cutover.</li>
+          <li><b>Prototyped a browser-embeddable retrieval interface end to end</b>, covering the client library, the backend service and an admin console.</li>
+          <li>Automated Meta Ads campaign creation single-handedly. A client spreadsheet becomes up to <b>5,000 ads</b>, all created paused so nothing spends by accident. Gave engineers a CLI and the business team a web UI.</li>
+          <li>Integrated <b>8 ad networks and feeds</b> with per-partner config, partnering with business teams through production testing. Handled security hardening and remediation, Docker/Jenkins container builds and dbt revenue models.</li>
         </ul>
       </div>
 
@@ -108,11 +106,11 @@
         <div class="job__top">
           <span class="job__what">Product Analyst</span>
           <span class="job__org">&middot; Glance (consumer content platform, InMobi group), Bengaluru</span>
-          <span class="job__when">Jun &ndash; Aug 2024</span>
+          <span class="job__when">Jun 2024 &ndash; Aug 2024</span>
         </div>
         <ul>
           <li>Delivered <b>4 Superset dashboards carrying 50+ charts</b> across the USA and Singapore clusters, including a product-alert dashboard tracking engagement deviations by OEM and region.</li>
-          <li>Reported deep dives across <b>30+ metrics</b> to product managers fortnightly, turning the alerts into decisions the content team acted on.</li>
+          <li>Reported deep dives across <b>30+ metrics</b> to product managers every two weeks, turning the alerts into decisions the content team acted on.</li>
         </ul>
       </div>
 
@@ -120,7 +118,7 @@
         <div class="job__top">
           <span class="job__what">AI Project Intern</span>
           <span class="job__org">&middot; IBM India</span>
-          <span class="job__when">Jun &ndash; Jul 2024</span>
+          <span class="job__when">Jun 2024 &ndash; Jul 2024</span>
         </div>
         <ul>
           <li>Led a plant-disease detection project to <b>92% accuracy</b>, directing a team of <b>3 interns</b> through data collection, training and evaluation.</li>
@@ -132,11 +130,11 @@
         <div class="job__top">
           <span class="job__what">Research internships</span>
           <span class="job__org">&middot; IIT Delhi &middot; DRDO</span>
-          <span class="job__when">2022, 2023</span>
+          <span class="job__when">2022 &ndash; 2023</span>
         </div>
         <ul>
           <li>Diagnosed faults in operating PEM fuel cells using AI at <b>IIT Delhi</b> (2023), under Dr. Anil Verma.</li>
-          <li>Simulated tactical MANET environments in NS2 at <b>DRDO DEAL</b>, presenting <b>10 recommendations</b> to the IP Based Protocols Group (2023). Electronics R&amp;D at DRDO IRDE (2022).</li>
+          <li>Simulated tactical MANET environments in NS2 at <b>DRDO DEAL</b> and presented <b>10 recommendations</b> to the IP Based Protocols Group (2023). Conducted electronics R&amp;D at DRDO IRDE (2022).</li>
         </ul>
       </div>
 
@@ -147,7 +145,7 @@
           <span class="job__when">Nov 2021 &ndash; Sep 2022</span>
         </div>
         <ul>
-          <li>Co-founded an investment-aggregator prototype with <b>2 co-founders</b>: <b>3</b> asset classes in one account, with portfolio tracking and personalized insights.</li>
+          <li>Co-founded an investment-aggregator prototype with <b>2 co-founders</b>. It combined <b>3</b> asset classes in one account, with portfolio tracking and personalized insights.</li>
           <li>Owned the market research, and <b>sold the prototype and its IP</b> as an undergraduate.</li>
         </ul>
       </div>
@@ -155,31 +153,31 @@
       <h2>Selected projects</h2>
       <div class="job">
         <ul>
-          <li><b>Mercury Works</b> (open source, MIT &middot; with Piyush Rane) &mdash; autonomous AI creative agency. One sentence of brief becomes a live brand: naming, design, illustration, voiceover ad, deployed site with checkout. <b>11 live sites in 8 hours</b>.</li>
-          <li><b>suryanshd.github.io</b> &mdash; this r&eacute;sum&eacute;&rsquo;s portfolio: hand-written HTML, CSS and WebGL, no framework and no build step, scoring 100 on Lighthouse accessibility, best practices and SEO.</li>
-          <li><b>Munshi</b> (with Piyush Rane) &mdash; bilingual Hindi/English health-insurance claims processor. Reads handwritten medical records into insurer-format claim packets, using a <b>2-model agreement check that abstains instead of guessing</b>.</li>
+          <li><b>Mercury Works</b> (open source, MIT, with Piyush Rane), an autonomous AI creative agency. One sentence of brief becomes a live brand with naming, design, illustration, voiceover ad and deployed site with checkout. <b>11 live sites in 8 hours</b>.</li>
+          <li><b>suryanshd.github.io</b>, a portfolio site. Hand-written in HTML, CSS and WebGL, no framework, no build step. <b>Scores 100 on Lighthouse</b> accessibility, best practices and SEO.</li>
+          <li><b>Munshi</b> (with Piyush Rane), a bilingual Hindi and English health-insurance claims processor. Reads handwritten medical records into insurer-format claim packets. A <b>2-model agreement check abstains instead of guessing</b>.</li>
         </ul>
       </div>
 
       <h2>Skills</h2>
       <div class="cv__rows">
-        <p class="cv__row"><span class="k">Languages&nbsp;</span><span>Python (FastAPI) &middot; TypeScript / JavaScript &middot; PHP (Laravel) &middot; SQL</span></p>
-        <p class="cv__row"><span class="k">Applied AI&nbsp;</span><span>Gemini &middot; Claude &middot; Imagen 4 &middot; Groq/Llama &middot; RAG &middot; embeddings and semantic search &middot; prompt engineering &middot; agent pipelines &middot; abstention and model-agreement checks &middot; PyTorch &middot; scikit-learn &middot; OpenCV</span></p>
-        <p class="cv__row"><span class="k">Systems &amp; data&nbsp;</span><span>Next.js / React &middot; React Native &middot; NestJS &middot; htmx &middot; PostgreSQL / AlloyDB / Neon &middot; pgvector &middot; Redis (cluster, circuit breaker) &middot; dbt &middot; Server-Sent Events &middot; Shadow DOM SDKs</span></p>
-        <p class="cv__row"><span class="k">Cloud &amp; security&nbsp;</span><span>GCP &middot; AWS &middot; Docker &middot; Jenkins &middot; Helm &middot; Nginx &middot; IAM/RBAC &middot; OAuth/SSO &middot; JWT &middot; HMAC &middot; session invalidation &middot; pen-test remediation</span></p>
-        <p class="cv__row"><span class="k">Ad platforms&nbsp;</span><span>Meta Ads API &middot; Google Ads / AFS / RSOC &middot; Bing &middot; Outbrain &middot; Taboola &middot; MGID &middot; Yahoo &middot; AdSense</span></p>
+        <p class="cv__row"><span class="k">Languages:</span><span>Python (FastAPI) &middot; TypeScript / JavaScript &middot; PHP (Laravel) &middot; SQL</span></p>
+        <p class="cv__row"><span class="k">Applied AI:</span><span>Gemini &middot; Claude &middot; Imagen 4 &middot; Groq/Llama &middot; RAG &middot; embeddings and semantic search &middot; prompt engineering &middot; agent pipelines &middot; guardrails (abstention, human-in-the-loop review, model-agreement checks) &middot; PyTorch &middot; scikit-learn &middot; OpenCV</span></p>
+        <p class="cv__row"><span class="k">Systems and data:</span><span>Next.js / React &middot; React Native &middot; NestJS &middot; htmx &middot; PostgreSQL / AlloyDB / Neon &middot; pgvector &middot; Redis (cluster, circuit breaker) &middot; dbt &middot; Server-Sent Events</span></p>
+        <p class="cv__row"><span class="k">Cloud and security:</span><span>GCP &middot; AWS &middot; Docker &middot; Jenkins &middot; Helm &middot; Nginx &middot; IAM/RBAC &middot; OAuth/SSO &middot; JWT &middot; HMAC &middot; session invalidation &middot; security hardening</span></p>
+        <p class="cv__row"><span class="k">Ad platforms:</span><span>Meta Ads API &middot; Google Ads / AFS / RSOC &middot; Bing &middot; Outbrain &middot; Taboola &middot; MGID &middot; Yahoo &middot; AdSense</span></p>
       </div>
 
       <h2>Education</h2>
       <div class="cv__compact">
-        <p><b>B.Tech, Computer Science &amp; Engineering</b> &middot; UPES Dehradun, 2021&ndash;2025. Coursework in AI/ML and cloud computing.</p>
+        <p><b>B.Tech, Computer Science and Engineering</b> &middot; UPES Dehradun, 2021&ndash;2025. Coursework in AI/ML and cloud computing.</p>
       </div>
 
-      <h2>Certifications &amp; recognition</h2>
+      <h2>Certifications and recognition</h2>
         <div class="cv__rows">
-          <div class="cv__row"><span class="k">Published</span><span>&ldquo;Use of AI and Its Benefits on Quality Assurance (QA)&rdquo; &mdash; journal of the DGQA, India&rsquo;s Ministry of Defence, <b>circulation 5,000+</b></span></div>
-          <div class="cv__row"><span class="k">Certifications</span><span>Microsoft <b>AI-102</b> (Azure AI Engineer) &middot; <b>AWS Academy Graduate</b> &middot; QSim quantum computing (IIT Roorkee)</span></div>
-          <div class="cv__row"><span class="k">Community</span><span>Core member and event coordinator, UPES Coding Club: organized a <b>150+ participant</b> hackathon &middot; GrowthX builder community</span></div>
+          <div class="cv__row"><span class="k">Published:</span><span>&ldquo;Use of AI and Its Benefits on Quality Assurance (QA)&rdquo; in the journal of the DGQA, India&rsquo;s Ministry of Defence. <b>Circulation 5,000+</b></span></div>
+          <div class="cv__row"><span class="k">Certifications:</span><span>Microsoft <b>AI-102</b> (Azure AI Engineer) &middot; <b>AWS Academy Graduate</b> &middot; QSim quantum computing (IIT Roorkee)</span></div>
+          <div class="cv__row"><span class="k">Community:</span><span>Core member and event coordinator, UPES Coding Club. Organized a <b>150+ participant</b> hackathon. GrowthX builder community</span></div>
         </div>
     </article>
   </div>

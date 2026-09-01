@@ -147,7 +147,7 @@
             <text x="170" y="30">prompt engine</text>
             <text x="170" y="52" class="dim">feed-specific prompt</text>
             <text x="170" y="70" class="dim">per-article config</text>
-            <text x="170" y="88" class="dim">afs / rsoc ad spec</text>
+            <text x="170" y="88" class="dim">search ad spec</text>
             <text x="170" y="106" class="dim">production template</text>
             <text x="170" y="124" class="dim">keyword count</text>
 
@@ -245,8 +245,8 @@
         unglamorous and worth recording precisely:
       </p>
       <ul>
-        <li>The run timeout went from 300 to 900 seconds, with the distributed lock TTL raised past it so a long run couldn't have its own lock expire underneath it.</li>
-        <li>The container was being killed on memory, so the limits went up and the data directory was made writable rather than the process failing on a read-only path.</li>
+        <li>The distributed lock TTL is held ahead of the run timeout, so a long run cannot have its own lock expire underneath it.</li>
+        <li>Container memory limits and filesystem permissions were sized to the workload rather than left at defaults.</li>
         <li>Exception tracebacks became structured JSON, because an unparseable stack trace in a log aggregator is nearly useless.</li>
         <li>On the frontend, a proxy was doubling the query string, which broke one feed specifically. That one took longer to find than it should have.</li>
       </ul>
@@ -258,8 +258,7 @@
         <span class="retro__tag">What I'd change</span>
         <p>
           I'd build the output checks before the generation. The specific thing I'd add is an
-          automated check that the article and the ad-unit keywords agree, because that relationship is
-          what the ad network grades and it is the one property nothing measured directly.
+          automated check that the article and the ad-unit keywords agree.
         </p>
       </div>
     </div>

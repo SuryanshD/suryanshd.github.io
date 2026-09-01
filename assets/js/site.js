@@ -120,7 +120,6 @@
     { label: 'Stage 01 — Generate', kind: 'stage', href: onHome ? '#stage-generate' : base + 'index.html#stage-generate' },
     { label: 'Stage 02 — Launch', kind: 'stage', href: onHome ? '#stage-launch' : base + 'index.html#stage-launch' },
     { label: 'Stage 03 — Gate', kind: 'stage', href: onHome ? '#stage-gate' : base + 'index.html#stage-gate' },
-    { label: 'Stage 04 — Serve', kind: 'stage', href: onHome ? '#stage-serve' : base + 'index.html#stage-serve' },
     { label: 'Try the gate', kind: 'demo', href: onHome ? '#gate' : base + 'index.html#gate' },
     { label: 'The substrate under all of it', kind: 'section', href: onHome ? '#foundation' : base + 'index.html#foundation' },
     { label: 'Built in public', kind: 'section', href: onHome ? '#projects' : base + 'index.html#projects' },
@@ -130,7 +129,6 @@
     { label: 'The compliance gate', kind: 'deep dive', href: base + 'work/compliance-gate.html' },
     { label: 'Identity, rebuilt from scratch', kind: 'deep dive', href: base + 'work/identity.html' },
     { label: 'The generation surface', kind: 'deep dive', href: base + 'work/generation-surface.html' },
-    { label: 'The embeddable answer surface', kind: 'deep dive', href: base + 'work/answer-surface.html' },
     { label: 'The Meta Ads bulk uploader', kind: 'deep dive', href: base + 'work/bulk-uploader.html' },
     { label: 'Mercury Works', kind: 'deep dive', href: base + 'work/mercury-works.html' },
     { label: 'Munshi', kind: 'deep dive', href: base + 'work/munshi.html' },
@@ -286,8 +284,7 @@
   var STAGE_META = [
     { name: 'Generate', cap: 'The generation surface: one concept in, an article, headline set, imagery and ad spec out.' },
     { name: 'Launch', cap: 'One spreadsheet becomes up to 5,000 ads. Every one of them created paused.' },
-    { name: 'Gate', cap: 'Policy rules, then an LLM. Approved traffic passes, blocked traffic never leaves.' },
-    { name: 'Serve', cap: 'A closed Shadow DOM on someone else\'s page, with the ad units inside the answer.' }
+    { name: 'Gate', cap: 'Policy rules, then an LLM. Approved traffic passes, blocked traffic never leaves.' }
   ];
 
   function setStage(i) {
@@ -311,8 +308,7 @@
     var caps = [
       'The generation surface: one concept in, an article, headline set, imagery and ad spec out.',
       'One spreadsheet becomes up to 5,000 ads. Every one of them created paused.',
-      'Policy rules, then an LLM. Approved traffic passes, blocked traffic never leaves.',
-      'A closed Shadow DOM on someone else\'s page, with the ad units inside the answer.'
+      'Policy rules, then an LLM. Approved traffic passes, blocked traffic never leaves.'
     ];
     Array.prototype.forEach.call(figs, function (fig, i) {
       var svg = fig.querySelector('svg');
@@ -334,10 +330,10 @@
   /* Inside the schematic panel the field competes with 8px labels; full-bleed
      it sits directly behind body copy. Both want a different intensity. */
   var ALPHA = {
-    hero: 0.95, generate: 0.7, launch: 0.7, gate: 0.8, serve: 0.7,
+    hero: 0.95, generate: 0.7, launch: 0.7, gate: 0.8,
     foundation: 0.5, quiet: 0.16
   };
-  var STAGE_MODES = ['generate', 'launch', 'gate', 'serve'];
+  var STAGE_MODES = ['generate', 'launch', 'gate'];
   var curMode = 'hero';
   var panelActive = false;
 
