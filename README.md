@@ -61,8 +61,7 @@ Everything in it is additive: with JavaScript off the page is still a complete d
 ## Keeping the résumé PDF in step
 
 `resume.html` is the source of truth. `assets/Suryansh-Deoli-Resume.pdf` is a rendered copy, for
-recruiters who want a file and for job forms that only accept an upload. Regenerate it after any
-edit to the résumé:
+anywhere a file is easier than a link. Regenerate it after any edit to the résumé:
 
 ```sh
 chrome --headless --no-pdf-header-footer \
