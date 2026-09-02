@@ -199,7 +199,7 @@
     flex-wrap: nowrap;
     white-space: nowrap;
   }
-  /* A résumé PDF gets clicked, in an email and in LinkedIn Easy Apply, so the
+  /* A résumé PDF gets clicked, so the
      links should look like links. Colour only; no underline, because the whole
      row is links and underlining all of it turns into noise. Text colour has no
      effect on ATS extraction. */
@@ -209,7 +209,7 @@
      token beside them. Padding does the same job and extracts as nothing. */
   .cv__sep { color: #9a9a9a !important; font-size: 6.9pt !important; padding: 0 2.2pt; }
   /* Keeps hyphenated compounds off line ends: the extractor was emitting
-     "HMAC-\nsigned" and "origin-\nallowlist" as fractured tokens. */
+     "HMAC-\nsigned" as a fractured token. */
   .nb { white-space: nowrap; }
 
   .cv h2 {
